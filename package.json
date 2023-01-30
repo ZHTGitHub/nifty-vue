@@ -9,8 +9,10 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
   },
-  "dependencies": {
-    "vue": "^3.2.45"
+  "peerDependencies": {
+    "pinia": ">=2.0.29",
+    "rocket-nifty.js": ">=1.2.0",
+    "vue": ">=3.2.45"
   },
   "devDependencies": {
     "@types/node": "^18.11.12",

@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-  defineProps({
+  import { ref, computed, watch } from 'vue'
+  import useFormStore from '../../../store/form'
+
+  const formStore = useFormStore()
+
+  const props = defineProps({
     autocomplete: {
       type: String,
       default: 'off'
@@ -8,6 +13,16 @@
     autofocus: {
       type: Boolean,
       default: false
+    },
+
+    formId: {
+      type: String,
+      required: false
+    },
+
+    formKey: {
+      type: String,
+      required: false
     },
 
     id: {
@@ -30,6 +45,28 @@
       default: 'text'
     }
   })
+
+  const value = computed({
+    get() {
+      if(!props.formId || !props.formKey) return void 0
+      
+      return formStore.forms[props.formId]?.[props.formKey]
+    }, 
+
+    set(value: string | undefined) {
+      if(!props.formId || !props.formKey) return
+
+      formStore.SET_FORM_VALUE_BY_KEY({
+        formId: props.formId,
+        formKey: props.formKey,
+        value
+      })
+    }
+  })
+
+  watch(() => value.value, (value) => {
+    console.log(formStore.forms)
+  })
 </script>
 
 <template>
@@ -42,6 +79,7 @@
       :placeholder="placeholder"
       required
       :type="type"
+      v-model="value"
     >
     <label class="z-label z-field__label" :for="id">{{ label }}</label>
     <hr class="z-field__hr" />
