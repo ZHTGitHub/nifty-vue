@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import nifty from 'rocket-nifty.js'
 
-const forms: any = {}
+interface State {
+  forms: any
+}
 
 interface Data {
   formId: string, 
@@ -10,13 +12,15 @@ interface Data {
 }
 
 const useFormStore = defineStore('form', {
-  state: () => ({
-    forms
-  }),
+  state: (): State => {
+    return {
+      forms: {}
+    }
+  },
 
   actions: {
     // 给表单的每个[key]设置[value]
-    SET_FORM_VALUE_BY_KEY(data: Data) {
+    SET_FORM_VALUE_BY_KEY(data: Data): void {
       const { formId, formKey, value } = data
 
       if(formId && formKey) {
@@ -25,12 +29,12 @@ const useFormStore = defineStore('form', {
     },
 
     // 清空表单
-    CLEAN_FORM() {
+    CLEAN_FORM(): void {
 
     },
 
     // 重置表单
-    RESET_FORM(data: Data) {
+    RESET_FORM(data: Data): void {
 
     }
   }
