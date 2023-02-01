@@ -10,5 +10,5 @@
 </template>
 
 <style lang="scss" scoped>
-  @import url(./index.scss);
+  @import "./index.scss";
 </style>
