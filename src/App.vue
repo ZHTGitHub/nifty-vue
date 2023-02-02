@@ -11,21 +11,20 @@
 <template>
   <z-input 
     form-id="login" 
-    form-key="name"
-    defaultValue="Leslie"
-    label="姓名"
-    placeholder="请输入姓名" 
+    form-key="input"
+    defaultValue="input"
+    label="Input"
   />
   <br />
   <br />
   <z-select 
     form-id="login" 
-    form-key="country" 
-    defaultValue="jp"
-    label="国家"
+    form-key="select" 
+    defaultValue="1"
+    label="Select"
     :items="[
-      { label: 'China', value: 'cn' }, 
-      { label: 'Japan', value: 'jp' }
+      { label: 'select1', value: '1' }, 
+      { label: 'select2', value: '2' }
     ]"
     placeholder="请选择国家" 
   />
@@ -33,47 +32,45 @@
   <br />
   <z-switch 
     :defaultValue="true"
-    label="记住"
+    label="Switch"
     form-id="login" 
-    form-key="gender"
+    form-key="switch"
   />
   <br />
   <br />
   <z-checkbox 
-    :defaultValue="true"
-    label="记住"
+    label="Checkbox"
     form-id="login" 
     form-key="checkbox"
   >Checkbox</z-checkbox>
   <br />
   <br />
   <z-checkbox-group 
-    :defaultValue="['jp']"
-    label="国家"
+    :defaultValue="[1]"
+    label="CheckboxGroup"
     form-id="login" 
     form-key="checkboxGroup" 
     :items="[
-      { label: 'China', value: 'cn' }, 
-      { label: 'Japan', value: 'jp' }
+      { label: 'group1', value: 1 }, 
+      { label: 'group2', value: 2 }
     ]">checkboxGroup</z-checkbox-group>
   <br />
   <br />
   <z-radio 
-    :defaultValue="true"
-    label="记住"
+    label="Radio"
     form-id="login"
     form-key="radio"
   >Radio</z-radio>
   <br />
   <br />
   <z-radio-group 
-    :defaultValue="'cn'"
-    label="记住"
+    :defaultValue="2"
+    label="RadioGroup"
     form-id="login" 
     form-key="radioGroup" 
     :items="[
-      { label: 'China', value: 'cn' }, 
-      { label: 'Japan', value: 'jp' }
+      { label: 'group1', value: 1 }, 
+      { label: 'group2', value: 2 }
     ]"></z-radio-group>
   <br />
   <br />
