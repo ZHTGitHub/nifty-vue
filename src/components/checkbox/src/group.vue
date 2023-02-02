@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
-  import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
+  import { useFormValue, useFormDefaultValue } from '../../../hooks/useForm'
   
   const attrs = useAttrs()
 
@@ -13,6 +13,21 @@
     formKey: {
       type: String,
       required: false
+    },
+
+    items: {
+      type: Array as any,
+      default: () => []
+    },
+
+    label: {
+      type: String,
+      default: 'label'
+    },
+
+    value: {
+      type: String,
+      default: 'value'
     }
   })
 
@@ -22,7 +37,5 @@
 </script>
 
 <template>
-  <a-checkbox v-model:checked="value">
-    <slot></slot>
-  </a-checkbox>
+    <a-checkbox-group v-model:value="value" :options="props.items" />
 </template>

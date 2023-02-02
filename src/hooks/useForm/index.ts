@@ -1,43 +1,37 @@
-import { computed, type WritableComputedRef } from 'vue'
+import { computed, watch } from 'vue'
 import useFormStore from '../../store/form'
 
-// export const use= () => {
-//   return {
-//     formId: {
-//       type: String,
-//       required: false
-//     },
+export const useFormValue = (
+  formId: string | undefined, 
+  formKey: string | undefined
+): any => {
+  if(!formId || !formKey) return void 0
 
-//     formKey: {
-//       type: String,
-//       required: false
-//     },
-//   }
-// }
+  let formStore: any = null
+  if(!formStore) formStore = useFormStore()
 
-type StringOrUndefined = string | undefined
-type Value = WritableComputedRef<any>
-
-const useValue = (formId: StringOrUndefined, formKey: StringOrUndefined): Value => {
-  const formStore = useFormStore()
-
-  const value: Value = computed({
+  const computedValue = computed({
     get() {
-      if(!formId || !formKey) return void 0
       return formStore.forms[formId]?.[formKey]
     }, 
 
-    set(val: StringOrUndefined) {
-      if(!formId || !formKey) return void 0
+    set(value: string | undefined) {
       formStore.SET_FORM_VALUE_BY_KEY({
-        formId: formId,
-        formKey: formKey,
-        value: val
+        formId,
+        formKey,
+        value
       })
     }
   })
 
-  return value
+  return computedValue
 }
 
-export default useValue
+export const useFormDefaultValue = (
+  defaultValue: any, 
+  value: any
+) => {
+  watch(() => defaultValue, (defaultVal) => {
+    value.value = defaultVal
+  }, { immediate: true })
+}
