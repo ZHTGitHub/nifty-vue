@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
-  import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
+  import { useFormDefaultValue, useFormValue } from '@/hooks/useForm'
   
   const attrs = useAttrs()
 
@@ -33,11 +33,8 @@
     </label>
 
     <div class="z-input-control">
-      <a-input 
-        v-bind="$attrs" 
-        v-model:value="value" 
-      />
-      
+      <a-switch v-model:checked="value" />
+
       <div class="z-messages">
         <div class="error-message">当前字段为必填项</div>
       </div>
@@ -46,32 +43,5 @@
 </template>
 
 <style lang="scss">
-  input {
-    border-color: #ff7875 !important;
-    box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
-  }
-
-  .z-input {
-    .z-input-label {
-      &::before {
-        content: "*";
-        display: inline-block;
-        margin-right: 4px;
-        font-size: 14px;
-        line-height: 1;
-        color: #ff4d4f;
-      }
-    }
-
-    .z-messages {
-      font-size: 14px;
-      line-height: 1.5715;
-
-      .error-message {
-        color: #ff4d4f;
-      }
-    }
-  } 
-
-  
+  @import "@/components/style.scss";
 </style>

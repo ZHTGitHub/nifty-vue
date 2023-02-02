@@ -1,0 +1,23 @@
+.z-input {
+  // label
+  .z-input-label {
+    &::before {
+      content: "*";
+      display: inline-block;
+      margin-right: 4px;
+      font-size: 14px;
+      line-height: 1;
+      color: #ff4d4f;
+    }
+  }
+
+  // messages
+  .z-messages {
+    font-size: 14px;
+    line-height: 1.5715;
+
+    .error-message {
+      color: #ff4d4f;
+    }
+  }
+} 

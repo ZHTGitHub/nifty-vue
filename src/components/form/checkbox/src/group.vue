@@ -1,8 +1,8 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
   import type { PropType } from 'vue'
-  import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
-
+  import { useFormValue, useFormDefaultValue } from '@/hooks/useForm'
+  
   const attrs = useAttrs()
 
   const props = defineProps({
@@ -14,6 +14,11 @@
     formKey: {
       type: String,
       required: false
+    },
+
+    label: {
+      type: String,
+      requried: false
     },
 
     itemLabel: {
@@ -33,17 +38,25 @@
   })
 
   const value = useFormValue(props.formId, props.formKey)
-  
+
   useFormDefaultValue(attrs.defaultValue, value)
 </script>
 
 <template>
-  <a-radio-group v-model:value="value">
-    <template 
-      v-for="item in items" 
-      :key="item[props.value]"
-    >
-      <a-radio :value="item[props.itemValue]">{{ item[props.itemLabel] }}</a-radio>
-    </template>
-  </a-radio-group>
+  <div class="z-input">
+    <label class="z-input-label">
+      {{ props.label }}
+    </label>
+
+    <div class="z-input-control">
+      <a-checkbox-group 
+        v-model:value="value" 
+        :options="props.items" 
+      />
+
+      <div class="z-messages">
+        <div class="error-message">当前字段为必填项</div>
+      </div>
+    </div>
+  </div>
 </template>

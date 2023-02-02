@@ -1,11 +1,11 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
   import type { PropType } from 'vue'
-  import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
+  import { useFormDefaultValue, useFormValue } from '@/hooks/useForm'
 
   const attrs = useAttrs()
 
-  let props = defineProps({
+  const props = defineProps({
     formId: {
       type: String,
       required: false
@@ -43,43 +43,29 @@
 </script>
 
 <template>
-  <div class="z-input z-input-select">
-    <label class="z-form-item-label">
+  <div class="z-input">
+    <label class="z-input-label">
       {{ props.label }}
     </label>
 
     <div class="z-input-control">
-      <a-select v-model:value="value">
+      <a-radio-group v-model:value="value">
         <template 
           v-for="item in items" 
           :key="item[props.value]"
         >
-          <a-select-option 
-            :value="item[props.itemValue]"
-          >
-            {{ item[props.itemLabel] }}
-          </a-select-option>
+          <a-radio :value="item[props.itemValue]">{{ item[props.itemLabel] }}</a-radio>
         </template>
-      </a-select>
+      </a-radio-group>
 
       <div class="z-messages">
         <div class="error-message">当前字段为必填项</div>
       </div>
     </div>
   </div>
+  
 </template>
 
 <style lang="scss">
-  .z-input-select {
-    .z-input-control {
-      .ant-select {
-        width: 100%;
-      }
-    }
-  }
-
-  .ant-select-selector {
-    border-color: #ff7875 !important;
-    box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
-  }
+  @import "@/components/style.scss";
 </style>

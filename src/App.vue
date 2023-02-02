@@ -33,6 +33,7 @@
   <br />
   <z-switch 
     :defaultValue="true"
+    label="记住"
     form-id="login" 
     form-key="gender"
   />
@@ -40,6 +41,7 @@
   <br />
   <z-checkbox 
     :defaultValue="true"
+    label="记住"
     form-id="login" 
     form-key="checkbox"
   >Checkbox</z-checkbox>
@@ -47,6 +49,7 @@
   <br />
   <z-checkbox-group 
     :defaultValue="['jp']"
+    label="国家"
     form-id="login" 
     form-key="checkboxGroup" 
     :items="[
@@ -57,6 +60,7 @@
   <br />
   <z-radio 
     :defaultValue="true"
+    label="记住"
     form-id="login"
     form-key="radio"
   >Radio</z-radio>
@@ -64,6 +68,7 @@
   <br />
   <z-radio-group 
     :defaultValue="'cn'"
+    label="记住"
     form-id="login" 
     form-key="radioGroup" 
     :items="[
