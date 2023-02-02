@@ -43,7 +43,7 @@
 </script>
 
 <template>
-  <div class="z-input">
+  <div class="z-input z-input-select">
     <label class="z-form-item-label">
       {{ props.label }}
     </label>
@@ -70,6 +70,14 @@
 </template>
 
 <style lang="scss">
+  .z-input-select {
+    .z-input-control {
+      .ant-select {
+        width: 100%;
+      }
+    }
+  }
+
   .ant-select-selector {
     border-color: #ff7875 !important;
     box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
