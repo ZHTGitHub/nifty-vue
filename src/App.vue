@@ -22,6 +22,7 @@
     form-id="login" 
     form-key="country" 
     defaultValue="jp"
+    label="国家"
     :items="[
       { label: 'China', value: 'cn' }, 
       { label: 'Japan', value: 'jp' }

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
+  import type { PropType } from 'vue'
   import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 
   const attrs = useAttrs()
@@ -15,17 +16,22 @@
       required: false
     },
 
-    items: {
-      type: Array as any,
-      default: () => []
+    label: {
+      type: String,
+      requried: false
     },
 
-    label: {
+    itemLabel: {
       type: String,
       default: 'label'
     },
 
-    value: {
+    items: {
+      type: Array as PropType<any[]>,
+      default: () => []
+    },
+
+    itemValue: {
       type: String,
       default: 'value'
     }
@@ -37,18 +43,30 @@
 </script>
 
 <template>
-  <a-select v-model:value="value">
-    <template 
-      v-for="item in items" 
-      :key="item[props.value]"
-    >
-      <a-select-option 
-        :value="item[props.value]"
-      >
-        {{ item[props.label] }}
-      </a-select-option>
-    </template>
-  </a-select>
+  <div class="z-input">
+    <label class="z-form-item-label">
+      {{ props.label }}
+    </label>
+
+    <div class="z-input-control">
+      <a-select v-model:value="value">
+        <template 
+          v-for="item in items" 
+          :key="item[props.value]"
+        >
+          <a-select-option 
+            :value="item[props.itemValue]"
+          >
+            {{ item[props.itemLabel] }}
+          </a-select-option>
+        </template>
+      </a-select>
+
+      <div class="z-messages">
+        <div class="error-message">当前字段为必填项</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
+  import type { PropType } from 'vue'
   import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 
   const attrs = useAttrs()
@@ -15,17 +16,17 @@
       required: false
     },
 
-    items: {
-      type: Array as any,
-      default: () => []
-    },
-
-    label: {
+    itemLabel: {
       type: String,
       default: 'label'
     },
 
-    value: {
+    items: {
+      type: Array as PropType<any[]>,
+      default: () => []
+    },
+
+    itemValue: {
       type: String,
       default: 'value'
     }
@@ -42,7 +43,7 @@
       v-for="item in items" 
       :key="item[props.value]"
     >
-      <a-radio :value="item[props.value]">{{ item[props.label] }}</a-radio>
+      <a-radio :value="item[props.itemValue]">{{ item[props.itemLabel] }}</a-radio>
     </template>
   </a-radio-group>
 </template>

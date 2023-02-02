@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
+  import type { PropType } from 'vue'
   import { useFormValue, useFormDefaultValue } from '../../../hooks/useForm'
   
   const attrs = useAttrs()
@@ -15,17 +16,17 @@
       required: false
     },
 
-    items: {
-      type: Array as any,
-      default: () => []
-    },
-
-    label: {
+    itemLabel: {
       type: String,
       default: 'label'
     },
 
-    value: {
+    items: {
+      type: Array as PropType<any[]>,
+      default: () => []
+    },
+
+    itemValue: {
       type: String,
       default: 'value'
     }

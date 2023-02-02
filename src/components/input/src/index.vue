@@ -28,11 +28,11 @@
 
 <template>
   <div class="z-input">
-    <label class="z-form-item-label">
+    <label class="z-input-label">
       {{ props.label }}
     </label>
 
-    <div class="z-form-item-control">
+    <div class="z-input-control">
       <a-input 
         v-bind="$attrs" 
         v-model:value="value" 
@@ -52,7 +52,7 @@
   }
 
   .z-input {
-    .z-form-item-label {
+    .z-input-label {
       &::before {
         content: "*";
         display: inline-block;
