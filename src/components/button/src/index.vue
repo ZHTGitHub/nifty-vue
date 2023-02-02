@@ -7,11 +7,12 @@
 </script>
 
 <template>
-  <button class="v-btn" @click="handleClick">
-    <span class="v-btn__content">
-      <slot></slot>
-    </span>
-  </button>
+  <a-button 
+    type="primary"
+    @click="handleClick"
+  >
+    <slot></slot>
+  </a-button>
 </template>
 
 <style lang="scss" scoped>

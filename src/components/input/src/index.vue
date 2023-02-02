@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { ref, computed, watch } from 'vue'
+  import { watch } from 'vue'
   import useFormStore from '../../../store/form'
   import useValue from '../../../hooks/useForm'
 
@@ -55,23 +55,12 @@
 </script>
 
 <template>
-  <a-input v-model:value="value" placeholder="Basic usage" />
-  <!-- <div class="z-field__field">
-    <input 
-      :autocomplete="autocomplete"
-      :autofocus="autofocus"
-      class="z-field__input"
-      :id="id" 
-      :placeholder="placeholder"
-      required
-      :type="type"
-      v-model="value"
-    >
-    <label class="z-label z-field__label" :for="id">{{ label }}</label>
-    <hr class="z-field__hr" />
-  </div> -->
+  <a-input 
+    v-bind="$attrs" 
+    v-model:value="value" 
+  />
 </template>
 
 <style lang="scss" scoped>
-  /* @import "./index.scss"; */
+  @import "./index.scss";
 </style>

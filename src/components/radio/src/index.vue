@@ -3,10 +3,7 @@
 </script>
 
 <template>
-  <label class="matter-radio">
-    <input type="radio" name="group" checked>
-    <span>Radio Option 1</span>
-  </label>
+  Radio
 </template>
 
 <style lang="scss" scoped>

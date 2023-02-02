@@ -3,10 +3,7 @@
 </script>
 
 <template>
-  <label class="matter-switch">
-    <input type="checkbox" role="switch" checked>
-    <span>Switched On</span>
-  </label>
+  <a-switch />
 </template>
 
 <style lang="scss" scoped>
