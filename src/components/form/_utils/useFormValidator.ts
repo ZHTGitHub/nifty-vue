@@ -18,7 +18,10 @@ export const useErrorMessage = (value?: any, rules?: any[]) => {
 
       console.log(rule.name, result, rule.message)
 
-      if(!result) errorMessage.value = rule.message
+      if(!result) {
+        errorMessage.value = rule.message
+        break
+      }
     }
   })
 
