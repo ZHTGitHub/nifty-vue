@@ -1,6 +1,15 @@
 import { defineStore } from 'pinia'
 import nifty from 'rocket-nifty.js'
-import type { State, Data } from './types'
+
+export interface State {
+  forms: any
+}
+
+export interface Data {
+  formId?: string, 
+  formKey?: string, 
+  value?: string | undefined
+}
 
 const useFormStore = defineStore('form', {
   state: (): State => ({

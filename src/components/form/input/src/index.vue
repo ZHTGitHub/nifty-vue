@@ -1,35 +1,32 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
-  import { useFormDefaultValue, useFormValue } from '@/hooks/useForm'
+  import fromProps from '@/components/form/props'
+  import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
+  import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
   
   const attrs = useAttrs()
 
-  const props = defineProps({
-    formId: {
-      type: String,
-      required: false
-    },
-
-    formKey: {
-      type: String,
-      required: false
-    },
-
-    label: {
-      type: String,
-      requried: false
-    }
-  })
+  const props = defineProps(fromProps())
 
   const value = useFormValue(props.formId, props.formKey)
 
   useFormDefaultValue(attrs.defaultValue, value)
+
+  const required = useFormRequired(attrs.rules as any[])
+
+  const errorMessage = useErrorMessage(value, attrs.rules as any[])
 </script>
 
 <template>
-  <div class="z-input">
+  <div 
+    class="z-input" 
+    :class="{ 
+      horizontal: direction === 'horizontal',
+      required
+    }"
+  >
     <label class="z-input-label">
-      {{ props.label }}
+      {{ label }}
     </label>
 
     <div class="z-input-control">
@@ -39,13 +36,13 @@
       />
       
       <div class="z-messages">
-        <div class="error-message">当前字段为必填项</div>
+        <div class="error-message">{{ errorMessage }}</div>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "@/components/style.scss";
 
   input {

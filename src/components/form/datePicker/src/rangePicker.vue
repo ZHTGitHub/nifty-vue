@@ -13,15 +13,16 @@
 </script>
 
 <template>
-  <div class="z-input">
+  <div class="z-input z-range-picker">
     <label class="z-input-label">
       {{ props.label }}
     </label>
 
     <div class="z-input-control">
-      <a-checkbox v-model:checked="value">
-        <slot></slot>
-      </a-checkbox>
+      <a-range-picker 
+        v-model:value="value" 
+        v-bind="$attrs"
+      />
 
       <div class="z-messages">
         <div class="error-message">当前字段为必填项</div>
@@ -29,7 +30,3 @@
     </div>
   </div>
 </template>
-
-<style lang="scss">
-  @import "@/components/style.scss";
-</style>

@@ -1,19 +1,50 @@
 .z-input {
-  // label
-  .z-input-label {
-    &::before {
-      content: "*";
-      display: inline-block;
-      margin-right: 4px;
-      font-size: 14px;
-      line-height: 1;
-      color: #ff4d4f;
+  // horizontal
+  &.horizontal {
+    display: flex;
+    align-items: center;
+
+    .z-input-label {
+      margin-right: 8px;
     }
+  }
+
+  // vertical
+  &.vertical {
+    .z-input-label {
+      margin-right: 0;
+    }
+  }
+
+  // required
+  &.required {
+    // label
+    .z-input-label {
+      &::before {
+        content: "*";
+        display: inline-block;
+        margin-right: 4px;
+        font-size: 14px;
+        line-height: 1;
+        color: #ff4d4f;
+      }
+    }
+  }
+
+  .z-input-label {
+    display: inline-block;
   }
 
   // control
   .z-input-control {
     position: relative;
+    flex-grow: 1;
+
+    // date
+    .ant-picker {
+      border-color: #ff7875 !important;
+      box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
+    }
 
     // messages
     .z-messages {

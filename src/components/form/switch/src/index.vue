@@ -1,25 +1,11 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
-  import { useFormDefaultValue, useFormValue } from '@/hooks/useForm'
+  import fromProps from '@/components/form/props'
+  import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   
   const attrs = useAttrs()
 
-  const props = defineProps({
-    formId: {
-      type: String,
-      required: false
-    },
-
-    formKey: {
-      type: String,
-      required: false
-    },
-
-    label: {
-      type: String,
-      requried: false
-    }
-  })
+  const props = defineProps(fromProps())
 
   const value = useFormValue(props.formId, props.formKey)
 

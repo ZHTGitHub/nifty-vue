@@ -1,25 +1,14 @@
 <script lang="ts" setup>
   import { useAttrs } from 'vue'
   import type { PropType } from 'vue'
-  import { useFormDefaultValue, useFormValue } from '@/hooks/useForm'
+  import fromProps from '@/components/form/props'
+  import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
+  import { useFormRequired } from '../../_utils/useFormValidator'
 
   const attrs = useAttrs()
 
   let props = defineProps({
-    formId: {
-      type: String,
-      required: false
-    },
-
-    formKey: {
-      type: String,
-      required: false
-    },
-
-    label: {
-      type: String,
-      requried: false
-    },
+    ...fromProps(),
 
     itemLabel: {
       type: String,
@@ -40,10 +29,18 @@
   const value = useFormValue(props.formId, props.formKey)
   
   useFormDefaultValue(attrs.defaultValue, value)
+
+  const required = useFormRequired(attrs.rules as any[])
 </script>
 
 <template>
-  <div class="z-input z-input-select">
+  <div 
+    class="z-input z-input-select"
+    :class="{ 
+      horizontal: direction === 'horizontal',
+      required
+    }"
+  >
     <label class="z-input-label">
       {{ props.label }}
     </label>
@@ -69,7 +66,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "@/components/style.scss";
 
   .z-input-select {
@@ -80,7 +77,7 @@
     }
   }
 
-  .ant-select-selector {
+  :deep(.ant-select-selector) {
     border-color: #ff7875 !important;
     box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
   }

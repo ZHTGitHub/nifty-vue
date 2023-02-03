@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import useFormStore from './store/form'
+  import type { message } from 'ant-design-vue';
+import useFormStore from './components/form/_utils/formStore'
 
   const formStore = useFormStore()
 
@@ -14,6 +15,13 @@
     form-key="input"
     defaultValue="input"
     label="Input"
+    :rules="[
+      { name: 'required', message: '当前字段为必填项' },
+      { name: 'alpha', message: '当前字段只能为英文字母' },
+      { name: 'min', value: 4, message: '当前字段最小长度为4' },
+      { name: 'max', value: 16, message: '当前字段最大长度为16' },
+      { name: 'excluded', value: ['fuck', 'shit'], message: '不能包含fuck、shit.' }
+    ]"
   />
   <br />
   <br />
@@ -27,6 +35,9 @@
       { label: 'select2', value: '2' }
     ]"
     placeholder="请选择国家" 
+    :rules="[
+      { required: true, message: '当前字段为必填项' }
+    ]"
   />
   <br />
   <br />
@@ -72,6 +83,22 @@
       { label: 'group1', value: 1 }, 
       { label: 'group2', value: 2 }
     ]"></z-radio-group>
+  <br />
+  <br />
+  <z-date-picker 
+    label="DatePicker" 
+    form-id="login" 
+    form-key="datePicker" 
+    format="YYYY/MM/DD"
+  />
+  <br />
+  <br />
+  <z-range-picker 
+    label="RangePicker" 
+    form-id="login" 
+    form-key="rangePicker" 
+    format="YYYY/MM/DD"
+  />
   <br />
   <br />
   <z-btn @click="handleConfirm">提交</z-btn>
