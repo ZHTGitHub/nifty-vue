@@ -22,6 +22,9 @@ export const useErrorMessage = (value?: any, rules?: any[]) => {
         errorMessage.value = rule.message
         break
       }
+      else {
+        errorMessage.value = ''
+      }
     }
   })
 
