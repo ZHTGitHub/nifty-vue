@@ -1,7 +1,6 @@
-import { ref, watch, onUnmounted } from 'vue'
+import { ref, watch, onUnmounted, getCurrentInstance } from 'vue'
 import type { Ref } from 'vue'
 import useFormStore from './formStore'
-import type { FormId, FormKey } from '@/components/form/types'
 import useBus from './useBus'
 import nifty from 'rocket-nifty.js'
 import rulesFunc from './rules'
@@ -9,8 +8,8 @@ import rulesFunc from './rules'
 const bus = useBus()
 
 interface IValidateRuleParams { 
-  formId: FormId, 
-  formKey: FormKey, 
+  formId: string, 
+  formKey: string, 
   value: any, 
   rules?: any[] 
 }
@@ -32,15 +31,17 @@ const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): I
 
   if(rules && rules.length) {
     for(let rule of rules) {
-      const result = rulesFunc[rule.name](value, rule.value)
+      if(value !== void 0) {
+        const result = rulesFunc[rule.name](value, rule.value)
   
-      if(!result) {
-        nifty.set(errors, formId + '.' + formKey, false)
-        errorMessage = rule.message
-        break
-      }
-      else {
-        nifty.set(errors, formId + '.' + formKey, true)
+        if(!result) {
+          nifty.set(errors, formId + '.' + formKey, false)
+          errorMessage = rule.message
+          break
+        }
+        else {
+          nifty.set(errors, formId + '.' + formKey, true)
+        }
       }
     }
   }
@@ -63,6 +64,7 @@ export const useFormRequired = (rules: any[]): boolean => {
 
 // 错误提示
 export const useErrorMessage = ({ formId, formKey, value, rules }: IValidateRuleParams): Ref<string> => {
+  const instance = getCurrentInstance()
   const errorMessage = ref<string>('')
 
   // input
@@ -71,8 +73,17 @@ export const useErrorMessage = ({ formId, formKey, value, rules }: IValidateRule
   })
 
   // button
-  bus.on('validate', (btnFormId: FormId) => {
+  bus.on('validate', (btnFormId: string) => {
     if(formId !== btnFormId) return
+
+    if(value.value === void 0) {
+      if(['ZCheckboxGroup', 'ZRangePicker'].includes(instance?.type.name!)) {
+        value.value = []
+      }
+      else {
+        value.value = ''
+      }
+    }
 
     errorMessage.value = validateRule({ formId, formKey, value: value.value, rules }).errorMessage
   })

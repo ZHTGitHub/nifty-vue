@@ -29,8 +29,8 @@ const useFormStore = defineStore('forms', {
     },
 
     // 清空表单
-    CLEAN_FORM() {
-
+    CLEAR_FORM(formId: string) {
+      nifty.set(this.forms, formId, {})
     },
 
     // 重置表单

@@ -1,25 +1,40 @@
-<script lang="ts" setup>
-  import { useAttrs } from 'vue'
+<script lang="ts" >
+  import { 
+    useAttrs, 
+    defineComponent 
+  } from 'vue'
+
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
   
-  const attrs = useAttrs()
+  export default defineComponent({
+    name: 'ZInput',
+    props: fromProps(),
+    setup(props, context) {
+      const attrs = useAttrs()
 
-  const props = defineProps(fromProps())
+      const value = useFormValue(props.formId, props.formKey)
 
-  const value = useFormValue(props.formId, props.formKey)
+      useFormDefaultValue(attrs.defaultValue, value)
 
-  useFormDefaultValue(attrs.defaultValue, value)
+      const required = useFormRequired(attrs.rules as any[])
 
-  const required = useFormRequired(attrs.rules as any[])
+      const errorMessage = useErrorMessage({
+        formId: props.formId!, 
+        formKey: props.formKey!, 
+        value, 
+        rules: attrs.rules as any[]
+      })
 
-  const errorMessage = useErrorMessage({
-    formId: props.formId, 
-    formKey: props.formKey, 
-    value, 
-    rules: attrs.rules as any[]
+      return {
+        value,
+        required,
+        errorMessage
+      }
+    }
   })
+
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts" setup name="ZSelect">
   import { useAttrs } from 'vue'
   import type { PropType } from 'vue'
   import fromProps from '@/components/form/props'

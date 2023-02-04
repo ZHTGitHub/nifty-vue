@@ -1,25 +1,39 @@
-<script lang="ts" setup>
-  import { useAttrs } from 'vue'
+<script lang="ts">
+  import { useAttrs, defineComponent } from 'vue'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
-  
-  const attrs = useAttrs()
 
-  const props = defineProps(fromProps())
+  export default defineComponent({
+    name: 'ZRangePicker',
 
-  const value = useFormValue(props.formId, props.formKey)
+    props: fromProps(),
 
-  useFormDefaultValue(attrs.defaultValue, value)
+    setup(props) {
+      const attrs = useAttrs()
 
-  const required = useFormRequired(attrs.rules as any[])
+      const value = useFormValue(props.formId, props.formKey)
 
-  const errorMessage = useErrorMessage({
-    formId: props.formId, 
-    formKey: props.formKey, 
-    value, 
-    rules: attrs.rules as any[]
+      useFormDefaultValue(attrs.defaultValue, value)
+
+      const required = useFormRequired(attrs.rules as any[])
+
+      const errorMessage = useErrorMessage({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        value, 
+        rules: attrs.rules as any[]
+      })
+
+      return {
+        value,
+        required,
+        errorMessage
+      }
+    }
   })
+  
+  
 </script>
 
 <template>
@@ -32,7 +46,7 @@
     }"
   >
     <label class="z-input-label">
-      {{ props.label }}
+      {{ label }}
     </label>
 
     <div class="z-input-control">

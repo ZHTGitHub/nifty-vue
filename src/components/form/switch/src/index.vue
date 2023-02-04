@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts" setup name="ZSwitch">
   import { useAttrs } from 'vue'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'

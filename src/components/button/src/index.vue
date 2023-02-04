@@ -1,30 +1,42 @@
-<script lang="ts" setup>
+<script lang="ts">
+  import { 
+    defineComponent 
+  } from 'vue'
   import useFormStore from '@/components/form/_utils/formStore'
   import { buttonProps } from './types'
   import useBus from '@/components/form/_utils/useBus'
 
-  const formStore = useFormStore()
+  export default defineComponent({
+    name: 'ZButton',
+    props: buttonProps(),
+    emits: ['click'],
+    setup(props, context) {
+      const formStore = useFormStore()
 
-  const bus = useBus()
+      const bus = useBus()
 
-  const emits = defineEmits(['click'])
+      const handleClick = (event: Event) => {
+        if(props.btnType === 'validate') {
+          bus.emit('validate', props.formId)
 
-  const props = defineProps(buttonProps())
+          const errors = Object.values(formStore.errors[props.formId!])
 
-  console.log(props.formId)
+          const error = !!errors.includes(false)
 
-  const handleClick = (event: Event) => {
-    bus.emit('validate', props.formId)
+          context.emit('click', { event, error })
+          return
+        }
 
-    console.log('forms', formStore.forms)
-    console.log('errors', formStore.errors)
+        if(props.btnType === 'clear') {
+          formStore.CLEAR_FORM(props.formId!)
+        }
+      }
 
-    const errors = Object.values(formStore.errors[props.formId])
-
-    const error = !!errors.includes(false)
-
-    emits('click', { event, error })
-  }
+      return {
+        handleClick
+      }
+    }
+  })
 </script>
 
 <template>

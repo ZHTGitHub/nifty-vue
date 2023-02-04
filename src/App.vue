@@ -8,7 +8,7 @@
 
   const handleConfirm = ({ error }: { event: Event, error: Boolean }) => {
     // console.log(formStore.forms[formId.value])
-    console.log(error)
+    console.log({error})
   }
 </script>
 
@@ -125,6 +125,12 @@
     btnType="validate"
     @click="handleConfirm"
   >提交</z-btn>
+
+  <z-btn 
+    :formId="formId" 
+    btnType="clear"
+    ghost
+  >清空</z-btn>
 </template>
 
 <style scoped>
