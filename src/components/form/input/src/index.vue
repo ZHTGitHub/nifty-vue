@@ -14,7 +14,12 @@
 
   const required = useFormRequired(attrs.rules as any[])
 
-  const errorMessage = useErrorMessage(value, attrs.rules as any[])
+  const errorMessage = useErrorMessage({
+    formId: props.formId, 
+    formKey: props.formKey, 
+    value, 
+    rules: attrs.rules as any[]
+  })
 </script>
 
 <template>
@@ -22,7 +27,8 @@
     class="z-input" 
     :class="{ 
       horizontal: direction === 'horizontal',
-      required
+      required,
+      'z-input-error': !!errorMessage
     }"
   >
     <label class="z-input-label">
@@ -44,9 +50,4 @@
 
 <style lang="scss" scoped>
   @import "@/components/style.scss";
-
-  input {
-    border-color: #ff7875 !important;
-    box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
-  }
 </style>

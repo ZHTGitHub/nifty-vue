@@ -1,107 +1,130 @@
 <script setup lang="ts">
-  import type { message } from 'ant-design-vue';
-import useFormStore from './components/form/_utils/formStore'
+  import { ref } from 'vue'
+  import useFormStore from './components/form/_utils/formStore'
 
   const formStore = useFormStore()
 
-  const handleConfirm = () => {
-    console.log(formStore.forms.login)
+  const formId = ref('login')
+
+  const handleConfirm = ({ error }: { event: Event, error: Boolean }) => {
+    // console.log(formStore.forms[formId.value])
+    console.log(error)
   }
 </script>
 
 <template>
   <z-input 
-    form-id="login" 
-    form-key="input"
-    defaultValue="input"
-    label="Input"
+    :formId="formId" 
+    formKey="name"
+    label="姓名"
     :rules="[
       { name: 'required', message: '当前字段为必填项' },
       { name: 'alpha', message: '当前字段只能为英文字母' },
       { name: 'min', value: 4, message: '当前字段最小长度为4' },
-      { name: 'max', value: 16, message: '当前字段最大长度为16' },
+      { name: 'max', value: 8, message: '当前字段最大长度为8' },
       { name: 'excluded', value: ['fuck', 'shit'], message: '不能包含fuck、shit.' }
     ]"
   />
   <br />
   <br />
   <z-select 
-    form-id="login" 
-    form-key="select" 
-    defaultValue="1"
-    label="Select"
+    :formId="formId" 
+    formKey="country" 
+    label="国家"
     :items="[
-      { label: 'select1', value: '1' }, 
-      { label: 'select2', value: '2' }
+      { label: '美国', value: '1' }, 
+      { label: '日本', value: '2' }
     ]"
     placeholder="请选择国家" 
     :rules="[
-      { required: true, message: '当前字段为必填项' }
+      { name: 'required', message: '请选择国家' }
     ]"
   />
   <br />
   <br />
   <z-switch 
-    :defaultValue="true"
-    label="Switch"
-    form-id="login" 
-    form-key="switch"
+    :formId="formId" 
+    formKey="switch"
+    label="记住"
+    :rules="[
+      { name: 'required', message: '请勾选记住' }
+    ]"
   />
   <br />
   <br />
   <z-checkbox 
-    label="Checkbox"
-    form-id="login" 
-    form-key="checkbox"
-  >Checkbox</z-checkbox>
+    :formId="formId" 
+    formKey="checkbox"
+    :rules="[
+      { name: 'required', message: '请勾选记住密码' }
+    ]"
+  >记住密码</z-checkbox>
   <br />
   <br />
   <z-checkbox-group 
-    :defaultValue="[1]"
-    label="CheckboxGroup"
-    form-id="login" 
-    form-key="checkboxGroup" 
+    label="水果"
+    :formId="formId" 
+    formKey="fruit" 
     :items="[
-      { label: 'group1', value: 1 }, 
-      { label: 'group2', value: 2 }
-    ]">checkboxGroup</z-checkbox-group>
+      { label: '苹果', value: 1 }, 
+      { label: '香蕉', value: 2 }
+    ]"
+    :rules="[
+      { name: 'required', message: '请勾选记住水果' }
+    ]"
+  ></z-checkbox-group>
   <br />
   <br />
   <z-radio 
-    label="Radio"
-    form-id="login"
-    form-key="radio"
-  >Radio</z-radio>
+    :formId="formId"
+    formKey="radio"
+    :rules="[
+      { name: 'required', message: '请勾选记住' }
+    ]"
+  >记住</z-radio>
   <br />
   <br />
   <z-radio-group 
-    :defaultValue="2"
-    label="RadioGroup"
-    form-id="login" 
-    form-key="radioGroup" 
+    :formId="formId" 
+    formKey="radioGroup" 
+    label="性别"
     :items="[
-      { label: 'group1', value: 1 }, 
-      { label: 'group2', value: 2 }
-    ]"></z-radio-group>
+      { label: '男', value: 1 }, 
+      { label: '女', value: 2 }
+    ]"
+    :rules="[
+      { name: 'required', message: '请选择性别' }
+    ]"
+  ></z-radio-group>
   <br />
   <br />
   <z-date-picker 
-    label="DatePicker" 
-    form-id="login" 
-    form-key="datePicker" 
+    label="日期" 
+    :formId="formId" 
+    formKey="date" 
     format="YYYY/MM/DD"
+    :rules="[
+      { name: 'required', message: '请选择日期' }
+    ]"
   />
   <br />
   <br />
   <z-range-picker 
-    label="RangePicker" 
-    form-id="login" 
-    form-key="rangePicker" 
+    :formId="formId" 
+    formKey="range" 
     format="YYYY/MM/DD"
+    label="日期范围" 
+    :rules="[
+      { name: 'required', message: '请选择日期范围' }
+    ]"
   />
   <br />
   <br />
-  <z-btn @click="handleConfirm">提交</z-btn>
+  <z-btn 
+    :formId="formId" 
+    btnType="validate"
+    @click="handleConfirm"
+  >提交</z-btn>
 </template>
 
 <style scoped>

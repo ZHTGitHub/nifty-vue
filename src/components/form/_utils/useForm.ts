@@ -35,5 +35,7 @@ export const useFormDefaultValue = (
     if(defaultVal) {
       value.value = defaultVal
     }
-  }, { immediate: true })
+
+    return value
+  }, { immediate: true, deep: true })
 }

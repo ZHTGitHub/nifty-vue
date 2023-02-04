@@ -1,4 +1,24 @@
 .z-input {
+  // label
+  .z-input-label {
+    display: inline-block;
+  }
+
+  // control
+  .z-input-control {
+    position: relative;
+    flex-grow: 1;
+
+    // messages
+    .z-messages {
+      position: absolute;
+      bottom: -22px;
+      left: 0;
+      font-size: 14px;
+      line-height: 1.5715;
+    }
+  }
+
   // horizontal
   &.horizontal {
     display: flex;
@@ -31,29 +51,29 @@
     }
   }
 
-  .z-input-label {
-    display: inline-block;
-  }
+  // invalid
+  &.z-input-error {
+    // control
+    .z-input-control {
+      // input
+      input.ant-input {
+        border-color: #ff7875 !important;
+        box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
+      }
 
-  // control
-  .z-input-control {
-    position: relative;
-    flex-grow: 1;
+      // select
+      :deep(.ant-select-selector) {
+        border-color: #ff7875 !important;
+        box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
+      }
 
-    // date
-    .ant-picker {
-      border-color: #ff7875 !important;
-      box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
-    }
+      // date
+      .ant-picker {
+        border-color: #ff7875 !important;
+        box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
+      }
 
-    // messages
-    .z-messages {
-      position: absolute;
-      bottom: -22px;
-      left: 0;
-      font-size: 14px;
-      line-height: 1.5715;
-
+      // error message
       .error-message {
         color: #ff4d4f;
       }

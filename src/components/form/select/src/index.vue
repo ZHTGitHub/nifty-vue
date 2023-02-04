@@ -3,7 +3,7 @@
   import type { PropType } from 'vue'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
-  import { useFormRequired } from '../../_utils/useFormValidator'
+  import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
   const attrs = useAttrs()
 
@@ -27,10 +27,17 @@
   })
 
   const value = useFormValue(props.formId, props.formKey)
-  
+
   useFormDefaultValue(attrs.defaultValue, value)
 
   const required = useFormRequired(attrs.rules as any[])
+
+  const errorMessage = useErrorMessage({
+    formId: props.formId, 
+    formKey: props.formKey, 
+    value, 
+    rules: attrs.rules as any[]
+  })
 </script>
 
 <template>
@@ -38,7 +45,8 @@
     class="z-input z-input-select"
     :class="{ 
       horizontal: direction === 'horizontal',
-      required
+      required,
+      'z-input-error': !!errorMessage
     }"
   >
     <label class="z-input-label">
@@ -60,7 +68,7 @@
       </a-select>
 
       <div class="z-messages">
-        <div class="error-message">当前字段为必填项</div>
+        <div class="error-message">{{ errorMessage }}</div>
       </div>
     </div>
   </div>
@@ -75,10 +83,5 @@
         width: 100%;
       }
     }
-  }
-
-  :deep(.ant-select-selector) {
-    border-color: #ff7875 !important;
-    box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
   }
 </style>

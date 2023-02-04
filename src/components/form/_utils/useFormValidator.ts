@@ -1,31 +1,84 @@
-import { ref, computed, watch } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
+import type { Ref } from 'vue'
+import useFormStore from './formStore'
+import type { FormId, FormKey } from '@/components/form/types'
+import useBus from './useBus'
 import nifty from 'rocket-nifty.js'
 import rulesFunc from './rules'
 
-// 是否必填
-export const useFormRequired = (rules: any[]): boolean => {
-  const result = nifty.find(rules, { required: true })
-  return !!result
+const bus = useBus()
+
+interface IValidateRuleParams { 
+  formId: FormId, 
+  formKey: FormKey, 
+  value: any, 
+  rules?: any[] 
 }
 
-export const useErrorMessage = (value?: any, rules?: any[]) => {
-  const errorMessage = ref<string>('')
+interface IValidateRule {
+  errors: any,
+  errorMessage: string
+}
 
-  watch(() => value.value, (val) => {
-    if(!rules) return
+const errors: any = {}
+
+const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): IValidateRule => {
+  let errorMessage = ''
+
+  let formStore: any = null
+  if(!formStore) formStore = useFormStore()
+
+  // console.log({ formId, formKey })
+
+  if(rules && rules.length) {
     for(let rule of rules) {
-      const result = rulesFunc[rule.name](val, rule.value)
-
-      console.log(rule.name, result, rule.message)
-
+      const result = rulesFunc[rule.name](value, rule.value)
+  
       if(!result) {
-        errorMessage.value = rule.message
+        nifty.set(errors, formId + '.' + formKey, false)
+        errorMessage = rule.message
         break
       }
       else {
-        errorMessage.value = ''
+        nifty.set(errors, formId + '.' + formKey, true)
       }
     }
+  }
+
+  formStore.SET_FORM_ERRORS(errors)
+
+  // console.log(errors)
+
+  return {
+    errors,
+    errorMessage
+  }
+}
+
+// 是否必填
+export const useFormRequired = (rules: any[]): boolean => {
+  const result = nifty.find(rules, { name: 'required' })
+  return !!result
+}
+
+// 错误提示
+export const useErrorMessage = ({ formId, formKey, value, rules }: IValidateRuleParams): Ref<string> => {
+  const errorMessage = ref<string>('')
+
+  // input
+  watch(() => value.value, (val) => {
+    errorMessage.value = validateRule({ formId, formKey, value: val, rules }).errorMessage
+  })
+
+  // button
+  bus.on('validate', (btnFormId: FormId) => {
+    if(formId !== btnFormId) return
+
+    errorMessage.value = validateRule({ formId, formKey, value: value.value, rules }).errorMessage
+  })
+
+  onUnmounted(() => {
+    bus.off('validate', () => {})
   })
 
   return errorMessage

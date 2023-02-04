@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 import nifty from 'rocket-nifty.js'
 
 export interface State {
-  forms: any
+  forms: any,
+  errors: any
 }
 
 export interface Data {
@@ -11,9 +12,10 @@ export interface Data {
   value?: string | undefined
 }
 
-const useFormStore = defineStore('form', {
+const useFormStore = defineStore('forms', {
   state: (): State => ({
-    forms: {}
+    forms: {},
+    errors: {}
   }),
 
   actions: {
@@ -34,6 +36,11 @@ const useFormStore = defineStore('form', {
     // 重置表单
     RESET_FORM(data: Data) {
 
+    },
+
+    // 错误 
+    SET_FORM_ERRORS(errors: any) {
+      this.errors = errors
     }
   }
 })

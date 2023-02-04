@@ -1,3 +1,5 @@
-import type { PropType } from 'vue'
+export type FormId = string | undefined
+
+export type FormKey = string | undefined
 
 export type Direction = 'horizontal' | 'vertical'

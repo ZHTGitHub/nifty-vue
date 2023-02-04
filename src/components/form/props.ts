@@ -1,9 +1,9 @@
 import type { PropType } from 'vue'
-import type { Direction } from './types'
+import type { FormId, Direction } from './types'
 
 const formProps = () => ({
   formId: {
-    type: String as PropType<string>
+    type: String as PropType<FormId>
   }, 
   
   formKey: {
