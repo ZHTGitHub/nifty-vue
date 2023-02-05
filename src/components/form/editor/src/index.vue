@@ -1,15 +1,24 @@
 <script lang="ts">
-  import { useAttrs, defineComponent } from 'vue'
+  import '@wangeditor/editor/dist/css/style.css'
+  import { useAttrs, shallowRef, defineComponent } from 'vue'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
-  
+  import { Toolbar, Editor } from '@wangeditor/editor-for-vue'
+
   export default defineComponent({
-    name: 'ZInput',
+    name: 'ZEditor',
 
     props: fromProps(),
 
     setup(props) {
+      const editorRef = shallowRef()
+
+      const handleCreated = (editor: object) => {
+        // console.log('created', editor)
+        editorRef.value = editor // 记录 editor 实例，重要！
+      }
+
       const attrs = useAttrs()
 
       const value = useFormValue(props.formId, props.formKey)
@@ -31,18 +40,24 @@
       })
 
       return {
+        editorRef,
+        handleCreated,
         value,
         required,
         errorMessage
       }
+    },
+
+    components: {
+      Toolbar,
+      Editor
     }
   })
-
 </script>
 
 <template>
   <div 
-    class="z-input" 
+    class="z-input z-input-editor"
     :class="{ 
       horizontal: direction === 'horizontal',
       required,
@@ -54,10 +69,22 @@
     </label>
 
     <div class="z-input-control">
-      <a-input 
-        v-bind="$attrs" 
-        v-model:value="value" 
-      />
+      <div class="editor">
+        <Toolbar
+          class="editor-toolbar"
+          :editor="editorRef"
+          :defaultConfig="{}"
+          mode="default"
+        />
+
+        <Editor
+          class="editor-container"
+          :defaultConfig="{ placeholder: '请输入内容...' }"
+          mode="default"
+          v-model="value"
+          @onCreated="handleCreated"
+        />
+      </div>
       
       <div class="z-messages">
         <div class="error-message">{{ errorMessage }}</div>
@@ -68,4 +95,20 @@
 
 <style lang="scss" scoped>
   @import "@/components/style.scss";
+  .z-input-editor {
+    .z-input-control {
+      .editor {
+        border: 1px solid #d9d9d9;
+
+        .editor-toolbar {
+          border-bottom: 1px solid #d9d9d9;
+        }
+
+        .editor-container {
+          overflow: hidden;
+          height: 360px !important;
+        }
+      }
+    }
+  }
 </style>

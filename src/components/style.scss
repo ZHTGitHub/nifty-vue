@@ -2,6 +2,8 @@
   // label
   .z-input-label {
     display: inline-block;
+    min-width: 38px;
+    text-align: right;
   }
 
   // control
@@ -19,6 +21,13 @@
     }
   }
 
+  // editor
+  &.z-input-editor {
+    .z-input-label {
+      align-self: flex-start;
+    }
+  }
+
   // horizontal
   &.horizontal {
     display: flex;
@@ -26,13 +35,11 @@
 
     .z-input-label {
       margin-right: 8px;
-    }
-  }
 
-  // vertical
-  &.vertical {
-    .z-input-label {
-      margin-right: 0;
+      // empty label
+      &.mr0 {
+        margin-right: 0;
+      }
     }
   }
 

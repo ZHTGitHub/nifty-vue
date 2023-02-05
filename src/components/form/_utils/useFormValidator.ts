@@ -8,9 +8,9 @@ import rulesFunc from './rules'
 const bus = useBus()
 
 interface IValidateRuleParams { 
-  formId: string, 
-  formKey: string, 
-  value: any, 
+  formId?: string | undefined, 
+  formKey?: string | undefined, 
+  value?: any, 
   rules?: any[] 
 }
 
@@ -26,8 +26,6 @@ const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): I
 
   let formStore: any = null
   if(!formStore) formStore = useFormStore()
-
-  // console.log({ formId, formKey })
 
   if(rules && rules.length) {
     for(let rule of rules) {
@@ -48,8 +46,6 @@ const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): I
 
   formStore.SET_FORM_ERRORS(errors)
 
-  // console.log(errors)
-
   return {
     errors,
     errorMessage
@@ -57,15 +53,18 @@ const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): I
 }
 
 // 是否必填
-export const useFormRequired = (rules: any[]): boolean => {
+export const useFormRequired = (rules: any[] = []): boolean => {
   const result = nifty.find(rules, { name: 'required' })
   return !!result
 }
 
 // 错误提示
 export const useErrorMessage = ({ formId, formKey, value, rules }: IValidateRuleParams): Ref<string> => {
-  const instance = getCurrentInstance()
   const errorMessage = ref<string>('')
+
+  if(!formId || !formKey) return errorMessage
+
+  const instance = getCurrentInstance()
 
   // input
   watch(() => value.value, (val) => {
@@ -77,8 +76,13 @@ export const useErrorMessage = ({ formId, formKey, value, rules }: IValidateRule
     if(formId !== btnFormId) return
 
     if(value.value === void 0) {
-      if(['ZCheckboxGroup', 'ZRangePicker'].includes(instance?.type.name!)) {
+      const compName = instance?.type.name!
+
+      if(['ZCheckboxGroup', 'ZRangePicker'].includes(compName)) {
         value.value = []
+      }
+      else if(['ZCheckbox', 'ZRadio'].includes(compName)) {
+        value.value = false
       }
       else {
         value.value = ''

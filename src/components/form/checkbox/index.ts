@@ -4,7 +4,7 @@ import CheckboxGroup from './src/group.vue'
 
 export default {
   install(app: App) {
-    app.component('z-checkbox', Checkbox)
-    app.component('z-checkbox-group', CheckboxGroup)
+    app.component(Checkbox.name, Checkbox)
+    app.component(CheckboxGroup.name, CheckboxGroup)
   }
 }

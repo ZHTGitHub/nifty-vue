@@ -3,6 +3,6 @@ import Select from './src/index.vue'
 
 export default {
   install(app: App) {
-    app.component('z-select', Select)
+    app.component(Select.name, Select)
   }
 }

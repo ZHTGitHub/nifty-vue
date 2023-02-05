@@ -1,5 +1,5 @@
-import { ref, computed, watch } from 'vue'
-import useFormStore from './formStore'
+import { computed, watch } from 'vue'
+import useFormStore, { type Data } from './formStore'
 
 export const useFormValue = (
   formId?: string | undefined, 
@@ -27,15 +27,22 @@ export const useFormValue = (
   return computedValue
 }
 
-export const useFormDefaultValue = (
-  defaultValue?: any, 
-  value?: any
-) => {
+export const useFormDefaultValue = ({
+  formId, 
+  formKey,
+  defaultValue, 
+  value
+}: Data) => {
+  if(!formId || !formKey) return void 0
+
+  let formStore: any = null
+  if(!formStore) formStore = useFormStore()
+
   watch(() => defaultValue, (defaultVal) => {
     if(defaultVal) {
       value.value = defaultVal
-    }
 
-    return value
+      formStore.SET_FORM_DEFAULT_VALUE({ formId, formKey, defaultValue })
+    }
   }, { immediate: true, deep: true })
 }

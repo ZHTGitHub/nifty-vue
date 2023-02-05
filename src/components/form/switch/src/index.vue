@@ -1,24 +1,41 @@
-<script lang="ts" setup name="ZSwitch">
-  import { useAttrs } from 'vue'
+<script lang="ts">
+  import { useAttrs, defineComponent } from 'vue'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
   
-  const attrs = useAttrs()
+  export default defineComponent({
+    name: 'ZSwitch',
 
-  const props = defineProps(fromProps())
+    props: fromProps(),
 
-  const value = useFormValue(props.formId, props.formKey)
+    setup(props) {
+      const attrs = useAttrs()
 
-  useFormDefaultValue(attrs.defaultValue, value)
+      const value = useFormValue(props.formId, props.formKey)
 
-  const required = useFormRequired(attrs.rules as any[])
+      useFormDefaultValue({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        defaultValue: attrs.defaultValue, 
+        value
+      })
 
-  const errorMessage = useErrorMessage({
-    formId: props.formId, 
-    formKey: props.formKey, 
-    value, 
-    rules: attrs.rules as any[]
+      const required = useFormRequired(attrs.rules as any[])
+
+      const errorMessage = useErrorMessage({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        value, 
+        rules: attrs.rules as any[]
+      })
+
+      return {
+        value,
+        required,
+        errorMessage
+      }
+    }
   })
 </script>
 
@@ -31,12 +48,15 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label">
-      {{ props.label }}
+    <label class="z-input-label" :class="{ mr0: !label }">
+      {{ label }}
     </label>
 
     <div class="z-input-control">
-      <a-switch v-model:checked="value" />
+      <a-switch 
+        v-bind="$attrs"
+        v-model:checked="value" 
+      />
 
       <div class="z-messages">
         <div class="error-message">{{ errorMessage }}</div>

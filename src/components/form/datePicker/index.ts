@@ -4,7 +4,7 @@ import RangePicker from './src/rangePicker.vue'
 
 export default {
   install(app: App) {
-    app.component('z-date-picker', DatePicker)
-    app.component('z-range-picker', RangePicker)
+    app.component(DatePicker.name, DatePicker)
+    app.component(RangePicker.name, RangePicker)
   }
 }

@@ -2,13 +2,12 @@
  * @description 必填
  * @param {String} value
  */ 
-const required = (value: string): boolean => {
-  if(value === undefined || value == null) {
+const required = (value: any): boolean => {
+  if(value === undefined || value == null || value === false) {
     return false
   }
 
-  const reg = /[\S]+/
-  return reg.test(value)
+  return /[\S]+/.test(value)
 }
 
 export default required

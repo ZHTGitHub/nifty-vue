@@ -1,24 +1,41 @@
-<script lang="ts" setup name="ZRadio">
-  import { useAttrs } from 'vue'
+<script lang="ts">
+  import { useAttrs, defineComponent } from 'vue'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
-  const attrs = useAttrs()
+  export default defineComponent({
+    name: 'ZRadio',
 
-  const props = defineProps(fromProps())
+    props: fromProps(),
 
-  const value = useFormValue(props.formId, props.formKey)
-  
-  useFormDefaultValue(attrs.defaultValue, value)
+    setup(props) {
+      const attrs = useAttrs()
 
-  const required = useFormRequired(attrs.rules as any[])
+      const value = useFormValue(props.formId, props.formKey)
+      
+      useFormDefaultValue({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        defaultValue: attrs.defaultValue, 
+        value
+      })
 
-  const errorMessage = useErrorMessage({
-    formId: props.formId, 
-    formKey: props.formKey, 
-    value, 
-    rules: attrs.rules as any[]
+      const required = useFormRequired(attrs.rules as any[])
+
+      const errorMessage = useErrorMessage({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        value, 
+        rules: attrs.rules as any[]
+      })
+
+      return {
+        value,
+        required,
+        errorMessage
+      }
+    }
   })
 </script>
 
@@ -31,12 +48,15 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label">
-      {{ props.label }}
+    <label class="z-input-label" :class="{ mr0: !label }">
+      {{ label }}
     </label>
 
     <div class="z-input-control">
-      <a-radio v-model:checked="value">
+      <a-radio 
+        v-bind="$attrs"
+        v-model:checked="value"
+      >
         <slot></slot>
       </a-radio>
 

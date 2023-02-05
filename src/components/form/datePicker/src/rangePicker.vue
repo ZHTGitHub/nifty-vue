@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useAttrs, defineComponent } from 'vue'
+  import locale from 'ant-design-vue/es/date-picker/locale/zh_CN'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
@@ -14,7 +15,12 @@
 
       const value = useFormValue(props.formId, props.formKey)
 
-      useFormDefaultValue(attrs.defaultValue, value)
+      useFormDefaultValue({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        defaultValue: attrs.defaultValue, 
+        value
+      })
 
       const required = useFormRequired(attrs.rules as any[])
 
@@ -28,12 +34,11 @@
       return {
         value,
         required,
-        errorMessage
+        errorMessage,
+        locale
       }
     }
   })
-  
-  
 </script>
 
 <template>
@@ -45,14 +50,14 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label">
+    <label class="z-input-label" :class="{ mr0: !label }">
       {{ label }}
     </label>
 
     <div class="z-input-control">
       <a-range-picker 
-        v-model:value="value" 
         v-bind="$attrs"
+        v-model:value="value" 
       />
 
       <div class="z-messages">

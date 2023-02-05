@@ -4,7 +4,7 @@ import RadioGroup from './src/group.vue'
 
 export default {
   install(app: App) {
-    app.component('z-radio', Radio)
-    app.component('z-radio-group', RadioGroup)
+    app.component(Radio.name, Radio)
+    app.component(RadioGroup.name, RadioGroup)
   }
 }

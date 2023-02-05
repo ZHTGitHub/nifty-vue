@@ -3,6 +3,6 @@ import Upload from './src/index.vue'
 
 export default {
   install(app: App) {
-    app.component('z-upload', Upload)
+    app.component(Upload.name, Upload)
   }
 }

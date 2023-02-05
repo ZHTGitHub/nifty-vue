@@ -32,7 +32,12 @@
 
       const value = useFormValue(props.formId, props.formKey)
 
-      useFormDefaultValue(attrs.defaultValue, value)
+      useFormDefaultValue({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        defaultValue: attrs.defaultValue, 
+        value
+      })
 
       const required = useFormRequired(attrs.rules as any[])
 
@@ -50,8 +55,6 @@
       }
     }
   })
-  
-  
 </script>
 
 <template>
@@ -63,12 +66,13 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label">
+    <label class="z-input-label" :class="{ mr0: !label }">
       {{ label }}
     </label>
 
     <div class="z-input-control">
       <a-checkbox-group 
+        v-bind="$attrs"
         v-model:value="value" 
         :options="items" 
       />

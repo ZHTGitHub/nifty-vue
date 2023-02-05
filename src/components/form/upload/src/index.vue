@@ -1,9 +1,67 @@
-<script lang="ts" setup name="ZUpload">
+<script lang="ts">
+  import { useAttrs, defineComponent } from 'vue'
+  import fromProps from '@/components/form/props'
+  import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
+  import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
+  export default defineComponent({
+    name: 'ZUpload',
+
+    props: fromProps(),
+
+    setup(props) {
+      const attrs = useAttrs()
+
+      const value = useFormValue(props.formId, props.formKey)
+
+      useFormDefaultValue({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        defaultValue: attrs.defaultValue, 
+        value
+      })
+
+      const required = useFormRequired(attrs.rules as any[])
+
+      const errorMessage = useErrorMessage({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        value, 
+        rules: attrs.rules as any[]
+      })
+
+      return {
+        value,
+        required,
+        errorMessage
+      }
+    }
+  })
 </script>
 
 <template>
-  <div class="z-input">
-    Upload
+  <div 
+    class="z-input" 
+    :class="{ 
+      horizontal: direction === 'horizontal',
+      required,
+      'z-input-error': !!errorMessage
+    }"
+  >
+    <label class="z-input-label" :class="{ mr0: !label }">
+      {{ label }}
+    </label>
+
+    <div class="z-input-control">
+      <a-upload 
+        v-model:file-list="value"
+      >
+        <slot></slot>
+      </a-upload>
+      
+      <div class="z-messages">
+        <div class="error-message">{{ errorMessage }}</div>
+      </div>
+    </div>
   </div>
 </template>

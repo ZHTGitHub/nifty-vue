@@ -1,24 +1,43 @@
-<script lang="ts" setup name="ZDatePicker">
-  import { useAttrs } from 'vue'
+<script lang="ts">
+  import { useAttrs, defineComponent } from 'vue'
+  import locale from 'ant-design-vue/es/date-picker/locale/zh_CN'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
-  
-  const attrs = useAttrs()
 
-  const props = defineProps(fromProps())
+  export default defineComponent({
+    name: 'ZDatePicker',
 
-  const value = useFormValue(props.formId, props.formKey)
+    props: fromProps(),
 
-  useFormDefaultValue(attrs.defaultValue, value)
+    setup(props) {
+      const attrs = useAttrs()
 
-  const required = useFormRequired(attrs.rules as any[])
+      const value = useFormValue(props.formId, props.formKey)
 
-  const errorMessage = useErrorMessage({
-    formId: props.formId, 
-    formKey: props.formKey, 
-    value, 
-    rules: attrs.rules as any[]
+      useFormDefaultValue({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        defaultValue: attrs.defaultValue, 
+        value
+      })
+
+      const required = useFormRequired(attrs.rules as any[])
+
+      const errorMessage = useErrorMessage({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        value, 
+        rules: attrs.rules as any[]
+      })
+
+      return {
+        value,
+        required,
+        errorMessage,
+        locale
+      }
+    }
   })
 </script>
 
@@ -31,15 +50,15 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label">
-      {{ props.label }}
+    <label class="z-input-label" :class="{ mr0: !label }">
+      {{ label }}
     </label>
 
     <div class="z-input-control">
-      <a-date-picker 
-        v-model:value="value" 
-        v-bind="$attrs"
-      />
+        <a-date-picker 
+          v-bind="$attrs"
+          v-model:value="value" 
+        />
 
       <div class="z-messages">
         <div class="error-message">{{ errorMessage }}</div>

@@ -1,43 +1,60 @@
-<script lang="ts" setup name="ZSelect">
-  import { useAttrs } from 'vue'
+<script lang="ts">
+  import { useAttrs, defineComponent } from 'vue'
   import type { PropType } from 'vue'
   import fromProps from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
-  const attrs = useAttrs()
+  export default defineComponent({
+    name: 'ZSelect',
 
-  let props = defineProps({
-    ...fromProps(),
+    props: {
+      ...fromProps(),
 
-    itemLabel: {
-      type: String,
-      default: 'label'
+      itemLabel: {
+        type: String,
+        default: 'label'
+      },
+
+      items: {
+        type: Array as PropType<any[]>,
+        default: () => []
+      },
+
+      itemValue: {
+        type: String,
+        default: 'value'
+      }
     },
 
-    items: {
-      type: Array as PropType<any[]>,
-      default: () => []
-    },
+    setup(props) {
+      const attrs = useAttrs()
 
-    itemValue: {
-      type: String,
-      default: 'value'
+      const value = useFormValue(props.formId, props.formKey)
+
+      useFormDefaultValue({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        defaultValue: attrs.defaultValue, 
+        value
+      })
+
+      const required = useFormRequired(attrs.rules as any[])
+
+      const errorMessage = useErrorMessage({
+        formId: props.formId, 
+        formKey: props.formKey, 
+        value, 
+        rules: attrs.rules as any[]
+      })
+
+      return {
+        value,
+        required,
+        errorMessage
+      }
     }
-  })
-
-  const value = useFormValue(props.formId, props.formKey)
-
-  useFormDefaultValue(attrs.defaultValue, value)
-
-  const required = useFormRequired(attrs.rules as any[])
-
-  const errorMessage = useErrorMessage({
-    formId: props.formId, 
-    formKey: props.formKey, 
-    value, 
-    rules: attrs.rules as any[]
-  })
+  }) 
 </script>
 
 <template>
@@ -49,20 +66,23 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label">
-      {{ props.label }}
+    <label class="z-input-label" :class="{ mr0: !label }">
+      {{ label }}
     </label>
 
     <div class="z-input-control">
-      <a-select v-model:value="value">
+      <a-select 
+        v-bind="$attrs"
+        v-model:value="value"
+      >
         <template 
           v-for="item in items" 
-          :key="item[props.value]"
+          :key="item[itemValue]"
         >
           <a-select-option 
-            :value="item[props.itemValue]"
+            :value="item[itemValue]"
           >
-            {{ item[props.itemLabel] }}
+            {{ item[itemLabel] }}
           </a-select-option>
         </template>
       </a-select>
