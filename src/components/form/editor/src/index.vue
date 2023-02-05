@@ -1,7 +1,7 @@
 <script lang="ts">
   import '@wangeditor/editor/dist/css/style.css'
   import { useAttrs, shallowRef, defineComponent } from 'vue'
-  import fromProps from '@/components/form/props'
+  import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
   import { Toolbar, Editor } from '@wangeditor/editor-for-vue'
@@ -9,7 +9,7 @@
   export default defineComponent({
     name: 'ZEditor',
 
-    props: fromProps(),
+    props: formProps(),
 
     setup(props) {
       const editorRef = shallowRef()

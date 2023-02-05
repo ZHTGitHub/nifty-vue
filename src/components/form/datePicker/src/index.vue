@@ -1,14 +1,14 @@
 <script lang="ts">
   import { useAttrs, defineComponent } from 'vue'
   import locale from 'ant-design-vue/es/date-picker/locale/zh_CN'
-  import fromProps from '@/components/form/props'
+  import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
   export default defineComponent({
     name: 'ZDatePicker',
 
-    props: fromProps(),
+    props: formProps(),
 
     setup(props) {
       const attrs = useAttrs()

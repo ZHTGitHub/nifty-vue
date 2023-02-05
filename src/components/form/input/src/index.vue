@@ -1,13 +1,13 @@
 <script lang="ts">
   import { useAttrs, defineComponent } from 'vue'
-  import fromProps from '@/components/form/props'
+  import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
   
   export default defineComponent({
     name: 'ZInput',
 
-    props: fromProps(),
+    props: formProps(),
 
     setup(props) {
       const attrs = useAttrs()
@@ -49,7 +49,13 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label" :class="{ mr0: !label }">
+    <label 
+      class="z-input-label" 
+      :class="{ mr0: !label }"
+      :style="{
+        width: `${ labelWidth }px`
+      }"
+    >
       {{ label }}
     </label>
 

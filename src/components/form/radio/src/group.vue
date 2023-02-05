@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useAttrs, defineComponent } from 'vue'
-  import type { PropType } from 'vue'
-  import fromProps from '@/components/form/props'
+  import { formProps, itemsProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
@@ -9,22 +8,8 @@
     name: 'ZRadioGroup',
 
     props: {
-      ...fromProps(),
-
-      itemLabel: {
-        type: String,
-        default: 'label'
-      },
-
-      items: {
-        type: Array as PropType<any[]>,
-        default: () => []
-      },
-
-      itemValue: {
-        type: String,
-        default: 'value'
-      }
+      ...formProps(),
+      ...itemsProps()
     },
 
     setup(props) {

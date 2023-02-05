@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import type { FormId, Direction } from './types'
 
-const formProps = () => ({
+export const formProps = () => ({
   formId: {
     type: String as PropType<FormId>
   }, 
@@ -17,7 +17,27 @@ const formProps = () => ({
 
   label: {
     type: [String, Number] as PropType<string | number>
+  },
+
+  labelWidth: {
+    type: [String, Number] as PropType<string | number>,
+    default: 38
   }
 })
 
-export default formProps
+export const itemsProps = () => ({
+  itemLabel: {
+    type: String,
+    default: 'label'
+  },
+
+  items: {
+    type: Array as PropType<any[]>,
+    default: () => []
+  },
+
+  itemValue: {
+    type: String,
+    default: 'value'
+  }
+})

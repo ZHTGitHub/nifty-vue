@@ -43,9 +43,11 @@
       formKey="country" 
       label="国家"
       :items="[
-        { label: '美国', value: '1' }, 
-        { label: '日本', value: '2' }
+        { name: '美国', val: '1' }, 
+        { name: '日本', val: '2' }
       ]"
+      itemLabel="name"
+      itemValue="val"
       placeholder="请选择国家" 
       :rules="[
         { name: 'required', message: '请选择国家' }
