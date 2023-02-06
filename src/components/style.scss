@@ -2,7 +2,7 @@
   // label
   .z-input-label {
     display: inline-block;
-    // min-width: 38px;
+    min-width: 40px;
     text-align: right;
   }
 
@@ -37,8 +37,8 @@
       margin-right: 8px;
 
       // empty label
-      &.mr0 {
-        margin-right: 0;
+      &.mr2 {
+        margin-right: 8;
       }
     }
   }

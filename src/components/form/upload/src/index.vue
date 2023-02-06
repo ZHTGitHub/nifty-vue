@@ -48,7 +48,7 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label" :class="{ mr0: !label }">
+    <label class="z-input-label" :class="{ mr2: !label }">
       {{ label }}
     </label>
 

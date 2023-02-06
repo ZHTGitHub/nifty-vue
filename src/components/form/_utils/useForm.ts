@@ -42,6 +42,8 @@ export const useFormDefaultValue = ({
     if(defaultVal) {
       value.value = defaultVal
 
+      // console.log(formKey, { defaultVal, value: value.value })
+
       formStore.SET_FORM_DEFAULT_VALUE({ formId, formKey, defaultValue })
     }
   }, { immediate: true, deep: true })

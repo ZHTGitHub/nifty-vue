@@ -1,27 +1,62 @@
 <script lang="ts">
   import '@wangeditor/editor/dist/css/style.css'
-  import { useAttrs, shallowRef, defineComponent } from 'vue'
+  import { useAttrs, ref, shallowRef, watch, defineComponent, onBeforeUnmount, nextTick } from 'vue'
+  import type { PropType } from 'vue'
   import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
+  import type { IDomEditor } from '@wangeditor/editor'
   import { Toolbar, Editor } from '@wangeditor/editor-for-vue'
 
   export default defineComponent({
     name: 'ZEditor',
 
-    props: formProps(),
+    props: {
+      ...formProps(),
+
+      autoFocus: {
+        type: Boolean as PropType<boolean>,
+        default: false
+      },
+
+      mode: {
+        type: String as PropType<'default' | 'simple'>,
+        default: 'default'
+      },
+
+      placeholder: {
+        type: String as PropType<'default' | 'simple'>
+      }
+    },
 
     setup(props) {
       const editorRef = shallowRef()
 
-      const handleCreated = (editor: object) => {
-        // console.log('created', editor)
-        editorRef.value = editor // 记录 editor 实例，重要！
-      }
+      onBeforeUnmount(() => {
+        editorRef.value?.destroy()
+      })
 
       const attrs = useAttrs()
 
       const value = useFormValue(props.formId, props.formKey)
+
+      const valueHtml = ref<string>(value)
+
+      const handleCreated = (editor: IDomEditor) => {
+        editorRef.value = editor 
+      }
+
+      const handleChange = () => {
+        const text = editorRef.value.getText()
+        const html = editorRef.value.getHtml()
+        value.value = text ? html : text
+      }
+
+      watch(() => value.value, (val) => {
+        nextTick(() => {
+          valueHtml.value = val
+        })
+      })
 
       useFormDefaultValue({
         formId: props.formId, 
@@ -41,7 +76,9 @@
 
       return {
         editorRef,
+        valueHtml,
         handleCreated,
+        handleChange,
         value,
         required,
         errorMessage
@@ -64,7 +101,13 @@
       'z-input-error': !!errorMessage
     }"
   >
-    <label class="z-input-label" :class="{ mr0: !label }">
+    <label 
+      class="z-input-label" 
+      :class="{ mr2: !label }"
+      :style="{
+        width: `${ labelWidth }px`
+      }"
+    >
       {{ label }}
     </label>
 
@@ -74,15 +117,19 @@
           class="editor-toolbar"
           :editor="editorRef"
           :defaultConfig="{}"
-          mode="default"
+          :mode="mode"
         />
 
         <Editor
           class="editor-container"
-          :defaultConfig="{ placeholder: '请输入内容...' }"
-          mode="default"
-          v-model="value"
+          :defaultConfig="{ 
+            autoFocus,
+            placeholder 
+          }"
+          :mode="mode"
+          v-model="valueHtml"
           @onCreated="handleCreated"
+          @onChange="handleChange"
         />
       </div>
       

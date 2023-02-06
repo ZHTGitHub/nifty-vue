@@ -21,7 +21,7 @@ export const formProps = () => ({
 
   labelWidth: {
     type: [String, Number] as PropType<string | number>,
-    default: 38
+    default: 40
   }
 })
 

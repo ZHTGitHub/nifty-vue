@@ -51,7 +51,7 @@
   >
     <label 
       class="z-input-label" 
-      :class="{ mr0: !label }"
+      :class="{ mr2: !label }"
       :style="{
         width: `${ labelWidth }px`
       }"
