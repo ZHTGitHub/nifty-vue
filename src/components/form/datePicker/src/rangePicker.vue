@@ -1,14 +1,22 @@
 <script lang="ts">
   import { useAttrs, defineComponent } from 'vue'
+  import type { PropType } from 'vue'
   import locale from 'ant-design-vue/es/date-picker/locale/zh_CN'
-import { formProps } from '@/components/form/props'
+  import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
   export default defineComponent({
     name: 'ZRangePicker',
 
-    props: formProps(),
+    props: {
+      ...formProps(),
+
+      placeholder: {
+        type: [Array, String] as PropType<string[] | string>,
+        default: ['开始日期', '结束日期']
+      }
+    },
 
     setup(props) {
       const attrs = useAttrs()
@@ -58,6 +66,7 @@ import { formProps } from '@/components/form/props'
       <a-range-picker 
         v-bind="$attrs"
         v-model:value="value" 
+        :placeholder="placeholder"
       />
 
       <div class="z-messages">

@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { useAttrs, defineComponent } from 'vue'
+  import { useAttrs, ref, defineComponent } from 'vue'
+  import type { PropType } from 'vue'
+  import type { UploadProps } from 'ant-design-vue'
   import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
@@ -7,9 +9,18 @@
   export default defineComponent({
     name: 'ZUpload',
 
-    props: formProps(),
+    props: {
+      ...formProps(),
+
+      listType: {
+        type: String as PropType<'picture' | 'picture-card' | 'text'>,
+        default: 'picture-card'
+      }
+    },
 
     setup(props) {
+      const fileList = ref<UploadProps[]>([])
+
       const attrs = useAttrs()
 
       const value = useFormValue(props.formId, props.formKey)
@@ -31,6 +42,7 @@
       })
 
       return {
+        fileList,
         value,
         required,
         errorMessage
@@ -54,7 +66,9 @@
 
     <div class="z-input-control">
       <a-upload 
-        v-model:file-list="value"
+        v-bind="$attrs"
+        v-model:file-list="fileList"
+        :listType="listType"
       >
         <slot></slot>
       </a-upload>

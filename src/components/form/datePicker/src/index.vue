@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useAttrs, defineComponent } from 'vue'
+  import type { PropType } from 'vue'
   import locale from 'ant-design-vue/es/date-picker/locale/zh_CN'
   import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
@@ -8,7 +9,14 @@
   export default defineComponent({
     name: 'ZDatePicker',
 
-    props: formProps(),
+    props: {
+      ...formProps(),
+
+      placeholder: {
+        type: String as PropType<string>,
+        default: '选择日期'
+      }
+    },
 
     setup(props) {
       const attrs = useAttrs()
@@ -58,6 +66,7 @@
         <a-date-picker 
           v-bind="$attrs"
           v-model:value="value" 
+          :placeholder="placeholder"
         />
 
       <div class="z-messages">

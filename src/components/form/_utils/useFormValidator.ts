@@ -78,7 +78,7 @@ export const useErrorMessage = ({ formId, formKey, value, rules }: IValidateRule
     if(value.value === void 0) {
       const compName = instance?.type.name!
 
-      if(['ZCheckboxGroup', 'ZRangePicker'].includes(compName)) {
+      if(['ZCheckboxGroup', 'ZRangePicker', 'ZUpload'].includes(compName)) {
         value.value = []
       }
       else if(['ZCheckbox', 'ZRadio'].includes(compName)) {

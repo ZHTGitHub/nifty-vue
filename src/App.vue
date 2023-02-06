@@ -21,7 +21,7 @@
         { name: 'required', message: '请上传头像' }
       ]"
     >
-      Upload
+      上传
     </z-upload>
     <br />
     <z-input 
@@ -140,6 +140,7 @@
       :rules="[
         { name: 'required', message: '文案不能为空' }
       ]"
+      defaultValue="这是文案内容"
     />
     <br />
     <z-btn 
