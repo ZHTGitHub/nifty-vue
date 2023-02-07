@@ -9,22 +9,27 @@ import type { RuleName } from './rules'
 
 const bus = useBus()
 
-interface RuleItem<U> { 
+interface IRuleItem { 
   name: RuleName;
-  value?: U;
+  value?: any;
   message: string; 
 }
 
-type ValidateRuleParams<T, U> = Data<T> & { rules?: RuleItem<U>[] }
+interface IValidateInputParams {
+  formId: string;
+  formKey: string;
+  value?: any;
+  rules?: IRuleItem[]
+}
 
-interface ValidateRule<V> {
-  errors: V,
+interface IValidateResult {
+  errors: object,
   errorMessage: string
 }
 
 const errors: any = {}
 
-const validateRule = <T, U, V>({ formId, formKey, value, rules }: ValidateRuleParams<T, U>): ValidateRule<V> => {
+const validateInput = ({ formId, formKey, value, rules }: IValidateInputParams): IValidateResult => {
   let errorMessage = ''
 
   let formStore: any = null
@@ -56,12 +61,12 @@ const validateRule = <T, U, V>({ formId, formKey, value, rules }: ValidateRulePa
 }
 
 // 是否必填
-export const useFormRequired = <U>(rules: RuleItem<U>[] = []): boolean => {
+export const useFormRequired = (rules: IRuleItem[] = []): boolean => {
   return !!rules.find(rule => rule.name === 'required')
 }
 
 // 错误提示
-export const useErrorMessage = <T, U>({ formId, formKey, valueRef, rules }: ValidateRuleParams<T, U>): Ref<string> => {
+export const useErrorMessage = ({ formId, formKey, valueRef, rules }: any): Ref<string> => {
   const errorMessage = ref<string>('')
 
   if(!formId || !formKey || !valueRef) return errorMessage
@@ -70,7 +75,7 @@ export const useErrorMessage = <T, U>({ formId, formKey, valueRef, rules }: Vali
 
   // input
   watch(() => valueRef.value, (value) => {
-    errorMessage.value = validateRule({ formId, formKey, value, rules }).errorMessage
+    errorMessage.value = validateInput({ formId, formKey, value, rules }).errorMessage
   })
 
   // button
@@ -91,7 +96,7 @@ export const useErrorMessage = <T, U>({ formId, formKey, valueRef, rules }: Vali
       }
     }
 
-    errorMessage.value = validateRule({ formId, formKey, value: valueRef.value, rules }).errorMessage
+    errorMessage.value = validateInput({ formId, formKey, value: valueRef.value, rules }).errorMessage
   })
 
   onUnmounted(() => {
