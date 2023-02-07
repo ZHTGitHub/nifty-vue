@@ -18,6 +18,27 @@ import phone from './phone'
 import regex from './regex'
 import required from './required'
 
+export type RuleName = 
+'alpha'
+| 'alphaNum'
+| 'between'
+| 'decimal'
+| 'email'
+| 'excluded'
+| 'included'
+| 'integer'
+| 'is'
+| 'isNot'
+| 'length'
+| 'max'
+| 'maxValue'
+| 'min'
+| 'minValue'
+| 'numeric'
+| 'phone'
+| 'regex'
+| 'required'
+
 export default {
   alpha,
   alphaNum,

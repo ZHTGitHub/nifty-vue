@@ -3,8 +3,7 @@
  * @param {String} value
  */ 
 const alphaNum = (value: string): boolean => {
-  const reg = /^[A-Za-z0-9]+$/
-  return reg.test(value)
+  return /^[A-Za-z0-9]+$/.test(value)
 }
 
 export default alphaNum

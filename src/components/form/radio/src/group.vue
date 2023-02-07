@@ -21,7 +21,7 @@
         formId: props.formId, 
         formKey: props.formKey, 
         defaultValue: attrs.defaultValue, 
-        value
+        valueRef: value
       })
 
       const required = useFormRequired(attrs.rules as any[])
@@ -29,7 +29,7 @@
       const errorMessage = useErrorMessage({
         formId: props.formId, 
         formKey: props.formKey, 
-        value, 
+        valueRef: value, 
         rules: attrs.rules as any[]
       })
 

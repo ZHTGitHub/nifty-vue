@@ -140,7 +140,6 @@
       :rules="[
         { name: 'required', message: '文案不能为空' }
       ]"
-      defaultValue="这是文案内容"
     />
     <br />
     <z-btn 

@@ -3,8 +3,7 @@
  * @param {String} value
  */ 
 const numeric = (value: string): boolean => {
-  const reg = /^[0-9]*$/
-  return reg.test(value)
+  return /^[0-9]*$/.test(value)
 }
 
 export default numeric

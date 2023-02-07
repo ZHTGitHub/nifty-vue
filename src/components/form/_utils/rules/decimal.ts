@@ -3,8 +3,7 @@
  * @param {String} value
  */ 
 const decimal = (value: string): boolean => {
-  const reg = /^(\-|\+)?\d+(\.\d+)?$/
-  return reg.test(value)
+  return /^(\-|\+)?\d+(\.\d+)?$/.test(value)
 }
 
 export default decimal

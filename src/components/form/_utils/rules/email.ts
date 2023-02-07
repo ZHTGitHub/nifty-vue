@@ -3,8 +3,7 @@
  * @param {String} value
  */ 
 const email = (value: string): boolean => {
-  var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-  return reg.test(value)
+  return /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value)
 }
 
 export default email

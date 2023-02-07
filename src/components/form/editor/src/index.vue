@@ -1,7 +1,7 @@
 <script lang="ts">
   import '@wangeditor/editor/dist/css/style.css'
   import { useAttrs, ref, shallowRef, watch, defineComponent, onBeforeUnmount, nextTick } from 'vue'
-  import type { PropType } from 'vue'
+  import type { PropType, Ref } from 'vue'
   import { formProps } from '@/components/form/props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
@@ -14,7 +14,7 @@
     props: {
       ...formProps(),
 
-      autoFocus: {
+      autofocus: {
         type: Boolean as PropType<boolean>,
         default: false
       },
@@ -25,7 +25,12 @@
       },
 
       placeholder: {
-        type: String as PropType<'default' | 'simple'>
+        type: String as PropType<string>
+      },
+
+      readonly: {
+        type: Boolean as PropType<boolean>,
+        default: false
       }
     },
 
@@ -40,7 +45,7 @@
 
       const value = useFormValue(props.formId, props.formKey)
 
-      const valueHtml = ref<string>(value)
+      const valueHtml = ref<Ref>(value)
 
       const handleCreated = (editor: IDomEditor) => {
         editorRef.value = editor 
@@ -52,17 +57,25 @@
         value.value = text ? html : text
       }
 
+      const handleBlur = () => {
+        console.log('blur')
+      }
+
       watch(() => value.value, (val) => {
-        nextTick(() => {
-          valueHtml.value = val
-        })
+        valueHtml.value = val
+
+        if(val === void 0) {
+          editorRef.value.clear()
+        }
+
+        console.log(valueHtml.value)
       })
 
       useFormDefaultValue({
         formId: props.formId, 
         formKey: props.formKey, 
         defaultValue: attrs.defaultValue, 
-        value
+        valueRef: value
       })
 
       const required = useFormRequired(attrs.rules as any[])
@@ -70,7 +83,7 @@
       const errorMessage = useErrorMessage({
         formId: props.formId, 
         formKey: props.formKey, 
-        value, 
+        valueRef: value, 
         rules: attrs.rules as any[]
       })
 
@@ -79,6 +92,7 @@
         valueHtml,
         handleCreated,
         handleChange,
+        handleBlur,
         value,
         required,
         errorMessage
@@ -123,13 +137,15 @@
         <Editor
           class="editor-container"
           :defaultConfig="{ 
-            autoFocus,
-            placeholder 
+            autoFocus: autofocus,
+            placeholder,
+            readOnly: readonly
           }"
           :mode="mode"
           v-model="valueHtml"
           @onCreated="handleCreated"
           @onChange="handleChange"
+          @onBlur="handleBlur"
         />
       </div>
       

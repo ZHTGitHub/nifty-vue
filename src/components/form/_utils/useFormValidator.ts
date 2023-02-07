@@ -1,27 +1,30 @@
 import { ref, watch, onUnmounted, getCurrentInstance } from 'vue'
 import type { Ref } from 'vue'
 import useFormStore from './formStore'
+import type { Data } from './formStore'
 import useBus from './useBus'
-import nifty from 'rocket-nifty.js'
+import _ from '../../_util/lodash'
 import rulesFunc from './rules'
+import type { RuleName } from './rules'
 
 const bus = useBus()
 
-interface IValidateRuleParams { 
-  formId?: string | undefined, 
-  formKey?: string | undefined, 
-  value?: any, 
-  rules?: any[] 
+interface RuleItem<U> { 
+  name: RuleName;
+  value?: U;
+  message: string; 
 }
 
-interface IValidateRule {
-  errors: any,
+type ValidateRuleParams<T, U> = Data<T> & { rules?: RuleItem<U>[] }
+
+interface ValidateRule<V> {
+  errors: V,
   errorMessage: string
 }
 
 const errors: any = {}
 
-const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): IValidateRule => {
+const validateRule = <T, U, V>({ formId, formKey, value, rules }: ValidateRuleParams<T, U>): ValidateRule<V> => {
   let errorMessage = ''
 
   let formStore: any = null
@@ -30,15 +33,15 @@ const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): I
   if(rules && rules.length) {
     for(let rule of rules) {
       if(value !== void 0) {
-        const result = rulesFunc[rule.name](value, rule.value)
+        const result = rulesFunc[rule.name](value, rule.value as never)
   
         if(!result) {
-          nifty.set(errors, formId + '.' + formKey, false)
+          _.set(errors, formId + '.' + formKey, false)
           errorMessage = rule.message
           break
         }
         else {
-          nifty.set(errors, formId + '.' + formKey, true)
+          _.set(errors, formId + '.' + formKey, true)
         }
       }
     }
@@ -53,43 +56,42 @@ const validateRule = ({ formId, formKey, value, rules }: IValidateRuleParams): I
 }
 
 // 是否必填
-export const useFormRequired = (rules: any[] = []): boolean => {
-  const result = nifty.find(rules, { name: 'required' })
-  return !!result
+export const useFormRequired = <U>(rules: RuleItem<U>[] = []): boolean => {
+  return !!rules.find(rule => rule.name === 'required')
 }
 
 // 错误提示
-export const useErrorMessage = ({ formId, formKey, value, rules }: IValidateRuleParams): Ref<string> => {
+export const useErrorMessage = <T, U>({ formId, formKey, valueRef, rules }: ValidateRuleParams<T, U>): Ref<string> => {
   const errorMessage = ref<string>('')
 
-  if(!formId || !formKey) return errorMessage
+  if(!formId || !formKey || !valueRef) return errorMessage
 
   const instance = getCurrentInstance()
 
   // input
-  watch(() => value.value, (val) => {
-    errorMessage.value = validateRule({ formId, formKey, value: val, rules }).errorMessage
+  watch(() => valueRef.value, (value) => {
+    errorMessage.value = validateRule({ formId, formKey, value, rules }).errorMessage
   })
 
   // button
   bus.on('validate', (btnFormId: string) => {
     if(formId !== btnFormId) return
 
-    if(value.value === void 0) {
+    if(valueRef.value === void 0) {
       const compName = instance?.type.name!
 
       if(['ZCheckboxGroup', 'ZRangePicker', 'ZUpload'].includes(compName)) {
-        value.value = []
+        valueRef.value = []
       }
       else if(['ZCheckbox', 'ZRadio'].includes(compName)) {
-        value.value = false
+        valueRef.value = false
       }
       else {
-        value.value = ''
+        valueRef.value = ''
       }
     }
 
-    errorMessage.value = validateRule({ formId, formKey, value: value.value, rules }).errorMessage
+    errorMessage.value = validateRule({ formId, formKey, value: valueRef.value, rules }).errorMessage
   })
 
   onUnmounted(() => {
