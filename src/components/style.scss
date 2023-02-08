@@ -10,6 +10,14 @@
   .z-input-control {
     position: relative;
     flex-grow: 1;
+    border-radius: inherit;
+
+    .ant-input, 
+    .ant-select,
+    .ant-select-selector,
+    .ant-picker {
+      border-radius: inherit;
+    }
 
     // messages
     .z-messages {
@@ -18,6 +26,22 @@
       left: 0;
       font-size: 14px;
       line-height: 1.5715;
+    }
+  }
+
+  &.capsule {
+    border-radius: 9999px;
+  }
+
+  &.z-input-btn {
+    display: inline-block;
+
+    &.block {
+      display: block;
+    }
+
+    .ant-btn {
+      border-radius: inherit;
     }
   }
 

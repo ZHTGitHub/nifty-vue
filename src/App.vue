@@ -1,15 +1,29 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, getCurrentInstance } from 'vue'
   import dayjs from 'dayjs'
   import useFormStore from './components/form/_utils/formStore'
 
+  const { proxy } = getCurrentInstance()
   const formStore = useFormStore()
-
   const formId = ref('login')
 
   const handleConfirm = ({ error, form }: { event: Event, error: Boolean, form: object }) => {
     // console.log(formStore.forms[formId.value])
     console.log({ error, form })
+  }
+
+  const handleOpen = () => {
+    proxy.$popup({
+      title: '这是标题',
+
+      cancel() {
+        console.log('cancel')
+      },
+
+      confirm() {
+        console.log('confirm')
+      }
+    })
   }
 </script>
 
@@ -145,6 +159,7 @@
     <z-btn 
       :formId="formId" 
       btnType="validate"
+      type="primary"
       @click="handleConfirm"
     >提交</z-btn>
 
@@ -152,13 +167,21 @@
       :formId="formId" 
       btnType="clear"
       ghost
+      type="primary"
     >清空</z-btn>
 
     <z-btn 
       :formId="formId" 
       btnType="reset"
       ghost
+      type="primary"
     >重置</z-btn>
+
+    <z-btn 
+      ghost
+      type="primary"
+      @click="handleOpen"
+    >打开</z-btn>
   </div>
 </template>
 

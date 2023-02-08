@@ -3,6 +3,8 @@ import type { App } from 'vue'
 // 基础组件
 import Button from './button'
 
+import Popup from './popup'
+
 // 表单组件
 import Checkbox from './form/checkbox'
 import DatePicker from './form/datePicker'

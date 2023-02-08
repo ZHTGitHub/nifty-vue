@@ -1,13 +1,18 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import useFormStore from '@/components/form/_utils/formStore'
-  import { buttonProps } from './types'
+  import { capsule } from '../../props'
+  import { buttonProps } from './props'
   import useBus from '@/components/form/_utils/useBus'
 
   export default defineComponent({
     name: 'ZButton',
 
-    props: buttonProps(),
+    props: {
+      ...buttonProps(),
+
+      capsule
+    },
 
     emits: ['click'],
 
@@ -16,7 +21,9 @@
 
       const bus = useBus()
 
-      const handleClick = (event: Event) => {
+      const onClick = (event: Event) => {
+        let validateInfo = {}
+        
         // 校验
         if(props.btnType === 'validate') {
           bus.emit('validate', props.formId)
@@ -25,35 +32,42 @@
 
           const error = !!errors.includes(false)
 
-          context.emit('click', { event, error, form: formStore.forms[props.formId!] })
-          return
+          validateInfo = { error, form: formStore.forms[props.formId!] }
         }
 
         // 清空
-        if(props.btnType === 'clear') {
+        else if(props.btnType === 'clear') {
           formStore.CLEAR_FORM(props.formId!)
-          return
         }
 
         // 重置
-        if(props.btnType === 'reset') {
+        else if(props.btnType === 'reset') {
           formStore.RESET_FORM(props.formId!)
         }
+
+        context.emit('click', { event, ...validateInfo })
       }
 
       return {
-        handleClick
+        onClick
       }
     }
   })
 </script>
 
 <template>
-  <a-button 
-    v-bind="$attrs"
-    type="primary"
-    @click="handleClick"
+  <div 
+    class="z-input z-input-btn" 
+    :class="{ 
+      capsule, 
+      block: ($attrs.block || $attrs.block === '')
+    }"
   >
-    <slot></slot>
-  </a-button>
+    <a-button 
+      v-bind="$attrs"
+      @click="onClick"
+    >
+      <slot></slot>
+    </a-button>
+  </div>
 </template>

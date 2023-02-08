@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useAttrs, defineComponent } from 'vue'
   import { formProps, itemsProps } from '@/components/form/props'
+  import { capsule } from '../../../props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
@@ -9,7 +10,8 @@
 
     props: {
       ...formProps(),
-      ...itemsProps()
+      ...itemsProps(),
+      capsule
     },
 
     setup(props) {
@@ -46,6 +48,7 @@
   <div 
     class="z-input z-input-select"
     :class="{ 
+      capsule,
       horizontal: direction === 'horizontal',
       required,
       'z-input-error': !!errorMessage

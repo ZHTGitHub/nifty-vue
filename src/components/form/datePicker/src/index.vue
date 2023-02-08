@@ -3,6 +3,7 @@
   import type { PropType } from 'vue'
   import locale from 'ant-design-vue/es/date-picker/locale/zh_CN'
   import { formProps } from '@/components/form/props'
+  import { capsule } from '../../../props'
   import { useFormDefaultValue, useFormValue } from '../../_utils/useForm'
   import { useFormRequired, useErrorMessage } from '../../_utils/useFormValidator'
 
@@ -11,6 +12,8 @@
 
     props: {
       ...formProps(),
+
+      capsule,
 
       placeholder: {
         type: String as PropType<string>,
@@ -53,6 +56,7 @@
   <div 
     class="z-input z-date-picker"
     :class="{ 
+      capsule,
       horizontal: direction === 'horizontal',
       required,
       'z-input-error': !!errorMessage
