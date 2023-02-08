@@ -14,8 +14,9 @@
 
   const handleOpen = () => {
     proxy.$popup({
-      title: '这是标题',
-
+      title: '删除警告',
+      content: '这里是文本内容!',
+      type: 'error',
       cancel() {
         console.log('cancel')
       },
@@ -147,7 +148,7 @@
       :defaultValue="[dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]"
     />
     <br />
-    <z-editor
+    <!-- <z-editor
       :formId="formId" 
       formKey="editor" 
       label="文案" 
@@ -155,7 +156,7 @@
         { name: 'required', message: '文案不能为空' }
       ]"
     />
-    <br />
+    <br /> -->
     <z-btn 
       :formId="formId" 
       btnType="validate"

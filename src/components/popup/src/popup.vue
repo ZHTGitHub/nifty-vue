@@ -1,7 +1,8 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue'
   import type { PropType } from 'vue'
-  import { Modal } from 'ant-design-vue'
+  import { Button, Modal } from 'ant-design-vue'
+  import type { PopupType } from './types'
 
   export default defineComponent({
     name: 'ZPopup',
@@ -12,18 +13,36 @@
         default: '取消'
       },
 
+      centered: {
+        type: Boolean as PropType<boolean>,
+          default: true
+      },
+
       confirmText: {
         type: String as PropType<string>,
         default: '确认'
+      },
+
+      content: {
+        type: String as PropType<string>
       },
 
       title: {
         type: String as PropType<string>
       },
 
+      type: {
+        type: String as PropType<PopupType>
+      },
+
       visible: {
         type: Boolean as PropType<boolean>,
         default: false
+      },
+
+      width: {
+        type: [String, Number] as PropType<string | number>,
+        default: 320
       },
 
       cancel: {
@@ -42,14 +61,15 @@
 
       const handleCancel = () => {
         if(typeof props.cancel === 'function') {
-          show.value = false
           props.cancel()
+          show.value = false
         }
       }
 
       const handleConfirm = () => {
         if(typeof props.confirm === 'function') {
           props.confirm()
+          show.value = false
         }
       }
 
@@ -61,18 +81,118 @@
     },
 
     components: {
-      AModal: Modal
+      AModal: Modal,
+      AButton: Button
     }
   })
 </script>
 
 <template>
-  <a-modal 
-    v-model:visible="show" 
-    :title="title" 
-    @cancel="handleCancel"
-    @ok="handleConfirm"
-  >
-    <p>Some contents...</p>
-  </a-modal>
+    <a-modal 
+      v-model:visible="show" 
+      :centered="centered"
+      dialogClass="z-popup"
+      :footer="null"
+      :title="title" 
+      :width="width"
+      wrapClassName="z-popup"
+    >
+      <div class="z-popup-header">
+        <i class="z-icon" :class="[type && `z-icon-${ type }`]"></i>
+        <span class="title">{{ title }}</span>
+      </div>
+
+      <div class="z-popup-container">
+        {{ content }}
+      </div>
+
+      <div class="z-popup-footer">
+        <a-button
+          class="cancel"
+          ghost
+          type="primary"
+          @click="handleCancel"
+        >{{ cancelText }}</a-button>
+
+        <a-button
+          type="primary"
+          @click="handleConfirm"
+        >{{ confirmText }}</a-button>
+      </div>
+    </a-modal>
 </template>
+
+<style lang="scss">
+  @import "./icons/iconfont.css";
+
+  .z-popup {
+    .ant-modal-content {
+      margin-bottom: 11.8%;
+      border-radius: 4px;
+
+      .ant-modal-header,
+      .ant-modal-close {
+        display: none;
+      }
+
+      .ant-modal-body {
+        padding: 0;
+
+        /* 顶部内容 */
+        .z-popup-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 12px;
+
+          .z-icon {
+            margin-right: 4px;
+            font-size: 22px;
+            font-weight: 500px;
+
+            &.z-icon-info {
+              color: #1890ff;
+            }
+
+            &.z-icon-success {
+              color: #52c41a;
+            } 
+
+            &.z-icon-warning {
+              color: #faad14;
+            } 
+
+            &.z-icon-error {
+              color: #ff4d4f;
+            } 
+          }
+
+          .title {
+            line-height: 22px;
+            font-size: 16px;
+            font-weight: 500;
+            word-wrap: break-word;
+            color: #000000d9;
+          }
+        }
+
+        /* 主要内容 */
+        .z-popup-container {
+          padding: 12px;
+          text-align: center;
+        }
+
+        /* 底部内容 */
+        .z-popup-footer {
+          display: flex;
+          justify-content: center;
+          padding: 12px;
+
+          .cancel {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+</style>
