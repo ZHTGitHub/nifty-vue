@@ -3,7 +3,7 @@
   import dayjs from 'dayjs'
   import useFormStore from './packages/components/form/_utils/formStore'
 
-  const { proxy } = getCurrentInstance()
+  // const { proxy } = getCurrentInstance()
   const formStore = useFormStore()
   const formId = ref('login')
 
@@ -13,18 +13,18 @@
   }
 
   const handleOpen = () => {
-    proxy.$popup({
-      title: '删除警告',
-      content: '这里是文本内容!',
-      type: 'error',
-      cancel() {
-        console.log('cancel')
-      },
+    // proxy.$popup({
+    //   title: '删除警告',
+    //   content: '这里是文本内容!',
+    //   type: 'error',
+    //   cancel() {
+    //     console.log('cancel')
+    //   },
 
-      confirm() {
-        console.log('confirm')
-      }
-    })
+    //   confirm() {
+    //     console.log('confirm')
+    //   }
+    // })
   }
 </script>
 
@@ -43,6 +43,7 @@
       :formId="formId" 
       formKey="name"
       label="姓名"
+      capsule
       :rules="[
         { name: 'required', message: '当前字段为必填项' },
         { name: 'alpha', message: '当前字段只能为英文字母' },
@@ -57,6 +58,7 @@
       :formId="formId" 
       formKey="country" 
       label="国家"
+      capsule
       :items="[
         { name: '美国', val: '1' }, 
         { name: '日本', val: '2' }

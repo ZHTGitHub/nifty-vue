@@ -1,4 +1,5 @@
 import type { App } from 'vue'
+import useFormStore from './form/_utils/formStore'
 
 // 基础组件
 import Button from './button'
@@ -34,4 +35,8 @@ export default {
       app.use(component)
     })
   }
+}
+
+export {
+  useFormStore
 }

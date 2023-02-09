@@ -1,10 +1,25 @@
 {
   "name": "rocket-vue3",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.6",
+  "private": false,
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/rocket-vue3.umd.cjs",
+  "module": "./dist/rocket-vue3.js",
+  "exports": {
+    ".": {
+      "import": "./dist/rocket-vue3.js",
+      "require": "./dist/rocket-vue3.umd.cjs"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
   "scripts": {
     "serve": "vite",
     "build": "run-p type-check build-only",
+    "lib": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
@@ -14,7 +29,6 @@
     "@wangeditor/editor-for-vue": ">=5.1.12",
     "ant-design-vue": ">=3.2.15",
     "pinia": ">=2.0.30",
-    "rocket-nifty.js": ">=1.2.0",
     "vue": ">=3.2.45"
   },
   "devDependencies": {

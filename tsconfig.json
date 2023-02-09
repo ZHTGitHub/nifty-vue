@@ -6,7 +6,9 @@
     "isolatedModules": false,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "target": "ES5",
+    "lib": ["DOM", "ESNext"]
   },
 
   "references": [

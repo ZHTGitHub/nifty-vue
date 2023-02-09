@@ -1,7 +1,6 @@
 import { ref, watch, onUnmounted, getCurrentInstance } from 'vue'
 import type { Ref } from 'vue'
 import useFormStore from './formStore'
-import type { Data } from './formStore'
 import useBus from './useBus'
 import _ from '../../../utils/lodash'
 import rulesFunc from './rules'

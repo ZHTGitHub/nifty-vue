@@ -11,7 +11,7 @@ export const useFormValue = (formId?: string, formKey?: string): any => {
 
   const computedValue = computed({
     get() {
-      return formStore.forms[formId][formKey]
+      return formStore.forms[formId]?.[formKey]
     }, 
 
     set(value: any) {
