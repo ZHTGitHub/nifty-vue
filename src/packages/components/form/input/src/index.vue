@@ -55,6 +55,7 @@
     }"
   >
     <label 
+      v-if="label"
       class="z-input-label" 
       :class="{ mr2: !label }"
       :style="{

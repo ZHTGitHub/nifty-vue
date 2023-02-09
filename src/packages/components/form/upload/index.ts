@@ -1,8 +1,9 @@
 import type { App } from 'vue'
 import Upload from './src/index.vue'
 
-export default {
-  install(app: App) {
-    app.component(Upload.name, Upload)
-  }
+Upload.install = function(app: App) {
+  app.component(Upload.name, Upload)
+  return app
 }
+
+export default Upload as typeof Upload

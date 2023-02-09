@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import Antd from './plugins/antd'
-import components from './packages/components'
+import { install } from './packages/components'
 import popup from './packages/components/popup'
 
 import './assets/main.css'
@@ -14,6 +14,6 @@ const pinia = createPinia()
 app
   .use(pinia)
   .use(Antd)
-  .use(components)
   .use(popup)
+  .use(install)
   .mount('#app')

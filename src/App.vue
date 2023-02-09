@@ -2,6 +2,7 @@
   import { ref, getCurrentInstance } from 'vue'
   import dayjs from 'dayjs'
   import useFormStore from './packages/components/form/_utils/formStore'
+  import { Button } from './packages/components'
 
   // const { proxy } = getCurrentInstance()
   const formStore = useFormStore()
@@ -42,7 +43,6 @@
     <z-input 
       :formId="formId" 
       formKey="name"
-      label="姓名"
       capsule
       :rules="[
         { name: 'required', message: '当前字段为必填项' },
@@ -159,12 +159,12 @@
       ]"
     />
     <br /> -->
-    <z-btn 
+    <Button 
       :formId="formId" 
       btnType="validate"
       type="primary"
       @click="handleConfirm"
-    >提交</z-btn>
+    >提交</Button>
 
     <z-btn 
       :formId="formId" 

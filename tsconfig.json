@@ -8,7 +8,8 @@
       "@/*": ["./src/*"]
     },
     "target": "ES5",
-    "lib": ["DOM", "ESNext"]
+    "lib": ["DOM", "ESNext"],
+    "noImplicitAny": false
   },
 
   "references": [

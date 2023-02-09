@@ -1,10 +1,9 @@
 import type { App } from 'vue'
 import Button from './src/index.vue'
 
-export default {
-  install(app: App) {
-    app.component('z-btn', Button)
-  }
+Button.install = function(app: App) {
+  app.component(Button.name, Button)
+  return app
 }
 
-export { Button }
+export default Button as typeof Button

@@ -53,7 +53,7 @@
 
 <template>
   <div 
-    class="z-input" 
+    class="z-input z-input-upload" 
     :class="{ 
       horizontal: direction === 'horizontal',
       required,

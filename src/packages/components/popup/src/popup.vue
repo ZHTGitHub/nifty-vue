@@ -2,7 +2,7 @@
   import { defineComponent, ref } from 'vue'
   import type { PropType } from 'vue'
   import { Modal } from 'ant-design-vue'
-  import { Button } from '../../button'
+  import Button from '../../button'
   import type { PopupType } from './types'
 
   export default defineComponent({

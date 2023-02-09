@@ -7,7 +7,7 @@
   import useBus from '../../form/_utils/useBus'
 
   export default defineComponent({
-    name: 'ZButton',
+    name: 'ZBtn',
 
     props: {
       ...buttonProps(),
