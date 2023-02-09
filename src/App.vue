@@ -2,7 +2,6 @@
   import { ref, getCurrentInstance } from 'vue'
   import dayjs from 'dayjs'
   import useFormStore from './packages/components/form/_utils/formStore'
-  import { Button } from './packages/components'
 
   // const { proxy } = getCurrentInstance()
   const formStore = useFormStore()
@@ -159,12 +158,12 @@
       ]"
     />
     <br /> -->
-    <Button 
+    <z-btn 
       :formId="formId" 
       btnType="validate"
       type="primary"
       @click="handleConfirm"
-    >提交</Button>
+    >提交</z-btn>
 
     <z-btn 
       :formId="formId" 

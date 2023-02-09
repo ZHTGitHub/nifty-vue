@@ -6,7 +6,7 @@ function classNames(...args: any[]) {
 
     if(!value) continue
 
-    classes.push(value)
+    classes.push(value as never)
   }
 
   return classes.join(' ')
