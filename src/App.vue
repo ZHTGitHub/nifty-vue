@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, getCurrentInstance } from 'vue'
   import dayjs from 'dayjs'
-  import useFormStore from './components/form/_utils/formStore'
+  import useFormStore from './packages/components/form/_utils/formStore'
 
   const { proxy } = getCurrentInstance()
   const formStore = useFormStore()

@@ -3,8 +3,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import Antd from './plugins/antd'
-import components from './components'
-import popup from './components/popup'
+import components from './packages/components'
+import popup from './packages/components/popup'
 
 import './assets/main.css'
 
