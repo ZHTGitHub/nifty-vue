@@ -1,6 +1,6 @@
 import { useAttrs, defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { formProps, itemsProps } from '../props'
+import { inputProps, inputItemsProps } from '../formProps'
 import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
 
@@ -8,8 +8,8 @@ export default defineComponent({
   name: 'ZCheckboxGroup',
 
   props: {
-    ...formProps(),
-    ...itemsProps()
+    ...inputProps(),
+    ...inputItemsProps()
   },
 
   setup(props, { attrs }) {

@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { formProps, itemsProps } from '../props'
+import { inputProps, inputItemsProps } from '../formProps'
 import { capsule } from '../../props'
 import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
@@ -9,8 +9,8 @@ export default defineComponent({
   name: 'ZSelect',
 
   props: {
-    ...formProps(),
-    ...itemsProps(),
+    ...inputProps(),
+    ...inputItemsProps(),
     capsule
   },
 

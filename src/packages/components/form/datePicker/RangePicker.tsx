@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
 import type { PropType } from 'vue'
-import { formProps } from '../props'
+import { inputProps } from '../formProps'
 import { capsule } from '../../props'
 import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
@@ -10,7 +10,7 @@ export default defineComponent({
   name: 'ZRangePicker',
 
   props: {
-    ...formProps(),
+    ...inputProps(),
 
     capsule,
 

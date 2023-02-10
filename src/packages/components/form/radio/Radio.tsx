@@ -1,13 +1,13 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { formProps } from '../props'
+import { inputProps } from '../formProps'
 import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
 
 export default defineComponent({
   name: 'ZRadio',
 
-  props: formProps(),
+  props: inputProps(),
 
   setup(props, { attrs }) {
 

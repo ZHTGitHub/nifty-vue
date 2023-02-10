@@ -2,7 +2,7 @@ import { ref, defineComponent } from 'vue'
 import FormInput from '../FormInput'
 import type { PropType } from 'vue'
 import type { UploadProps } from 'ant-design-vue'
-import { formProps } from '../props'
+import { inputProps } from '../formProps'
 import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
 
@@ -10,7 +10,7 @@ export default defineComponent({
   name: 'ZUpload',
 
   props: {
-    ...formProps(),
+    ...inputProps(),
 
     listType: {
       type: String as PropType<'picture' | 'picture-card' | 'text'>,

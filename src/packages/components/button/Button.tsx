@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { useFormStore } from '../../store'
-import { capsule } from '../props'
+import { formId, capsule } from '../props'
 import useBus from '../../hooks/useBus'
 import classNames from '../form/_utils/classNames'
 
@@ -11,9 +11,7 @@ export default defineComponent({
   name: 'ZBtn',
 
   props: {
-    formId: {
-      type: String as PropType<string>
-    },
+    formId,
   
     btnType: {
       type: String as PropType<BtnType>,

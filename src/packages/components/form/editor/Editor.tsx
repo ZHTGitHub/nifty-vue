@@ -1,7 +1,7 @@
 import { useAttrs, ref, shallowRef, watch, defineComponent, onBeforeUnmount } from 'vue'
 import FormInput from '../FormInput'
 import type { PropType, Ref } from 'vue'
-import { formProps } from '../props'
+import { inputProps } from '../formProps'
 import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
 import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
 import type { IDomEditor } from '@wangeditor/editor'
@@ -17,7 +17,7 @@ export default defineComponent({
   },
 
   props: {
-    ...formProps(),
+    ...inputProps(),
 
     autofocus: {
       type: Boolean as PropType<boolean>,
