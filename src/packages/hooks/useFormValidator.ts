@@ -1,23 +1,18 @@
 import { ref, watch, onUnmounted, getCurrentInstance } from 'vue'
 import type { Ref } from 'vue'
+import type { RuleItem } from '../components/form/formProps'
 import { useFormStore } from '../store'
 import useBus from './useBus'
 import _ from '../utils/lodash'
-import rulesFunc, { type RuleName } from '../components/form/_utils/rules'
+import rulesFunc from '../components/form/_utils/rules'
 
 const bus = useBus()
-
-interface IRuleItem { 
-  name: RuleName;
-  value?: any;
-  message: string; 
-}
 
 interface IValidateInputParams {
   formId: string;
   formKey: string;
   value?: any;
-  rules?: IRuleItem[]
+  rules?: RuleItem[]
 }
 
 interface IValidateResult {
@@ -59,7 +54,7 @@ const validateInput = ({ formId, formKey, value, rules }: IValidateInputParams):
 }
 
 // 是否必填
-export const useFormRequired = (rules: IRuleItem[] = []): boolean => {
+export const useFormRequired = (rules: RuleItem[] = []): boolean => {
   return !!rules.find(rule => rule.name === 'required')
 }
 

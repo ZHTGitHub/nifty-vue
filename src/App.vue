@@ -47,6 +47,7 @@
       :rules="[
         { name: 'required', message: '姓名不能为空' }
       ]"
+      defaultValue="leslie"
     />
     <br />
     <z-select 
@@ -56,8 +57,8 @@
       capsule
       allowClear
       :items="[
-        { name: '美国', val: '1' }, 
-        { name: '日本', val: '2' }
+        { name: '美国', val: 1 }, 
+        { name: '日本', val: 2 }
       ]"
       itemLabel="name"
       itemValue="val"
@@ -65,7 +66,7 @@
       :rules="[
         { name: 'required', message: '请选择国家' }
       ]"
-      defaultValue="2"
+      :defaultValue="2"
     />
     <br />
     <z-switch 

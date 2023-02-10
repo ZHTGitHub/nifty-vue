@@ -20,17 +20,17 @@ export default defineComponent({
     useFormDefaultValue({
       formId: props.formId, 
       formKey: props.formKey, 
-      defaultValue: attrs.defaultValue, 
+      defaultValue: props.defaultValue, 
       valueRef
     })
 
-    const required = useFormRequired(attrs.rules as any[])
+    const required = useFormRequired(props.rules)
 
     const errorMessageRef = useErrorMessage({
       formId: props.formId, 
       formKey: props.formKey, 
       valueRef, 
-      rules: attrs.rules
+      rules: props.rules
     })
 
     return () => (
