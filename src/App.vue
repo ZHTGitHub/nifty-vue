@@ -146,14 +146,14 @@
       :defaultValue="[dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]"
     />
     <br />
-    <z-editor
+    <!-- <z-editor
       :formId="formId" 
       formKey="editor" 
       label="文案" 
       :rules="[
         { name: 'required', message: '文案不能为空' }
       ]"
-    />
+    /> -->
     <br />
     <z-btn 
       :formId="formId" 

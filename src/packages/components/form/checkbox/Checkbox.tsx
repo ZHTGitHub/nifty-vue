@@ -1,8 +1,8 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
 import { formProps } from '../props'
-import { useFormDefaultValue, useFormValue } from '../_utils/useForm'
-import { useFormRequired, useErrorMessage } from '../_utils/useFormValidator'
+import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
+import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
 
 export default defineComponent({
   name: 'ZCheckbox',
