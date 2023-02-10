@@ -19,6 +19,10 @@
       border-radius: inherit;
     }
 
+    .ant-select {
+      width: 100%;
+    }
+
     // messages
     .z-messages {
       position: absolute;
@@ -83,6 +87,24 @@
     }
   }
 
+  // editor
+  &.z-input-editor {
+    .z-input-control {
+      .editor {
+        border: 1px solid #d9d9d9;
+
+        .editor-toolbar {
+          border-bottom: 1px solid #d9d9d9;
+        }
+
+        .editor-container {
+          overflow: hidden;
+          height: 360px !important;
+        }
+      }
+    }
+  }
+
   // invalid
   &.z-input-error {
     // control
@@ -94,7 +116,7 @@
       }
 
       // select
-      :deep(.ant-select-selector) {
+      .ant-select-selector {
         border-color: #ff7875 !important;
         box-shadow: 0 0 0 2px rgba(255, 77, 79, .2) !important;
       }

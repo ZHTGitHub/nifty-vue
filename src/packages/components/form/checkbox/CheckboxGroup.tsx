@@ -1,16 +1,15 @@
-import { defineComponent } from 'vue'
+import { useAttrs, defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { capsule } from '../../props'
-import { formProps } from '../props'
+import { formProps, itemsProps } from '../props'
 import { useFormDefaultValue, useFormValue } from '../_utils/useForm'
 import { useFormRequired, useErrorMessage } from '../_utils/useFormValidator'
 
 export default defineComponent({
-  name: 'ZInput',
+  name: 'ZCheckboxGroup',
 
   props: {
     ...formProps(),
-    capsule
+    ...itemsProps()
   },
 
   setup(props, { attrs }) {
@@ -34,16 +33,16 @@ export default defineComponent({
 
     return () => (
       <FormInput
-        capsule={ props.capsule }
         direction={ props.direction }
         errorMessage={ errorMessageRef.value }
         label={ props.label }
         labelWidth={ props.labelWidth }
         required={ required }
       >
-        <a-input 
+        <a-checkbox-group 
           { ...attrs }
           v-model:value={ valueRef.value }
+          options={ props.items }
         />
       </FormInput>
     )

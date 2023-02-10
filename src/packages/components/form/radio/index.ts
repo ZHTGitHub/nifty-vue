@@ -1,6 +1,6 @@
 import type { App } from 'vue'
-import Radio from './src/index.vue'
-import RadioGroup from './src/group.vue'
+import Radio from './Radio'
+import RadioGroup from './RadioGroup'
 
 Radio.Group = RadioGroup
 

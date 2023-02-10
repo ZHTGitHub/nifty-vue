@@ -83,7 +83,7 @@
 
     components: {
       AModal: Modal,
-      ZButton: Button
+      ZBtn: Button
     }
   })
 </script>
@@ -108,17 +108,17 @@
       </div>
 
       <div class="z-popup-footer">
-        <z-button
+        <z-btn
           class="cancel"
           ghost
           type="primary"
           @click="handleCancel"
-        >{{ cancelText }}</z-button>
+        >{{ cancelText }}</z-btn>
 
-        <z-button
+        <z-btn
           type="primary"
           @click="handleConfirm"
-        >{{ confirmText }}</z-button>
+        >{{ confirmText }}</z-btn>
       </div>
     </a-modal>
 </template>
@@ -126,7 +126,7 @@
 <style lang="scss">
   .z-popup {
     .ant-modal-content {
-      margin-bottom: 11.8%;
+      margin-bottom: 61.8%;
       border-radius: 4px;
 
       .ant-modal-header,

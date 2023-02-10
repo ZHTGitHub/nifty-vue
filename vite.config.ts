@@ -9,7 +9,7 @@ import path from 'path'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/packages/components/index.ts'),
+      entry: path.resolve(__dirname, 'src/packages/index.ts'),
       name: 'rocketVue3',
       fileName: 'rocket-vue3'
     },

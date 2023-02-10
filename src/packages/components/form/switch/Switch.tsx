@@ -1,17 +1,13 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { capsule } from '../../props'
 import { formProps } from '../props'
 import { useFormDefaultValue, useFormValue } from '../_utils/useForm'
 import { useFormRequired, useErrorMessage } from '../_utils/useFormValidator'
 
 export default defineComponent({
-  name: 'ZInput',
+  name: 'ZSwitch',
 
-  props: {
-    ...formProps(),
-    capsule
-  },
+  props: formProps(),
 
   setup(props, { attrs }) {
     const valueRef = useFormValue(props.formId, props.formKey)
@@ -34,16 +30,15 @@ export default defineComponent({
 
     return () => (
       <FormInput
-        capsule={ props.capsule }
         direction={ props.direction }
         errorMessage={ errorMessageRef.value }
         label={ props.label }
         labelWidth={ props.labelWidth }
         required={ required }
       >
-        <a-input 
+        <a-switch 
           { ...attrs }
-          v-model:value={ valueRef.value }
+          v-model:checked={ valueRef.value }
         />
       </FormInput>
     )

@@ -1,16 +1,23 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { capsule } from '../../props'
+import type { PropType } from 'vue'
 import { formProps } from '../props'
+import { capsule } from '../../props'
 import { useFormDefaultValue, useFormValue } from '../_utils/useForm'
 import { useFormRequired, useErrorMessage } from '../_utils/useFormValidator'
 
 export default defineComponent({
-  name: 'ZInput',
+  name: 'ZRangePicker',
 
   props: {
     ...formProps(),
-    capsule
+
+    capsule,
+
+    placeholder: {
+      type: [Array, String] as PropType<string[] | string>,
+      default: ['开始日期', '结束日期']
+    }
   },
 
   setup(props, { attrs }) {
@@ -41,11 +48,13 @@ export default defineComponent({
         labelWidth={ props.labelWidth }
         required={ required }
       >
-        <a-input 
+        <a-range-picker 
           { ...attrs }
           v-model:value={ valueRef.value }
+          placeholder={ props.placeholder }
         />
       </FormInput>
     )
   }
 })
+

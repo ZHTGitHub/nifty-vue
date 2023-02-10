@@ -1,6 +1,6 @@
 import type { App } from 'vue'
-import DatePicker from './src/index.vue'
-import RangePicker from './src/rangePicker.vue'
+import DatePicker from './DatePicker'
+import RangePicker from './RangePicker'
 
 DatePicker.Range = RangePicker
 

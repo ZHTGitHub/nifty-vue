@@ -1,7 +1,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { Button } from 'ant-design-vue'
-  import useFormStore from '../../form/_utils/formStore'
+  import { useFormStore } from '../../../store'
   import { capsule } from '../../props'
   import { buttonProps } from './props'
   import useBus from '../../form/_utils/useBus'
@@ -11,7 +11,6 @@
 
     props: {
       ...buttonProps(),
-
       capsule
     },
 
@@ -29,11 +28,11 @@
         if(props.btnType === 'validate') {
           bus.emit('validate', props.formId)
 
-          const errors = Object.values(formStore.errors[props.formId!])
+          const errors = Object.values(formStore.getFormErrors(props.formId!))
 
           const error = !!errors.includes(false)
 
-          validateInfo = { error, form: formStore.forms[props.formId!] }
+          validateInfo = { error, form: formStore.getForm(props.formId!) }
         }
 
         // 清空

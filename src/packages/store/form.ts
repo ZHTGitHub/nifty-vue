@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
-import _ from '../../../utils/lodash'
+import _ from '../utils/lodash'
 
 export interface State {
   defaultForms: any;
@@ -8,7 +8,7 @@ export interface State {
   errors: any;
 }
 
-export interface Data {
+export interface FormParams {
   formId?: string;
   formKey?: string;
   defaultValue?: any;
@@ -22,6 +22,20 @@ const useFormStore = defineStore('forms', {
     forms: {},
     errors: {}
   }),
+
+  getters: {
+    getForm: (state: State) => {
+      return (formId: string) => {
+        return state.forms[formId] || {}
+      }
+    },
+
+    getFormErrors: (state: State) => {
+      return (formId: string) => {
+        return state.errors[formId] || {}
+      }
+    }
+  },
 
   actions: {
     // 保存表单的默认值

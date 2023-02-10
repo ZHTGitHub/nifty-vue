@@ -1,19 +1,15 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { capsule } from '../../props'
 import { formProps } from '../props'
 import { useFormDefaultValue, useFormValue } from '../_utils/useForm'
 import { useFormRequired, useErrorMessage } from '../_utils/useFormValidator'
 
 export default defineComponent({
-  name: 'ZInput',
+  name: 'ZCheckbox',
 
-  props: {
-    ...formProps(),
-    capsule
-  },
+  props: formProps(),
 
-  setup(props, { attrs }) {
+  setup(props, { attrs, slots }) {
     const valueRef = useFormValue(props.formId, props.formKey)
 
     useFormDefaultValue({
@@ -34,18 +30,21 @@ export default defineComponent({
 
     return () => (
       <FormInput
-        capsule={ props.capsule }
         direction={ props.direction }
         errorMessage={ errorMessageRef.value }
         label={ props.label }
         labelWidth={ props.labelWidth }
         required={ required }
       >
-        <a-input 
+        <a-checkbox 
           { ...attrs }
-          v-model:value={ valueRef.value }
-        />
+          v-model:checked={ valueRef.value }
+        >
+          { slots.default?.() }
+        </a-checkbox>
       </FormInput>
     )
   }
 })
+
+  

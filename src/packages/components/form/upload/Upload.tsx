@@ -1,19 +1,26 @@
-import { defineComponent } from 'vue'
+import { ref, defineComponent } from 'vue'
 import FormInput from '../FormInput'
-import { capsule } from '../../props'
+import type { PropType } from 'vue'
+import type { UploadProps } from 'ant-design-vue'
 import { formProps } from '../props'
 import { useFormDefaultValue, useFormValue } from '../_utils/useForm'
 import { useFormRequired, useErrorMessage } from '../_utils/useFormValidator'
 
 export default defineComponent({
-  name: 'ZInput',
+  name: 'ZUpload',
 
   props: {
     ...formProps(),
-    capsule
+
+    listType: {
+      type: String as PropType<'picture' | 'picture-card' | 'text'>,
+      default: 'picture-card'
+    }
   },
 
-  setup(props, { attrs }) {
+  setup(props, { attrs, slots }) {
+    const fileList = ref<UploadProps[]>([])
+
     const valueRef = useFormValue(props.formId, props.formKey)
 
     useFormDefaultValue({
@@ -34,18 +41,21 @@ export default defineComponent({
 
     return () => (
       <FormInput
-        capsule={ props.capsule }
         direction={ props.direction }
         errorMessage={ errorMessageRef.value }
         label={ props.label }
         labelWidth={ props.labelWidth }
         required={ required }
       >
-        <a-input 
+        <a-upload 
           { ...attrs }
-          v-model:value={ valueRef.value }
-        />
+          v-model:file-list={ fileList.value }
+          listType={ props.listType }
+        >
+          { slots.default?.() }
+        </a-upload>
       </FormInput>
     )
   }
 })
+

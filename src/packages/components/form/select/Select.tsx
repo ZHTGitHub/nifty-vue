@@ -1,15 +1,16 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
+import { formProps, itemsProps } from '../props'
 import { capsule } from '../../props'
-import { formProps } from '../props'
 import { useFormDefaultValue, useFormValue } from '../_utils/useForm'
 import { useFormRequired, useErrorMessage } from '../_utils/useFormValidator'
 
 export default defineComponent({
-  name: 'ZInput',
+  name: 'ZSelect',
 
   props: {
     ...formProps(),
+    ...itemsProps(),
     capsule
   },
 
@@ -29,11 +30,12 @@ export default defineComponent({
       formId: props.formId, 
       formKey: props.formKey, 
       valueRef, 
-      rules: attrs.rules as any[]
+      rules: attrs.rules
     })
 
     return () => (
       <FormInput
+        class="z-input-select"
         capsule={ props.capsule }
         direction={ props.direction }
         errorMessage={ errorMessageRef.value }
@@ -41,11 +43,21 @@ export default defineComponent({
         labelWidth={ props.labelWidth }
         required={ required }
       >
-        <a-input 
+        <a-select 
           { ...attrs }
           v-model:value={ valueRef.value }
-        />
+        >
+          {
+            props.items.map(item => (
+              <a-select-option 
+                value={ item[props.itemValue] }
+              >
+                { item[props.itemLabel] }
+              </a-select-option>
+            ))
+          }
+        </a-select>
       </FormInput>
     )
   }
-})
+}) 

@@ -1,6 +1,6 @@
 import { computed, watch } from 'vue'
 // import type { WritableComputedRef } from 'vue'
-import { useFormStore, type FormParams } from '../../../store'
+import { useFormStore, type FormParams } from '../store'
 
 // value
 export const useFormValue = (formId?: string, formKey?: string): any => {

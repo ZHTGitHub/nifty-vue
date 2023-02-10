@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, getCurrentInstance } from 'vue'
   import dayjs from 'dayjs'
-  import useFormStore from './packages/components/form/_utils/formStore'
+  import { useFormStore } from './packages/store'
 
   // const { proxy } = getCurrentInstance()
   const formStore = useFormStore()
@@ -43,14 +43,7 @@
       :formId="formId" 
       formKey="name"
       capsule
-      :rules="[
-        { name: 'required', message: '当前字段为必填项' },
-        { name: 'alpha', message: '当前字段只能为英文字母' },
-        { name: 'min', value: 4, message: '当前字段最小长度为4' },
-        { name: 'max', value: 8, message: '当前字段最大长度为8' },
-        { name: 'excluded', value: ['fuck', 'shit'], message: '不能包含fuck、shit.' }
-      ]"
-      defaultValue="Leslie"
+      label="姓名"
     />
     <br />
     <z-select 
@@ -58,6 +51,7 @@
       formKey="country" 
       label="国家"
       capsule
+      allowClear
       :items="[
         { name: '美国', val: '1' }, 
         { name: '日本', val: '2' }
@@ -78,7 +72,6 @@
       :rules="[
         { name: 'required', message: '请勾选记住' }
       ]"
-      :defaultValue="true"
     />
     <br />
     <z-checkbox 
@@ -107,6 +100,7 @@
     <z-radio 
       :formId="formId"
       formKey="radio"
+      label="记住"
       :rules="[
         { name: 'required', message: '请勾选记住' }
       ]"
@@ -149,7 +143,7 @@
       :defaultValue="[dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]"
     />
     <br />
-    <!-- <z-editor
+    <z-editor
       :formId="formId" 
       formKey="editor" 
       label="文案" 
@@ -157,7 +151,7 @@
         { name: 'required', message: '文案不能为空' }
       ]"
     />
-    <br /> -->
+    <br />
     <z-btn 
       :formId="formId" 
       btnType="validate"

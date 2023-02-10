@@ -1,6 +1,6 @@
 import type { App } from 'vue'
-import Checkbox from './src/index.vue'
-import CheckboxGroup from './src/group.vue'
+import Checkbox from './Checkbox'
+import CheckboxGroup from './CheckboxGroup'
 
 Checkbox.Group = CheckboxGroup
 
