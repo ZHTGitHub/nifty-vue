@@ -3,7 +3,7 @@
   import dayjs from 'dayjs'
   import { useFormStore } from './packages/store'
 
-  // const { proxy } = getCurrentInstance()
+  const { proxy } = getCurrentInstance()
   const formStore = useFormStore()
   const formId = ref('login')
 
@@ -44,6 +44,9 @@
       formKey="name"
       capsule
       label="姓名"
+      :rules="[
+        { name: 'required', message: '姓名不能为空' }
+      ]"
     />
     <br />
     <z-select 

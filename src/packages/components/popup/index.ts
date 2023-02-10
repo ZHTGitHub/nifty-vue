@@ -1,9 +1,10 @@
 import type { App } from 'vue'
-import ZPopup from './src'
+import Popup from './src'
 
-export default (app: App) => {
-  app.config.globalProperties[`$${ ZPopup.name }`] = ZPopup
+Popup['install'] = function(app: App) {
+  app.component(Popup.name, Popup)
+  app.config.globalProperties[`$${ Popup.name }`] = Popup
+  return app
 }
 
-// 在js/ts中使用
-export const Popup = ZPopup
+export default Popup as typeof Popup

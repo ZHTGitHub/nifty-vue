@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, type App } from 'vue'
 import Popup from './popup.vue'
 import type { IOptions } from './types'
 
