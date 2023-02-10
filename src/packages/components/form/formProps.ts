@@ -16,7 +16,7 @@ export const inputProps = () => ({
   },
 
   defaultValue: {
-    type: [String, Number] as PropType<string | number>
+    type: [String, Number, Boolean, Array, Object] as PropType<any>
   },
 
   direction: {
