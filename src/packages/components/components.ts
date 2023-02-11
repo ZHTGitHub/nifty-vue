@@ -12,4 +12,5 @@ export { default as Switch } from './form/switch'
 export { default as Upload } from './form/upload'
 
 // 弹窗
+export { default as Modal } from './modal'
 export { default as Popup } from './popup'

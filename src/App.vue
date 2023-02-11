@@ -12,6 +12,8 @@
     console.log({ error, form })
   }
 
+  const modalRef = ref(null)
+
   const handleOpen = () => {
     // proxy.$popup({
     //   title: '删除警告',
@@ -25,11 +27,36 @@
     //     console.log('confirm')
     //   }
     // })
+
+    console.log(modalRef.value.onOpen())
+  }
+
+  const handleModalConfirm = () => {
+    modalRef.value.onClose()
   }
 </script>
 
 <template>
   <div style="margin: 16px;">
+    <z-modal ref="modalRef" title="我是标题" @confirm="handleModalConfirm">
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+      <h1>leslie</h1>
+    </z-modal>
+
     <!-- <z-upload 
       label="头像"
       :rules="[
@@ -147,7 +174,7 @@
       :defaultValue="[dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]"
     />
     <br />
-    <z-editor
+    <!-- <z-editor
       :formId="formId" 
       formKey="editor" 
       label="文案" 
@@ -155,7 +182,9 @@
         { name: 'required', message: '文案不能为空' }
       ]"
     />
-    <br />
+    <br /> -->
+
+
     <z-btn 
       :formId="formId" 
       btnType="validate"
@@ -184,6 +213,3 @@
     >打开</z-btn>
   </div>
 </template>
-
-<style scoped>
-</style>

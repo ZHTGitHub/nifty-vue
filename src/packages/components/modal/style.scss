@@ -1,0 +1,24 @@
+.z-modal {
+  .ant-modal-body {
+    padding: 0;
+
+    /* 主要内容 */
+    .z-modal-container {
+      overflow-y: scroll;
+      height: calc(100vh - 158px);
+      text-align: center;
+    }
+
+    /* 底部内容 */
+    .z-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding: 12px;
+      border-top: 1px solid #f0f0f0;
+
+      .cancel {
+        margin-right: 8px;
+      }
+    }
+  }
+}
