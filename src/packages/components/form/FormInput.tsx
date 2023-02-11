@@ -1,4 +1,4 @@
-import { defineComponent, type Ref } from 'vue'
+import { defineComponent, onBeforeUnmount, type Ref } from 'vue'
 import FormInputLabel from './FormInputLabel'
 import FormInputMessages from './FormInputMessages'
 import classNames from './_utils/classNames'
@@ -44,9 +44,12 @@ export default defineComponent({
       rules
     })
 
-    const inputClassName = classNames('z-input', {
+    onBeforeUnmount(() => {
+      console.log(formId, formKey)
+    })
+
+    const inputClassName = classNames('z-input', direction, {
       capsule,
-      horizontal: direction === 'horizontal',
       required
     })
   

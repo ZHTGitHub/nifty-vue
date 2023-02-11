@@ -72,6 +72,13 @@
     }
   }
 
+  // vertical
+  &.vertical {
+    .z-input-label {
+      text-align: left;
+    }
+  }
+
   // required
   &.required {
     // label

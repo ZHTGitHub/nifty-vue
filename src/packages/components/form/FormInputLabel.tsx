@@ -16,7 +16,8 @@ const FormInputLabel: FunctionalComponent<FormInputLabelProps> = (props, { attrs
   })
 
   return (
-    label && <label 
+    label && 
+    <label 
       class={ labelClassName }
       style={{
         width: `${ width }px`

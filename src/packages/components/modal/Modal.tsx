@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, type PropType } from 'vue'
+import { defineComponent, ref, computed, watch, type PropType } from 'vue'
 import { useFormStore } from '../../store'
 import type { BtnType } from '../button/types'
 import type { FormId } from '../form/types'
@@ -50,9 +50,7 @@ export default defineComponent({
 
     const visible = ref<boolean>(false)
     const btnType = ref<BtnType>('normal')
-    const formId = ref<FormId>()
-
-    console.log(slots.default()[0].props)
+    const formId = ref<FormId>(void 0)
 
     if(props.type === 'form') {
       btnType.value = 'validate'
@@ -61,6 +59,12 @@ export default defineComponent({
 
     const computedWidth = computed(() => {
       return attrs.width || ModalSize[props.size]
+    })
+
+    watch(() => visible.value, (visible) => {
+      if(props.type === 'form' && !visible) {
+        formStore.RESET_FORM(formId.value)
+      }
     })
 
     const onClose = () => {
@@ -77,10 +81,16 @@ export default defineComponent({
     }
 
     const handleConfirm = () => {
-      const errors = Object.values(formStore.getFormErrors(formId.value))
-      const error = !!errors.includes(false)
+      let validateInfo = { error: false, form: void 0 }
+
+      if(formId.value) {
+        const errors = Object.values(formStore.getFormErrors(formId.value))
+        const error = !!errors.includes(false)
+        validateInfo = { error, form: formStore.getForm(formId.value) }
+      }
       
-      emit('confirm', { error, form: formStore.getForm(formId.value) })
+
+      emit('confirm', validateInfo)
     }
 
     return {
