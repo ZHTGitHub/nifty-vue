@@ -1,9 +1,8 @@
-import { useAttrs, ref, shallowRef, watch, defineComponent, onBeforeUnmount } from 'vue'
+import { ref, shallowRef, watch, defineComponent, onBeforeUnmount } from 'vue'
 import FormInput from '../FormInput'
 import type { PropType, Ref } from 'vue'
 import { inputProps } from '../formProps'
-import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
-import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
+import { useComponentName, useFormValue } from '../../../hooks/useForm'
 import type { IDomEditor } from '@wangeditor/editor'
 import { Toolbar, Editor } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css'
@@ -46,11 +45,10 @@ export default defineComponent({
       editorRef.value?.destroy()
     })
 
-    const attrs = useAttrs()
+    const componentName = useComponentName()
+    const valueRef = useFormValue(props.formId, props.formKey)
 
-    const value = useFormValue(props.formId, props.formKey)
-
-    const valueHtml = ref<Ref>(value)
+    const valueHtml = ref<Ref>(valueRef)
 
     const editorConfig = {
       autoFocus: props.autofocus,
@@ -65,15 +63,14 @@ export default defineComponent({
     const handleChange = () => {
       const text = editorRef.value.getText()
       const html = editorRef.value.getHtml()
-      value.value = text ? html : text
-      console.log(value.value)
+      valueRef.value = text ? html : text
     }
 
     const handleBlur = () => {
       console.log('blur')
     }
 
-    watch(() => value.value, (val) => {
+    watch(() => valueRef.value, (val) => {
       valueHtml.value = val
 
       if(val === void 0) {
@@ -81,30 +78,18 @@ export default defineComponent({
       }
     })
 
-    useFormDefaultValue({
-      formId: props.formId, 
-      formKey: props.formKey, 
-      defaultValue: props.defaultValue, 
-      valueRef: value
-    })
-
-    const required = useFormRequired(props.rules)
-
-    const errorMessageRef = useErrorMessage({
-      formId: props.formId, 
-      formKey: props.formKey, 
-      valueRef: value, 
-      rules: props.rules as any[]
-    })
-
     return () => (
       <FormInput
+        formId={ props.formId }
+        formKey={ props.formKey }
         class="z-input-editor"
+        componentName={ componentName }
+        defaultValue={ props.defaultValue }
         direction={ props.direction }
-        errorMessage={ errorMessageRef.value }
         label={ props.label }
         labelWidth={ props.labelWidth }
-        required={ required }
+        rules={ props.rules }
+        valueRef={ valueRef }
       >
         <div class="editor">
           <Toolbar

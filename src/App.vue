@@ -30,14 +30,14 @@
 
 <template>
   <div style="margin: 16px;">
-    <z-upload 
+    <!-- <z-upload 
       label="头像"
       :rules="[
         { name: 'required', message: '请上传头像' }
       ]"
     >
       上传
-    </z-upload>
+    </z-upload> -->
     <br />
     <z-input 
       :formId="formId" 
@@ -101,7 +101,7 @@
       :defaultValue="[2]"
     ></z-checkbox-group>
     <br />
-    <z-radio 
+     <z-radio 
       :formId="formId"
       formKey="radio"
       label="记住"
@@ -147,14 +147,14 @@
       :defaultValue="[dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]"
     />
     <br />
-    <!-- <z-editor
+    <z-editor
       :formId="formId" 
       formKey="editor" 
       label="文案" 
       :rules="[
         { name: 'required', message: '文案不能为空' }
       ]"
-    /> -->
+    />
     <br />
     <z-btn 
       :formId="formId" 

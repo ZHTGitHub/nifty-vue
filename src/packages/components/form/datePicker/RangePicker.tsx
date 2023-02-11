@@ -3,8 +3,7 @@ import FormInput from '../FormInput'
 import type { PropType } from 'vue'
 import { inputProps } from '../formProps'
 import { capsule } from '../../props'
-import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
-import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
+import { useComponentName, useFormValue } from '../../../hooks/useForm'
 
 export default defineComponent({
   name: 'ZRangePicker',
@@ -21,32 +20,21 @@ export default defineComponent({
   },
 
   setup(props, { attrs }) {
+    const componentName = useComponentName()
     const valueRef = useFormValue(props.formId, props.formKey)
-
-    useFormDefaultValue({
-      formId: props.formId, 
-      formKey: props.formKey, 
-      defaultValue: props.defaultValue, 
-      valueRef
-    })
-
-    const required = useFormRequired(props.rules)
-
-    const errorMessageRef = useErrorMessage({
-      formId: props.formId, 
-      formKey: props.formKey, 
-      valueRef, 
-      rules: props.rules as any[]
-    })
 
     return () => (
       <FormInput
+        formId={ props.formId }
+        formKey={ props.formKey }
         capsule={ props.capsule }
+        componentName={ componentName }
+        defaultValue={ props.defaultValue }
         direction={ props.direction }
-        errorMessage={ errorMessageRef.value }
         label={ props.label }
         labelWidth={ props.labelWidth }
-        required={ required }
+        rules={ props.rules }
+        valueRef={ valueRef }
       >
         <a-range-picker 
           { ...attrs }

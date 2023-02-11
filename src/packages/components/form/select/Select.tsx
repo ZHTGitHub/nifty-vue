@@ -2,8 +2,7 @@ import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
 import { inputProps, inputItemsProps } from '../formProps'
 import { capsule } from '../../props'
-import { useFormDefaultValue, useFormValue } from '../../../hooks/useForm'
-import { useFormRequired, useErrorMessage } from '../../../hooks/useFormValidator'
+import { useComponentName, useFormValue } from '../../../hooks/useForm'
 
 export default defineComponent({
   name: 'ZSelect',
@@ -15,33 +14,22 @@ export default defineComponent({
   },
 
   setup(props, { attrs }) {
+    const componentName = useComponentName()
     const valueRef = useFormValue(props.formId, props.formKey)
-
-    useFormDefaultValue({
-      formId: props.formId, 
-      formKey: props.formKey, 
-      defaultValue: props.defaultValue, 
-      valueRef
-    })
-
-    const required = useFormRequired(props.rules)
-
-    const errorMessageRef = useErrorMessage({
-      formId: props.formId, 
-      formKey: props.formKey, 
-      valueRef, 
-      rules: props.rules
-    })
 
     return () => (
       <FormInput
-        class="z-input-select"
+        formId={ props.formId }
+        formKey={ props.formKey }
         capsule={ props.capsule }
+        class="z-input-select"
+        componentName={ componentName }
+        defaultValue={ props.defaultValue }
         direction={ props.direction }
-        errorMessage={ errorMessageRef.value }
         label={ props.label }
         labelWidth={ props.labelWidth }
-        required={ required }
+        rules={ props.rules }
+        valueRef={ valueRef }
       >
         <a-select 
           { ...attrs }

@@ -1,5 +1,4 @@
-import { ref, watch, onUnmounted, getCurrentInstance } from 'vue'
-import type { Ref } from 'vue'
+import { ref, watch, onUnmounted, type Ref } from 'vue'
 import type { RuleItem } from '../components/form/formProps'
 import { useFormStore } from '../store'
 import useBus from './useBus'
@@ -59,12 +58,10 @@ export const useFormRequired = (rules: RuleItem[] = []): boolean => {
 }
 
 // 错误提示
-export const useErrorMessage = ({ formId, formKey, valueRef, rules }: any): Ref<string> => {
+export const useErrorMessage = ({ formId, formKey, componentName, valueRef, rules }: any): Ref<string> => {
   const errorMessage = ref<string>('')
 
   if(!formId || !formKey || !valueRef) return errorMessage
-
-  const instance = getCurrentInstance()
 
   // input
   watch(() => valueRef.value, (value) => {
@@ -76,12 +73,10 @@ export const useErrorMessage = ({ formId, formKey, valueRef, rules }: any): Ref<
     if(formId !== btnFormId) return
 
     if(valueRef.value === void 0) {
-      const compName = instance?.type.name!
-
-      if(['ZCheckboxGroup', 'ZRangePicker', 'ZUpload'].includes(compName)) {
+      if(['ZCheckboxGroup', 'ZRangePicker', 'ZUpload'].includes(componentName)) {
         valueRef.value = []
       }
-      else if(['ZCheckbox', 'ZRadio'].includes(compName)) {
+      else if(['ZCheckbox', 'ZRadio'].includes(componentName)) {
         valueRef.value = false
       }
       else {
