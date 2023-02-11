@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
 import { inputProps, inputItemsProps } from '../formProps'
-import { useComponentName, useFormValue } from '../../../hooks/useForm'
+import { useComponentName, useFormValue } from '../useForm'
 
 export default defineComponent({
   name: 'ZCheckboxGroup',

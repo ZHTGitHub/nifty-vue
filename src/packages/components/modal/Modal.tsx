@@ -1,4 +1,7 @@
 import { defineComponent, ref, computed, type PropType } from 'vue'
+import { useFormStore } from '../../store'
+import type { BtnType } from '../button/types'
+import type { FormId } from '../form/types'
 import './style.scss'
 
 type Size = 'small' | 'medium' | 'large' | 'x-large'
@@ -33,13 +36,28 @@ export default defineComponent({
     size: {
       type: String as PropType<Size>,
       default: 'medium'
+    },
+
+    type: {
+      type: String as PropType<'normal' | 'form'>
     }
   },
 
   emits: ['cancel', 'confirm'],
 
-  setup(props, { attrs, emit }) {
+  setup(props, { attrs, emit, slots }) {
+    const formStore = useFormStore()
+
     const visible = ref<boolean>(false)
+    const btnType = ref<BtnType>('normal')
+    const formId = ref<FormId>()
+
+    console.log(slots.default()[0].props)
+
+    if(props.type === 'form') {
+      btnType.value = 'validate'
+      formId.value = slots.default()[0].props.formId
+    }
 
     const computedWidth = computed(() => {
       return attrs.width || ModalSize[props.size]
@@ -59,11 +77,16 @@ export default defineComponent({
     }
 
     const handleConfirm = () => {
-      emit('confirm')
+      const errors = Object.values(formStore.getFormErrors(formId.value))
+      const error = !!errors.includes(false)
+      
+      emit('confirm', { error, form: formStore.getForm(formId.value) })
     }
 
     return {
       visible,
+      btnType,
+      formId,
       computedWidth,
       onClose,
       onOpen,
@@ -96,6 +119,8 @@ export default defineComponent({
 
           <z-btn
             type="primary"
+            btnType={ this.btnType }
+            formId={ this.formId }
             onClick={ this.handleConfirm }
           >{ this.$props.confirmText }</z-btn>
         </div>

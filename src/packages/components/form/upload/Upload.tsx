@@ -3,7 +3,7 @@ import FormInput from '../FormInput'
 import type { PropType } from 'vue'
 import type { UploadProps } from 'ant-design-vue'
 import { inputProps } from '../formProps'
-import { useComponentName, useFormValue } from '../../../hooks/useForm'
+import { useComponentName, useFormValue } from '../useForm'
 
 export default defineComponent({
   name: 'ZUpload',

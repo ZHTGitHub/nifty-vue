@@ -4,9 +4,9 @@
 
     /* 主要内容 */
     .z-modal-container {
-      overflow-y: scroll;
-      height: calc(100vh - 158px);
-      text-align: center;
+      overflow-y: auto;
+      max-height: calc(100vh - 160px);
+      padding: 24px;
     }
 
     /* 底部内容 */

@@ -1,9 +1,9 @@
 import { ref, watch, onUnmounted, type Ref } from 'vue'
-import type { RuleItem } from '../components/form/formProps'
-import { useFormStore } from '../store'
-import useBus from './useBus'
-import _ from '../utils/lodash'
-import rulesFunc from '../components/form/_utils/rules'
+import type { RuleItem } from '../../components/form/formProps'
+import { useFormStore } from '../../store'
+import useBus from '../../hooks/useBus'
+import _ from '../../utils/lodash'
+import rulesFunc from '../../components/form/_utils/rules'
 
 const bus = useBus()
 

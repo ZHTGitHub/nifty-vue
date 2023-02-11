@@ -4,8 +4,7 @@ import { useFormStore } from '../../store'
 import { formId, capsule } from '../props'
 import useBus from '../../hooks/useBus'
 import classNames from '../form/_utils/classNames'
-
-type BtnType = 'normal'  | 'clear' | 'reset' | 'validate'
+import type { BtnType } from './types'
 
 export default defineComponent({
   name: 'ZBtn',

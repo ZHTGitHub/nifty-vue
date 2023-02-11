@@ -10,6 +10,8 @@ export { default as Radio, RadioGroup } from './form/radio'
 export { default as Select } from './form/select'
 export { default as Switch } from './form/switch'
 export { default as Upload } from './form/upload'
+// 动态表单
+export { default as Form } from './form/form'
 
 // 弹窗
 export { default as Modal } from './modal'

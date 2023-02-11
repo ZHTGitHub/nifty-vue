@@ -3,7 +3,7 @@ import FormInput from '../FormInput'
 import type { PropType } from 'vue'
 import { inputProps } from '../formProps'
 import { capsule } from '../../props'
-import { useComponentName, useFormValue } from '../../../hooks/useForm'
+import { useComponentName, useFormValue } from '../useForm'
 
 export default defineComponent({
   name: 'ZDatePicker',

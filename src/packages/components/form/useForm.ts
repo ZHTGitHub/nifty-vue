@@ -1,6 +1,6 @@
-import { computed, watch, getCurrentInstance } from 'vue'
+import { ref, computed, watch, getCurrentInstance } from 'vue'
 // import type { WritableComputedRef } from 'vue'
-import { useFormStore, type FormParams } from '../store'
+import { useFormStore, type FormParams } from '../../store'
 
 // component name
 export const useComponentName = () => {
@@ -10,20 +10,21 @@ export const useComponentName = () => {
 
 // value
 export const useFormValue = (formId?: string, formKey?: string): any => {
-  if(!formId || !formKey) return
-  
-  let formStore: any = null
-  if(!formStore) formStore = useFormStore()
+  let computedValue = ref(void 0)
 
-  const computedValue = computed({
-    get() {
-      return formStore.forms[formId]?.[formKey]
-    }, 
+  if(formId && formKey) {
+    const formStore = useFormStore()
 
-    set(value: any) {
-      formStore.SET_FORM_VALUE_BY_KEY(formId, formKey, value)
-    }
-  })
+    computedValue = computed({
+      get() {
+        return formStore.forms[formId]?.[formKey]
+      }, 
+
+      set(value: any) {
+        formStore.SET_FORM_VALUE_BY_KEY(formId, formKey, value)
+      }
+    })
+  }
 
   return computedValue
 }
@@ -32,8 +33,7 @@ export const useFormValue = (formId?: string, formKey?: string): any => {
 export const useFormDefaultValue = ({ formId, formKey, defaultValue, valueRef }: FormParams) => {
   if(!formId || !formKey) return
 
-  let formStore: any = null
-  if(!formStore) formStore = useFormStore()
+  const formStore = useFormStore()
 
   watch(() => defaultValue, (defaultVal) => {
     if(defaultVal && valueRef) {

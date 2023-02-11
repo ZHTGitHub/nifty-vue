@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
 import { capsule } from '../../props'
 import { inputProps } from '../formProps'
-import { useComponentName, useFormValue } from '../../../hooks/useForm'
+import { useComponentName, useFormValue } from '../useForm'
 
 export default defineComponent({
   name: 'ZInput',
