@@ -1,6 +1,7 @@
-import pinia, { useFormStore, type FormParams } from './store'
+import * as formStore from './store'
+import Rocket from './components'
 import './components/style.scss'
 import './icons/iconfont.css'
 
-export { pinia, useFormStore, FormParams }
-export * from './components' 
+export { formStore }
+export default Rocket

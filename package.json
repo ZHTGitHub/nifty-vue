@@ -1,6 +1,6 @@
 {
   "name": "rocket-vue3",
-  "version": "0.1.36",
+  "version": "0.1.42",
   "private": false,
   "type": "module",
   "files": [
@@ -50,9 +50,5 @@
     "vite": "^4.0.0",
     "vue": "^3.2.45",
     "vue-tsc": "^1.0.12"
-  },
-  "dependencies": {
-    "rocket-vue3": "^0.1.22",
-    "vue": ">=3.2.45"
   }
 }

@@ -2,14 +2,15 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import Antd from './plugins/antd'
-import * as packages from './packages'
+import Rocket, { formStore } from './packages'
 
 import './assets/main.css'
 
 const app = createApp(App)
+const pinia = formStore.createPinia()
 
 app
-  .use(packages.pinia)
+  .use(pinia)
   .use(Antd)
-  .use(packages.install)
+  .use(Rocket)
   .mount('#app')
