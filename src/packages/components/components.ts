@@ -14,5 +14,5 @@ export { default as Upload } from './form/upload'
 export { default as Form } from './form/form'
 
 // 弹窗
-export { default as Modal } from './modal'
+// export { default as Dialog } from './dialog'
 export { default as Popup } from './popup'

@@ -15,7 +15,7 @@ enum ModalSize {
 }
 
 export default defineComponent({
-  name: 'ZModal',
+  name: 'ZDialog',
 
   props: {
     cancelText: {

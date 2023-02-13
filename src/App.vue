@@ -149,7 +149,7 @@
 
 <template>
   <div style="margin: 16px;">
-    <z-modal 
+    <z-dialog 
       ref="modalRef" 
       type="form"
       title="我是标题" 
@@ -165,7 +165,7 @@
           range: [dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]
         }"
       />
-    </z-modal>
+    </z-dialog>
 
     <z-btn 
       :formId="formId" 

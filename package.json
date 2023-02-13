@@ -1,9 +1,11 @@
 {
   "name": "rocket-vue3",
-  "version": "0.1.19",
+  "version": "0.1.36",
   "private": false,
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/rocket-vue3.umd.cjs",
   "module": "./dist/rocket-vue3.js",
   "exports": {
@@ -50,6 +52,7 @@
     "vue-tsc": "^1.0.12"
   },
   "dependencies": {
+    "rocket-vue3": "^0.1.22",
     "vue": ">=3.2.45"
   }
 }
