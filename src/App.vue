@@ -196,6 +196,7 @@
 
     <z-btn 
       :formId="formId" 
+      btnType="validate"
       type="primary"
       @click="handleConfirm"
     >提交</z-btn>

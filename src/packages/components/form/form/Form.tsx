@@ -1,45 +1,8 @@
 import { defineComponent, type PropType } from 'vue'
 import { formId, capsule } from '../../props'
 import { inputProps } from '../formProps'
-import type { Direction } from '../types'
+import type { Row, Col, Field } from './types'
 import './style.scss'
-
-interface Row {
-  align: string;
-  gutter: number | object | Array<string | number>;
-  justify: string;
-  wrap: boolean
-}
-
-interface Col {
-  flex?: string | number;
-  offset?: number;
-  order?: number;
-  pull?: number;
-  push?: number;
-  span?: number;
-  xxxl?: number | object;
-  xs?: number | object;
-  sm?: number | object;
-  md?: number | object;
-  lg?: number | object;
-  xl?: number | object;
-  xxl?: number | object;
-}
-
-interface Field {
-  name: string;
-  formKey: string;
-  label?: string;
-  capsule?: boolean;
-  col?: Col;
-  direction?: Direction;
-  items?: any[];
-  placeholder?: string;
-  rules?: { name: string; value?: string | number | Array<string | number>; message: string }[];
-  // 日期格式
-  format?: string;
-}
 
 export default defineComponent({
   name: 'zForm',
@@ -73,26 +36,24 @@ export default defineComponent({
   },
 
   setup(props, { slots }) {
-    const { capsule, col: sameCol, defaultValues, ...restProps } = props
+    const { capsule, col: commonCol, defaultValues, ...restProps } = props
 
     return () => (
       <>
-        { slots.top?.() }
         <a-row class="z-form" { ...props.row }>
           { slots.head?.() }
 
           {
             props.fields?.map(field => {
-              const { name, col, ...rest } = field
+              const { name, col: fieldCol, ...rest } = field
               const defaultValue = defaultValues?.[rest.formKey]
-
-              const assignCol = { ...sameCol, ...col }
+              const col = { ...commonCol, ...fieldCol }
 
               return (
                 <>
                   {
                     name === 'checkbox' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-checkbox 
                         defaultValue={ defaultValue }
                         { ...restProps }
@@ -103,7 +64,7 @@ export default defineComponent({
 
                   {
                     name === 'checkboxGroup' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-checkbox-group 
                         defaultValue={ defaultValue }
                         { ...restProps }
@@ -114,7 +75,7 @@ export default defineComponent({
 
                   {
                     name === 'date' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-date-picker
                         capsule={ capsule }
                         defaultValue={ defaultValue }
@@ -126,7 +87,7 @@ export default defineComponent({
 
                   {
                     name === 'editor' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-editor
                         defaultValue={ defaultValue }
                         { ...restProps }
@@ -137,7 +98,7 @@ export default defineComponent({
 
                   {
                     name === 'range' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-range-picker
                         capsule={ capsule }
                         defaultValue={ defaultValue }
@@ -149,7 +110,7 @@ export default defineComponent({
 
                   {
                     name === 'input' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-input 
                         capsule={ capsule }
                         defaultValue={ defaultValue }
@@ -161,7 +122,7 @@ export default defineComponent({
 
                   {
                     name === 'radio' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-radio 
                         defaultValue={ defaultValue }
                         { ...restProps }
@@ -172,7 +133,7 @@ export default defineComponent({
 
                   {
                     name === 'radioGroup' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-radio-group 
                         defaultValue={ defaultValue }
                         { ...restProps }
@@ -183,7 +144,7 @@ export default defineComponent({
 
                   {
                     name === 'select' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-select 
                         capsule={ capsule }
                         defaultValue={ defaultValue }
@@ -195,7 +156,7 @@ export default defineComponent({
 
                   {
                     name === 'switch' && 
-                    <a-col span={ 24 } { ...assignCol }>
+                    <a-col span={ 24 } { ...col }>
                       <z-switch 
                         defaultValue={ defaultValue }
                         { ...restProps }
@@ -210,7 +171,6 @@ export default defineComponent({
 
           { slots.tail?.() }
         </a-row>
-        { slots.bottom?.() }
       </>
     )
   }
