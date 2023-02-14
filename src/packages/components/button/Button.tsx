@@ -28,7 +28,7 @@ export default defineComponent({
     const bus = useBus()
 
     const onClick = (event: Event) => {
-      let validateInfo = {}
+      let formInfo = { error: false, form: void 0 }
       
       // 校验
       if(props.btnType === 'validate') {
@@ -38,20 +38,22 @@ export default defineComponent({
 
         const error = !!errors.includes(false)
 
-        validateInfo = { error, form: formStore.getForm(props.formId!) }
+        formInfo.error = error
       }
 
       // 清空
       else if(props.btnType === 'clear') {
+        formInfo.error = false
         formStore.CLEAR_FORM(props.formId!)
       }
 
       // 重置
       else if(props.btnType === 'reset') {
+        formInfo.error = false
         formStore.RESET_FORM(props.formId!)
       }
 
-      emit('click', { event, ...validateInfo })
+      emit('click', { event, ...formInfo, form: formStore.getForm(props.formId!) })
     }
 
     const btnClassName = classNames('z-input z-input-btn', {

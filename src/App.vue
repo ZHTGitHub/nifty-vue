@@ -102,6 +102,9 @@
       name: 'switch',
       formKey: 'toggle',
       label: '开关',
+      col: {
+        span: 4
+      },
       rules: [
         { name: 'required', message: '请勾选记住' }
       ]
@@ -149,7 +152,7 @@
 
 <template>
   <div style="margin: 16px;">
-    <z-dialog 
+    <!-- <z-dialog 
       ref="modalRef" 
       type="form"
       title="我是标题" 
@@ -158,18 +161,41 @@
       <z-form 
         :formId="formId" 
         :fields="fields"
+        :col="{
+          span: 8 
+        }"
         :labelWidth="66"
         :defaultValues="{
           name: 'leslie',
           date: dayjs('2023/02/05', 'YYYY-MM-DD'),
           range: [dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]
         }"
-      />
-    </z-dialog>
+      >
+        <template #tail>
+          <a-col :span="4">
+            <z-btn>按钮</z-btn>
+          </a-col>
+        </template>
+      </z-form>
+    </z-dialog> -->
+
+    <z-form 
+      :formId="formId" 
+      :fields="fields"
+      :col="{
+        span: 8 
+      }"
+      :labelWidth="66"
+      :defaultValues="{
+        name: 'leslie',
+        date: dayjs('2023/02/05', 'YYYY-MM-DD'),
+        range: [dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]
+      }"
+    >
+    </z-form>
 
     <z-btn 
       :formId="formId" 
-      btnType="validate"
       type="primary"
       @click="handleConfirm"
     >提交</z-btn>

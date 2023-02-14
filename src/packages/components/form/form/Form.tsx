@@ -4,11 +4,35 @@ import { inputProps } from '../formProps'
 import type { Direction } from '../types'
 import './style.scss'
 
+interface Row {
+  align: string;
+  gutter: number | object | Array<string | number>;
+  justify: string;
+  wrap: boolean
+}
+
+interface Col {
+  flex?: string | number;
+  offset?: number;
+  order?: number;
+  pull?: number;
+  push?: number;
+  span?: number;
+  xxxl?: number | object;
+  xs?: number | object;
+  sm?: number | object;
+  md?: number | object;
+  lg?: number | object;
+  xl?: number | object;
+  xxl?: number | object;
+}
+
 interface Field {
   name: string;
   formKey: string;
   label?: string;
   capsule?: boolean;
+  col?: Col;
   direction?: Direction;
   items?: any[];
   placeholder?: string;
@@ -23,6 +47,11 @@ export default defineComponent({
   props: {
     capsule,
 
+    col: {
+      type: Object as PropType<Col>,
+      default: () => ({})
+    },
+
     defaultValues: {
       type: Object as PropType<object>
     },
@@ -35,139 +64,154 @@ export default defineComponent({
 
     formId,
 
-    labelWidth: inputProps().labelWidth
+    labelWidth: inputProps().labelWidth,
+
+    row: {
+      type: Object as PropType<Row>,
+      default: () => ({})
+    }
   },
 
-  setup(props) {
-    const { capsule, defaultValues, ...restProps } = props
+  setup(props, { slots }) {
+    const { capsule, col: sameCol, defaultValues, ...restProps } = props
 
     return () => (
-      <a-row class="z-form">
-        {
-          props.fields?.map(field => {
-            const { name, ...rest } = field
-            const defaultValue = defaultValues[rest.formKey]
+      <>
+        { slots.top?.() }
+        <a-row class="z-form" { ...props.row }>
+          { slots.head?.() }
 
-            return (
-              <>
-                {
-                  name === 'checkbox' && 
-                  <a-col span={ 24 }>
-                    <z-checkbox 
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+          {
+            props.fields?.map(field => {
+              const { name, col, ...rest } = field
+              const defaultValue = defaultValues?.[rest.formKey]
 
-                {
-                  name === 'checkboxGroup' && 
-                  <a-col span={ 24 }>
-                    <z-checkbox-group 
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+              const assignCol = { ...sameCol, ...col }
 
-                {
-                  name === 'date' && 
-                  <a-col span={ 24 }>
-                    <z-date-picker
-                      capsule={ capsule }
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+              return (
+                <>
+                  {
+                    name === 'checkbox' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-checkbox 
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
 
-                {
-                  name === 'editor' && 
-                  <a-col span={ 24 }>
-                    <z-editor
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+                  {
+                    name === 'checkboxGroup' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-checkbox-group 
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
 
-                {
-                  name === 'range' && 
-                  <a-col span={ 24 }>
-                    <z-range-picker
-                      capsule={ capsule }
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+                  {
+                    name === 'date' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-date-picker
+                        capsule={ capsule }
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
 
-                {
-                  name === 'input' && 
-                  <a-col span={ 24 }>
-                    <z-input 
-                      capsule={ capsule }
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+                  {
+                    name === 'editor' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-editor
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
 
-                {
-                  name === 'radio' && 
-                  <a-col span={ 24 }>
-                    <z-radio 
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+                  {
+                    name === 'range' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-range-picker
+                        capsule={ capsule }
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
 
-                {
-                  name === 'radioGroup' && 
-                  <a-col span={ 24 }>
-                    <z-radio-group 
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+                  {
+                    name === 'input' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-input 
+                        capsule={ capsule }
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
 
-                {
-                  name === 'select' && 
-                  <a-col span={ 24 }>
-                    <z-select 
-                      capsule={ capsule }
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
+                  {
+                    name === 'radio' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-radio 
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
 
-                {
-                  name === 'switch' && 
-                  <a-col span={ 24 }>
-                    <z-switch 
-                      defaultValue={ defaultValue }
-                      { ...restProps }
-                      { ...rest }
-                    />
-                  </a-col>
-                }
-              </>
-            )
-          })
-        }
-      </a-row>
+                  {
+                    name === 'radioGroup' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-radio-group 
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
+
+                  {
+                    name === 'select' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-select 
+                        capsule={ capsule }
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
+
+                  {
+                    name === 'switch' && 
+                    <a-col span={ 24 } { ...assignCol }>
+                      <z-switch 
+                        defaultValue={ defaultValue }
+                        { ...restProps }
+                        { ...rest }
+                      />
+                    </a-col>
+                  }
+                </>
+              )
+            })
+          }
+
+          { slots.tail?.() }
+        </a-row>
+        { slots.bottom?.() }
+      </>
     )
   }
 })
