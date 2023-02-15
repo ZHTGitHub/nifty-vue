@@ -34,4 +34,7 @@ export interface Field {
   disabled?: boolean;
   items?: any[];
   placeholder?: string;
+  rules?: { name: string; value?: string | number | Array<string | number>; message: string }[];
+  // 日期格式
+  format?: string;
 }
