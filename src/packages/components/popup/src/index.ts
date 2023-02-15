@@ -1,8 +1,8 @@
-import { createApp, type App } from 'vue'
+import { createApp } from 'vue'
 import Popup from './popup.vue'
-import type { IOptions } from './types'
+import type { Options } from './types'
 
-export default function popup(options: IOptions) {
+export default function popup(options: Options) {
   const node = document.createElement('div')
   document.body.appendChild(node)
 

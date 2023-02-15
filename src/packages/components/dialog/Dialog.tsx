@@ -1,4 +1,5 @@
-import { defineComponent, ref, computed, watch, type PropType } from 'vue'
+import { defineComponent, ref, computed, watch } from 'vue'
+import type { PropType } from 'vue'
 import { useFormStore } from '../../store'
 import type { BtnType } from '../button/types'
 import type { FormId } from '../form/types'
@@ -6,12 +7,12 @@ import './style.scss'
 
 type Size = 'small' | 'medium' | 'large' | 'x-large'
 
-enum ModalSize {
+enum ModalSizes {
   small = 320,
   medium = 560,
   large = 720,
   xLarge = 960,
-  'x-large' = 960
+  // 'x-large' = 960
 }
 
 export default defineComponent({
@@ -31,6 +32,11 @@ export default defineComponent({
     confirmText: {
       type: String as PropType<string>,
       default: '确认'
+    },
+
+    fullscreen: {
+      type: Boolean as PropType<boolean>,
+      default: false
     },
 
     size: {
@@ -58,7 +64,17 @@ export default defineComponent({
     }
 
     const computedWidth = computed(() => {
-      return attrs.width || ModalSize[props.size]
+      // return attrs.width
+
+      if(attrs.width) return attrs.width
+
+      switch (props.size) {
+        case 'small': return 320;
+        case 'medium': return 560;
+        case 'large': return 720;
+        case 'x-large': return 960;
+        default: return 560;
+      }
     })
 
     watch(() => visible.value, (visible) => {
@@ -88,7 +104,6 @@ export default defineComponent({
         const error = !!errors.includes(false)
         validateInfo = { error, form: formStore.getForm(formId.value) }
       }
-      
 
       emit('confirm', validateInfo)
     }
@@ -113,27 +128,30 @@ export default defineComponent({
         centered={ this.$props.centered }
         footer={ null }
         width={ this.computedWidth }
-        wrapClassName="z-modal"
+        wrapClassName={ `z-dialog ${ this.$props.fullscreen && 'fullscreen' }` }
       >
         <div class="z-modal-container">
           { this.$slots.default?.() }
         </div>
 
-        <div class="z-modal-footer">
-          <z-btn
-            class="cancel"
-            ghost
-            type="primary"
-            onClick={ this.handleCancel }
-          >{ this.$props.cancelText }</z-btn>
+        {
+          this.$slots.footer?.() ||
+          <div class="z-modal-footer">
+            <z-btn
+              class="cancel"
+              ghost
+              type="primary"
+              onClick={ this.handleCancel }
+            >{ this.$props.cancelText }</z-btn>
 
-          <z-btn
-            type="primary"
-            btnType={ this.btnType }
-            formId={ this.formId }
-            onClick={ this.handleConfirm }
-          >{ this.$props.confirmText }</z-btn>
-        </div>
+            <z-btn
+              type="primary"
+              btnType={ this.btnType }
+              formId={ this.formId }
+              onClick={ this.handleConfirm }
+            >{ this.$props.confirmText }</z-btn>
+          </div>
+        }
       </a-modal>
     )
   }

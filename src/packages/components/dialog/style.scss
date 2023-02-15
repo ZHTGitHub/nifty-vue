@@ -1,23 +1,45 @@
-.z-modal {
-  .ant-modal-body {
-    padding: 0;
+.z-dialog {
+  .ant-modal-content {
+    display: flex;
+    flex-direction: column;
 
-    /* 主要内容 */
-    .z-modal-container {
-      overflow-y: auto;
-      max-height: calc(100vh - 160px);
-      padding: 24px;
-    }
-
-    /* 底部内容 */
-    .z-modal-footer {
+    .ant-modal-body {
+      flex: 1;
       display: flex;
-      justify-content: flex-end;
-      padding: 12px;
-      border-top: 1px solid #f0f0f0;
+      flex-direction: column;
+      padding: 0;
+  
+      /* 主要内容 */
+      .z-modal-container {
+        flex: 1;
+        overflow-y: auto;
+        max-height: calc(100vh - 160px);
+        padding: 24px;
+      }
+  
+      /* 底部内容 */
+      .z-modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 12px;
+        border-top: 1px solid #f0f0f0;
+  
+        .cancel {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
 
-      .cancel {
-        margin-right: 8px;
+  // 全屏
+  &.fullscreen {
+    .ant-modal {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: unset;
+
+      .z-modal-container {
+        min-height: calc(100vh - 112px);
       }
     }
   }

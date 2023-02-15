@@ -1,7 +1,6 @@
-import type { App } from 'vue'
-export type PopupType = 'info' | 'success' | 'warning' | 'success'
+export type PopupType = 'info' | 'success' | 'warning' | 'error'
 
-export interface IOptions {
+export interface Options {
   cancelText?: string;
   centered?: boolean;
   confirmText?: string;

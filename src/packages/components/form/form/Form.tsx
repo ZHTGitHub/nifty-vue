@@ -21,6 +21,11 @@ export default defineComponent({
 
     direction: inputProps().direction,
 
+    disabled: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
+
     fields: {
       type: Array as PropType<Field[]>
     },
@@ -36,7 +41,13 @@ export default defineComponent({
   },
 
   setup(props, { slots }) {
-    const { capsule, col: commonCol, defaultValues, ...restProps } = props
+    const { 
+      capsule, 
+      col: commonCol, 
+      disabled: commonDisabled, 
+      defaultValues, 
+      ...restProps 
+    } = props
 
     return () => (
       <>
@@ -45,9 +56,16 @@ export default defineComponent({
 
           {
             props.fields?.map(field => {
-              const { name, col: fieldCol, ...rest } = field
-              const defaultValue = defaultValues?.[rest.formKey]
+              const { 
+                name, 
+                col: fieldCol, 
+                defaultValue: fieldDefaultValue,
+                disabled: fieldDisabled, 
+                ...rest 
+              } = field
+              const defaultValue = fieldDefaultValue || defaultValues?.[rest.formKey]
               const col = { ...commonCol, ...fieldCol }
+              const disabled = fieldDisabled || commonDisabled
 
               return (
                 <>
@@ -56,6 +74,7 @@ export default defineComponent({
                     <a-col span={ 24 } { ...col }>
                       <z-checkbox 
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -67,6 +86,7 @@ export default defineComponent({
                     <a-col span={ 24 } { ...col }>
                       <z-checkbox-group 
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -79,6 +99,7 @@ export default defineComponent({
                       <z-date-picker
                         capsule={ capsule }
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -90,6 +111,7 @@ export default defineComponent({
                     <a-col span={ 24 } { ...col }>
                       <z-editor
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -102,6 +124,7 @@ export default defineComponent({
                       <z-range-picker
                         capsule={ capsule }
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -109,11 +132,12 @@ export default defineComponent({
                   }
 
                   {
-                    name === 'input' && 
+                    (name === 'input' || !name) && 
                     <a-col span={ 24 } { ...col }>
                       <z-input 
                         capsule={ capsule }
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -125,6 +149,7 @@ export default defineComponent({
                     <a-col span={ 24 } { ...col }>
                       <z-radio 
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -136,6 +161,7 @@ export default defineComponent({
                     <a-col span={ 24 } { ...col }>
                       <z-radio-group 
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -148,6 +174,7 @@ export default defineComponent({
                       <z-select 
                         capsule={ capsule }
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />
@@ -159,6 +186,7 @@ export default defineComponent({
                     <a-col span={ 24 } { ...col }>
                       <z-switch 
                         defaultValue={ defaultValue }
+                        disabled={ disabled }
                         { ...restProps }
                         { ...rest }
                       />

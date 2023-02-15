@@ -1,7 +1,9 @@
 import { defineComponent } from 'vue'
 import FormInput from '../FormInput'
+// import { direction } from '../../props'
 import { inputProps, inputItemsProps } from '../formProps'
 import { useComponentName, useFormValue } from '../useForm'
+import './style.scss'
 
 export default defineComponent({
   name: 'ZCheckboxGroup',
@@ -19,6 +21,7 @@ export default defineComponent({
       <FormInput
         formId={ props.formId }
         formKey={ props.formKey }
+        class={ `z-input-checkbox-group ${ props.direction }` }
         componentName={ componentName }
         defaultValue={ props.defaultValue }
         direction={ props.direction }

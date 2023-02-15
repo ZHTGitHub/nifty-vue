@@ -1,8 +1,7 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue'
   import type { PropType } from 'vue'
-  import { Modal } from 'ant-design-vue'
-  import Button from '../../button'
+  import { Modal, Button } from 'ant-design-vue'
   import type { PopupType } from './types'
 
   export default defineComponent({
@@ -83,7 +82,7 @@
 
     components: {
       AModal: Modal,
-      ZBtn: Button
+      ABtn: Button
     }
   })
 </script>
@@ -108,17 +107,17 @@
       </div>
 
       <div class="z-popup-footer">
-        <z-btn
+        <a-btn
           class="cancel"
           ghost
           type="primary"
           @click="handleCancel"
-        >{{ cancelText }}</z-btn>
+        >{{ cancelText }}</a-btn>
 
-        <z-btn
+        <a-btn
           type="primary"
           @click="handleConfirm"
-        >{{ confirmText }}</z-btn>
+        >{{ confirmText }}</a-btn>
       </div>
     </a-modal>
 </template>

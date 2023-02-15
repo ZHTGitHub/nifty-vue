@@ -1,9 +1,10 @@
 <script setup lang="ts">
   import { ref, getCurrentInstance } from 'vue'
+  import { Popup } from './packages'
   import dayjs from 'dayjs'
   import { useFormStore } from './packages/store'
 
-  const { proxy } = getCurrentInstance()
+  // const { proxy } = getCurrentInstance()
   const formStore = useFormStore()
   const formId = ref('login')
   const fields = ref<any[]>([
@@ -52,7 +53,6 @@
     }, 
 
     {
-      name: 'input',
       formKey: 'name',
       label: '姓名',
       rules: [
@@ -128,7 +128,7 @@
   const modalRef = ref(null)
 
   const handleOpen = () => {
-    // proxy.$popup({
+    // Popup({
     //   title: '删除警告',
     //   content: '这里是文本内容!',
     //   type: 'error',
@@ -152,17 +152,19 @@
 
 <template>
   <div style="margin: 16px;">
-    <!-- <z-dialog 
+    <z-dialog 
       ref="modalRef" 
       type="form"
       title="我是标题" 
+      fullscreen
       @confirm="handleModalConfirm"
     >
       <z-form 
         :formId="formId" 
         :fields="fields"
+        disabled
         :col="{
-          span: 8 
+          span: 24 
         }"
         :labelWidth="66"
         :defaultValues="{
@@ -171,15 +173,10 @@
           range: [dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]
         }"
       >
-        <template #tail>
-          <a-col :span="4">
-            <z-btn>按钮</z-btn>
-          </a-col>
-        </template>
       </z-form>
-    </z-dialog> -->
+    </z-dialog>
 
-    <z-form 
+    <!-- <z-form 
       :formId="formId" 
       :fields="fields"
       :col="{
@@ -192,7 +189,7 @@
         range: [dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]
       }"
     >
-    </z-form>
+    </z-form> -->
 
     <z-btn 
       :formId="formId" 

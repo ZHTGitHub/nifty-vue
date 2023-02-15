@@ -4,4 +4,5 @@ import './components/style.scss'
 import './icons/iconfont.css'
 
 export { formStore }
+export * from './components'
 export default Rocket
