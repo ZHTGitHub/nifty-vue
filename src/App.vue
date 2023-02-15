@@ -21,6 +21,7 @@
       name: 'checkboxGroup',
       formKey: 'fruit',
       label: '水果',
+      
       items: [
         { label: '苹果', value: 1 }, 
         { label: '香蕉', value: 2 }
@@ -73,6 +74,9 @@
       name: 'radioGroup',
       formKey: 'gender',
       label: '性别',
+      groupConfig: {
+        direction: 'horizontal'
+      },
       items: [
         { label: '男', value: 1 }, 
         { label: '女', value: 2 }
@@ -102,9 +106,6 @@
       name: 'switch',
       formKey: 'toggle',
       label: '开关',
-      col: {
-        span: 4
-      },
       rules: [
         { name: 'required', message: '请勾选记住' }
       ]
@@ -166,7 +167,12 @@
         :col="{
           span: 24 
         }"
-        :labelWidth="66"
+        :groupConfig = "{
+          direction: 'vertical'
+        }"
+        :labelConfig="{
+          align: 'right',
+        }"
         :defaultValues="{
           name: 'leslie',
           date: dayjs('2023/02/05', 'YYYY-MM-DD'),
@@ -182,7 +188,6 @@
       :col="{
         span: 8 
       }"
-      :labelWidth="66"
       :defaultValues="{
         name: 'leslie',
         date: dayjs('2023/02/05', 'YYYY-MM-DD'),

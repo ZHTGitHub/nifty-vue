@@ -18,13 +18,13 @@ export const direction = {
   default: 'horizontal'
 }
 
-// label
+// Input label
 export const labelConfig = {
   type: Object as PropType<LabelConfig>,
   default: () => ({})
 }
 
-// group
+// Input group
 export const groupConfig = {
   type: Object as PropType<GroupConfig>,
   default: () => ({})

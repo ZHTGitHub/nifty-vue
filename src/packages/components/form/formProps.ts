@@ -1,6 +1,5 @@
 import type { PropType } from 'vue'
-import { direction } from '../props'
-import { formId } from '../props'
+import { direction, formId, labelConfig } from '../props'
 
 export interface RuleItem {
   name: string,
@@ -25,10 +24,7 @@ export const inputProps = () => ({
     type: [String, Number] as PropType<string | number>
   },
 
-  labelWidth: {
-    type: [String, Number] as PropType<string | number>,
-    default: 40
-  },
+  labelConfig,
 
   rules: {
     type: Array as PropType<RuleItem[]>

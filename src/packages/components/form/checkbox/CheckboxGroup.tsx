@@ -1,32 +1,36 @@
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import FormInput from '../FormInput'
-// import { direction } from '../../props'
 import { inputProps, inputItemsProps } from '../formProps'
+import { defaultGroupConfig } from '../../default'
+import { groupConfig } from '../../props'
+import type { GroupConfig } from '../../types'
 import { useComponentName, useFormValue } from '../useForm'
-import './style.scss'
 
 export default defineComponent({
   name: 'ZCheckboxGroup',
 
   props: {
     ...inputProps(),
-    ...inputItemsProps()
+    ...inputItemsProps(),
+    groupConfig
   },
 
   setup(props, { attrs }) {
     const componentName = useComponentName()
     const valueRef = useFormValue(props.formId, props.formKey)
 
+    const groupConfig = ref<GroupConfig>({ ...defaultGroupConfig, ...props.groupConfig })
+
     return () => (
       <FormInput
         formId={ props.formId }
         formKey={ props.formKey }
-        class={ `z-input-checkbox-group ${ props.direction }` }
+        class={ `z-input-group ${ groupConfig.value.direction }` }
         componentName={ componentName }
         defaultValue={ props.defaultValue }
         direction={ props.direction }
         label={ props.label }
-        labelWidth={ props.labelWidth }
+        labelConfig={ props.labelConfig }
         rules={ props.rules }
         valueRef={ valueRef }
       >

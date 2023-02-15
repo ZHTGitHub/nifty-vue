@@ -30,7 +30,7 @@ export default defineComponent({
         componentName={ componentName }
         direction={ props.direction }
         label={ props.label }
-        labelWidth={ props.labelWidth }
+        labelConfig={ props.labelConfig }
         rules={ props.rules }
         valueRef={ valueRef }
       >

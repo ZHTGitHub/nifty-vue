@@ -141,4 +141,18 @@
       }
     }
   }
+
+  &.z-input-group {
+    &.vertical {
+      align-items: flex-start !important;
+  
+      .z-input-control {
+        .ant-checkbox-group,
+        .ant-radio-group {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+  }
 } 

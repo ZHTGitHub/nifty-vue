@@ -1,6 +1,7 @@
 import { defineComponent, onBeforeUnmount, type Ref } from 'vue'
 import FormInputLabel from './FormInputLabel'
 import FormInputMessages from './FormInputMessages'
+import type { LabelConfig } from '../types'
 import classNames from './_utils/classNames'
 import { useFormDefaultValue } from './useForm'
 import { useFormRequired, useErrorMessage } from './useFormValidator'
@@ -14,7 +15,7 @@ interface FormInputProps {
   defaultValue?: any;
   direction?: 'horizontal' | 'vertical';
   label?: string | number;
-  labelWidth?: string | number;
+  labelConfig?: LabelConfig;
   required?: boolean;
   rules?: RuleItem[];
   valueRef?: Ref;
@@ -22,7 +23,7 @@ interface FormInputProps {
 
 export default defineComponent({
   setup(props: FormInputProps, { attrs, slots }) {
-    const { formId, formKey, capsule, componentName, defaultValue, direction, label, labelWidth, rules, valueRef } = { 
+    const { formId, formKey, capsule, componentName, defaultValue, direction, label, labelConfig, rules, valueRef } = { 
       ...props, 
       ...attrs 
     }
@@ -57,7 +58,7 @@ export default defineComponent({
       <div class={[ inputClassName, {'z-input-error': errorMessageRef.value}]}>
         <FormInputLabel 
           label={ label }
-          width={ labelWidth }
+          labelConfig={ labelConfig }
         />
         
         <div class="z-input-control">

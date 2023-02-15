@@ -1,4 +1,4 @@
-import type { Direction } from '../../types'
+import type { Direction, GroupConfig } from '../../types'
 
 export interface Row {
   align: string;
@@ -32,6 +32,7 @@ export interface Field {
   defaultValue?: string | number | Array<string | number | object>;
   direction?: Direction;
   disabled?: boolean;
+  groupConfig?: GroupConfig;
   items?: any[];
   placeholder?: string;
   rules?: { name: string; value?: string | number | Array<string | number>; message: string }[];

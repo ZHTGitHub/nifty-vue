@@ -1,16 +1,19 @@
+import { ref } from 'vue'
 import type { FunctionalComponent } from 'vue'
+import type { LabelConfig } from '../types'
+import { defaultLabelConfig } from '../default'
 import classNames from './_utils/classNames'
 
-export interface FormInputLabelProps {
+export interface LabelProps {
   label?: string | number;
-  width?: string | number;
+  labelConfig?: LabelConfig;
 }
 
-const FormInputLabel: FunctionalComponent<FormInputLabelProps> = (props, { attrs, slots }) => {
-  const { width } = { ...props, ...attrs }
-
-  const label = props.label ?? slots.label?.()
-
+const FormInputLabel: FunctionalComponent<LabelProps> = (props, { slots }) => {
+  const config = ref<LabelConfig>({ ...defaultLabelConfig, ...props.labelConfig })
+  
+  const label = props.label || config.value.label || slots.label?.()
+  
   const labelClassName = classNames('z-input-label', {
     mr2: label
   })
@@ -20,7 +23,8 @@ const FormInputLabel: FunctionalComponent<FormInputLabelProps> = (props, { attrs
     <label 
       class={ labelClassName }
       style={{
-        width: `${ width }px`
+        width: config.value.width,
+        textAlign: config.value.align
       }}
     >
       { label }
