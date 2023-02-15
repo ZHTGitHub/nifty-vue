@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { Direction } from './types'
+import type { Direction, LabelConfig, GroupConfig } from './types'
 
 // 表单ID
 export const formId = {
@@ -16,4 +16,16 @@ export const capsule = {
 export const direction = {
   type: String as PropType<Direction>,
   default: 'horizontal'
+}
+
+// label
+export const labelConfig = {
+  type: Object as PropType<LabelConfig>,
+  default: () => ({})
+}
+
+// group
+export const groupConfig = {
+  type: Object as PropType<GroupConfig>,
+  default: () => ({})
 }
