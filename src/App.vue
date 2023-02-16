@@ -21,7 +21,6 @@
       name: 'checkboxGroup',
       formKey: 'fruit',
       label: '水果',
-      
       items: [
         { label: '苹果', value: 1 }, 
         { label: '香蕉', value: 2 }
@@ -163,15 +162,16 @@
       <z-form 
         :formId="formId" 
         :fields="fields"
+        direction="horizontal"
         disabled
+        :row="{
+          gutter: [8, 0]
+        }"
         :col="{
           span: 24 
         }"
         :groupConfig = "{
           direction: 'vertical'
-        }"
-        :labelConfig="{
-          align: 'right',
         }"
         :defaultValues="{
           name: 'leslie',

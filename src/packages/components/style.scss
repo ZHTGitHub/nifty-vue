@@ -6,6 +6,21 @@
     text-align: right;
   }
 
+  // label(与 control 在同一水平线)
+  &.horizontal {
+    display: flex;
+    align-items: center;
+
+    .z-input-label {
+      margin-right: 8px;
+
+      // empty label
+      &.mr2 {
+        margin-right: 8;
+      }
+    }
+  }
+
   // control
   .z-input-control {
     position: relative;
@@ -34,6 +49,7 @@
     }
   }
 
+  // 胶囊形态
   &.capsule {
     border-radius: 9999px;
   }
@@ -55,28 +71,6 @@
   &.z-input-editor {
     .z-input-label {
       align-self: flex-start;
-    }
-  }
-
-  // horizontal
-  &.horizontal {
-    display: flex;
-    align-items: center;
-
-    .z-input-label {
-      margin-right: 8px;
-
-      // empty label
-      &.mr2 {
-        margin-right: 8;
-      }
-    }
-  }
-
-  // vertical
-  &.vertical {
-    .z-input-label {
-      text-align: left;
     }
   }
 

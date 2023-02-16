@@ -1,7 +1,6 @@
 import { defineComponent, type PropType } from 'vue'
-import { capsule, formId, labelConfig } from '../../props'
+import { capsule, formId, groupConfig, labelConfig } from '../../props'
 import { inputProps } from '../formProps'
-import type { GroupConfig } from '../../types'
 import type { Row, Col, Field } from './types'
 import './style.scss'
 
@@ -35,10 +34,7 @@ export default defineComponent({
 
     formId,
 
-    groupConfig: {
-      type: Object as PropType<GroupConfig>,
-      default: () => ({})
-    },
+    groupConfig,
 
     labelConfig,
 
@@ -55,7 +51,6 @@ export default defineComponent({
       disabled: commonDisabled, 
       defaultValues, 
       groupConfig: commonGroupConfig,
-      labelConfig: commonLabelConfig,
       ...restCommonProps 
     } = props
 
@@ -72,14 +67,12 @@ export default defineComponent({
                 defaultValue: fieldDefaultValue,
                 disabled: fieldDisabled, 
                 groupConfig: fieldGroupConfig,
-                labelConfig: fieldLabelConfig,
                 ...rest 
               } = field
               const defaultValue = fieldDefaultValue || defaultValues?.[rest.formKey]
               const col = { ...commonCol, ...fieldCol }
               const disabled = fieldDisabled || commonDisabled
               const groupConfig = GROUPS.includes(name) ? { ...commonGroupConfig, ...fieldGroupConfig } : {}
-              const labelConfig = { ...commonLabelConfig, ...fieldLabelConfig }
 
               return (
                 <>
@@ -89,7 +82,6 @@ export default defineComponent({
                       <z-checkbox 
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />
@@ -102,7 +94,6 @@ export default defineComponent({
                       <z-checkbox-group 
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         groupConfig={ groupConfig }
                         { ...restCommonProps }
                         { ...rest }
@@ -117,7 +108,6 @@ export default defineComponent({
                         capsule={ capsule }
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />
@@ -130,7 +120,6 @@ export default defineComponent({
                       <z-editor
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />
@@ -144,7 +133,6 @@ export default defineComponent({
                         capsule={ capsule }
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />
@@ -158,7 +146,6 @@ export default defineComponent({
                         capsule={ capsule }
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />
@@ -171,7 +158,6 @@ export default defineComponent({
                       <z-radio 
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />
@@ -184,7 +170,6 @@ export default defineComponent({
                       <z-radio-group 
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         groupConfig={ groupConfig }
                         { ...restCommonProps }
                         { ...rest }
@@ -199,7 +184,6 @@ export default defineComponent({
                         capsule={ capsule }
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />
@@ -212,7 +196,6 @@ export default defineComponent({
                       <z-switch 
                         defaultValue={ defaultValue }
                         disabled={ disabled }
-                        labelConfig={ labelConfig }
                         { ...restCommonProps }
                         { ...rest }
                       />

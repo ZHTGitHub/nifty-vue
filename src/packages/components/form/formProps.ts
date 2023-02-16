@@ -39,7 +39,7 @@ export const inputItemsProps = () => ({
 
   items: {
     type: Array as PropType<any[]>,
-    default: () => []
+    default: () => ([])
   },
 
   itemValue: {

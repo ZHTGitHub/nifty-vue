@@ -1,7 +1,7 @@
 import { defineComponent, onBeforeUnmount, type Ref } from 'vue'
 import FormInputLabel from './FormInputLabel'
 import FormInputMessages from './FormInputMessages'
-import type { LabelConfig } from '../types'
+import type { Direction, LabelConfig } from '../types'
 import classNames from './_utils/classNames'
 import { useFormDefaultValue } from './useForm'
 import { useFormRequired, useErrorMessage } from './useFormValidator'
@@ -13,7 +13,7 @@ interface FormInputProps {
   capsule?: boolean;
   componentName: string;
   defaultValue?: any;
-  direction?: 'horizontal' | 'vertical';
+  direction?: Direction;
   label?: string | number;
   labelConfig?: LabelConfig;
   required?: boolean;
@@ -57,6 +57,7 @@ export default defineComponent({
     return () => (
       <div class={[ inputClassName, {'z-input-error': errorMessageRef.value}]}>
         <FormInputLabel 
+          direction={ direction }
           label={ label }
           labelConfig={ labelConfig }
         />
