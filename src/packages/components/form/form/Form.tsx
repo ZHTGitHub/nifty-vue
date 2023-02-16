@@ -76,147 +76,188 @@ export default defineComponent({
                 ...rest 
               } = field
               const defaultValue = fieldDefaultValue || defaultValues?.[rest.formKey]
-              const col = { ...commonCol, ...fieldCol }
+              const col = { span: 24, ...commonCol, ...fieldCol }
               const disabled = fieldDisabled || commonDisabled
               const groupConfig = GROUPS.includes(name) ? { ...commonGroupConfig, ...fieldGroupConfig } : {}
               const labelConfig = { ...commonLabelConfig, ...fieldLabelConfig }
+              const suffixSlot = slots[rest.formKey]?.()
 
               return (
                 <>
                   {
                     name === 'checkbox' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-checkbox 
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-checkbox 
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'checkboxGroup' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-checkbox-group 
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        groupConfig={ groupConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-checkbox-group 
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          groupConfig={ groupConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'date' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-date-picker
-                        capsule={ capsule }
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-date-picker
+                          capsule={ capsule }
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'editor' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-editor
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-editor
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'range' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-range-picker
-                        capsule={ capsule }
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-range-picker
+                          capsule={ capsule }
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     (name === 'input' || !name) && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-input 
-                        capsule={ capsule }
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-input 
+                          capsule={ capsule }
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'radio' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-radio 
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-radio 
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'radioGroup' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-radio-group 
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        groupConfig={ groupConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-radio-group 
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          groupConfig={ groupConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'select' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-select 
-                        capsule={ capsule }
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-select 
+                          capsule={ capsule }
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
 
                   {
                     name === 'switch' && 
-                    <a-col span={ 24 } { ...col }>
-                      <z-switch 
-                        defaultValue={ defaultValue }
-                        disabled={ disabled }
-                        labelConfig={ labelConfig }
-                        { ...restCommonProps }
-                        { ...rest }
-                      />
-                    </a-col>
+                    <>
+                      <a-col { ...col }>
+                        <z-switch 
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
                   }
                 </>
               )

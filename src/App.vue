@@ -168,7 +168,7 @@
           gutter: [8, 0]
         }"
         :col="{
-          span: 24 
+          span: 20 
         }"
         :groupConfig = "{
           direction: 'vertical'
@@ -179,6 +179,11 @@
           range: [dayjs('2023/02/05', 'YYYY-MM-DD'), dayjs('2023/02/15', 'YYYY-MM-DD')]
         }"
       >
+        <template #name>
+          <a-col>
+            zht1
+          </a-col>
+        </template>
       </z-form>
     </z-dialog>
 
