@@ -18,17 +18,18 @@ const FormInputLabel: FunctionalComponent<LabelProps> = (props, { slots }) => {
   const config = ref<LabelConfig>({ ...defaultConfig, ...props.labelConfig })
   const label = props.label || config.value.label || slots.label?.()
   
-  const labelClassName = classNames('z-input-label', {
-    mr2: label
-  })
+  const labelClassName = classNames('z-input-label')
+
+  const { align, minWidth, width } = config.value
 
   return (
     label && 
     <label 
       class={ labelClassName }
       style={{
-        width: config.value.width,
-        textAlign: config.value.align
+        width,
+        minWidth,
+        textAlign: align
       }}
     >
       { label }

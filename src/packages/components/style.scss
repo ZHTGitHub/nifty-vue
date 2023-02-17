@@ -2,8 +2,6 @@
   // label
   .z-input-label {
     display: inline-block;
-    min-width: 40px;
-    text-align: right;
   }
 
   // label(与 control 在同一水平线)
@@ -13,10 +11,19 @@
 
     .z-input-label {
       margin-right: 8px;
+    }
+  }
 
-      // empty label
-      &.mr2 {
-        margin-right: 8;
+  // 必填
+  &.required {
+    .z-input-label {
+      &::before {
+        content: "*";
+        display: inline-block;
+        margin-right: 4px;
+        font-size: 14px;
+        line-height: 1;
+        color: #ff4d4f;
       }
     }
   }
@@ -71,21 +78,6 @@
   &.z-input-editor {
     .z-input-label {
       align-self: flex-start;
-    }
-  }
-
-  // required
-  &.required {
-    // label
-    .z-input-label {
-      &::before {
-        content: "*";
-        display: inline-block;
-        margin-right: 4px;
-        font-size: 14px;
-        line-height: 1;
-        color: #ff4d4f;
-      }
     }
   }
 

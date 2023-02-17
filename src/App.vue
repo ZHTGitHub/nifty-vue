@@ -12,15 +12,15 @@
       name: 'checkbox',
       formKey: 'agree',
       label: '同意',
-      rules: [
-        { name: 'required', message: '请勾选同意' }
-      ]
+      // rules: [
+      //   { name: 'required', message: '请勾选同意' }
+      // ]
     },
 
     {
       name: 'checkboxGroup',
       formKey: 'fruit',
-      label: '水果',
+      // label: '水果',
       items: [
         { label: '苹果', value: 1 }, 
         { label: '香蕉', value: 2 }
@@ -167,6 +167,9 @@
         }"
         :col="{
           span: 20 
+        }"
+        :labelConfig = "{
+          width: '66px'
         }"
         :groupConfig = "{
           direction: 'vertical'
