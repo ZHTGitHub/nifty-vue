@@ -39,6 +39,11 @@ export default defineComponent({
       default: false
     },
 
+    mask: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+
     size: {
       type: String as PropType<Size>,
       default: 'medium'
@@ -64,8 +69,6 @@ export default defineComponent({
     }
 
     const computedWidth = computed(() => {
-      // return attrs.width
-
       if(attrs.width) return attrs.width
 
       switch (props.size) {
@@ -127,6 +130,7 @@ export default defineComponent({
         { ...this.$attrs }
         centered={ this.$props.centered }
         footer={ null }
+        mask={ this.fullscreen ? false : this.$props.mask }
         width={ this.computedWidth }
         wrapClassName={ `z-dialog ${ this.$props.fullscreen && 'fullscreen' }` }
       >
