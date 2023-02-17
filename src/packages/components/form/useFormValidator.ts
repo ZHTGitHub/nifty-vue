@@ -1,11 +1,9 @@
 import { ref, watch, onUnmounted, type Ref } from 'vue'
 import type { RuleItem } from '../../components/form/formProps'
 import { useFormStore } from '../../store'
-import useBus from '../../hooks/useBus'
+import { eventBus } from '../../utils/eventBus'
 import _ from '../../utils/lodash'
 import rulesFunc from '../../components/form/_utils/rules'
-
-const bus = useBus()
 
 interface IValidateInputParams {
   formId: string;
@@ -68,8 +66,8 @@ export const useErrorMessage = ({ formId, formKey, componentName, valueRef, rule
     errorMessage.value = validateInput({ formId, formKey, value, rules }).errorMessage
   })
 
-  // button
-  bus.on('validate', (btnFormId: string) => {
+  // 表单校验
+  function validateForm(btnFormId: string) {
     if(formId !== btnFormId) return
 
     if(valueRef.value === void 0) {
@@ -85,10 +83,12 @@ export const useErrorMessage = ({ formId, formKey, componentName, valueRef, rule
     }
 
     errorMessage.value = validateInput({ formId, formKey, value: valueRef.value, rules }).errorMessage
-  })
+  }
+
+  eventBus.on('validate', validateForm)
 
   onUnmounted(() => {
-    bus.off('validate', () => {})
+    eventBus.off('validate', validateForm)
   })
 
   return errorMessage

@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { useFormStore } from '../../store'
 import { formId, capsule } from '../props'
-import useBus from '../../hooks/useBus'
+import { eventBus } from '../../utils/eventBus'
 import classNames from '../form/_utils/classNames'
 import type { BtnType } from './types'
 
@@ -25,14 +25,12 @@ export default defineComponent({
   setup(props, { attrs, emit, slots }) {
     const formStore = useFormStore()
 
-    const bus = useBus()
-
     const onClick = (event: Event) => {
       let formInfo = { error: false, form: void 0 }
       
       // 校验
       if(props.btnType === 'validate') {
-        bus.emit('validate', props.formId)
+        eventBus.emit('validate', props.formId)
 
         const errors = Object.values(formStore.getFormErrors(props.formId!))
 

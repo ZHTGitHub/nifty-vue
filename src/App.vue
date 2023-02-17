@@ -156,14 +156,12 @@
       ref="modalRef" 
       type="form"
       title="我是标题" 
-      fullscreen
       @confirm="handleModalConfirm"
     >
       <z-form 
         :formId="formId" 
         :fields="fields"
         direction="horizontal"
-        disabled
         :row="{
           gutter: [8, 0]
         }"
