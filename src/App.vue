@@ -168,9 +168,7 @@
         :col="{
           span: 20 
         }"
-        :labelConfig = "{
-          width: '66px'
-        }"
+        
         :groupConfig = "{
           direction: 'vertical'
         }"
