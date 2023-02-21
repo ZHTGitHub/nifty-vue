@@ -10,8 +10,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/packages/index.ts'),
-      name: 'rocketVue3',
-      fileName: 'rocket-vue3'
+      name: 'nifty-vue',
+      fileName: 'nifty-vue'
     },
 
     rollupOptions: {
