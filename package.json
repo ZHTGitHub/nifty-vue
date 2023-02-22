@@ -1,10 +1,23 @@
 {
   "name": "nifty-vue",
-  "version": "0.1.0",
-  "private": false,
-  "type": "module",
+  "version": "0.2.0",
+  "title": "Nifty Vue",
+  "keywords": [
+    "vue",
+    "vue3",
+    "nifty",
+    "niftyVue",
+    "ant",
+    "antd",
+    "vueComponent",
+    "component",
+    "components",
+    "framework",
+    "frontend"
+  ],
   "files": [
-    "dist"
+    "dist",
+    "src/types/nifty-vue.d.ts"
   ],
   "main": "./dist/nifty-vue.umd.cjs",
   "module": "./dist/nifty-vue.js",

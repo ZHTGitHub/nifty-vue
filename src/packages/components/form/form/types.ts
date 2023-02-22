@@ -1,10 +1,10 @@
 import type { Direction, GroupConfig, LabelConfig } from '../../types'
 
 export interface Row {
-  align: string;
-  gutter: number | object | Array<string | number>;
-  justify: string;
-  wrap: boolean
+  align?: string;
+  gutter?: number | object | Array<string | number>;
+  justify?: string;
+  wrap?: boolean
 }
 
 export interface Col {

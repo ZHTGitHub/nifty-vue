@@ -2,10 +2,11 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.tsx", "src/**/*.vue"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "isolatedModules": false,
     "paths": {
-      "@/*": ["./src/*"]
+      "nifty-vue": ["src/packages/components/index.ts"],
+      "@/*": ["src/*"]
     },
     "target": "ES5",
     "lib": ["DOM", "ESNext"],
@@ -16,7 +17,7 @@
 
   "references": [
     {
-      "path": "./tsconfig.config.json"
+      "path": "tsconfig.config.json"
     }
   ]
 }

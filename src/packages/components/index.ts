@@ -12,8 +12,12 @@ const install = function (app: App) {
     }
   })
 
+  app.config.globalProperties.$popup = components.Popup
+
   return app
 }
 
-export default install
+export default {
+  install
+}
 
