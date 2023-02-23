@@ -124,15 +124,17 @@ export default defineComponent({
   },
 
   render() {
+    const { cancelText, centered, confirmText, mask, fullscreen } = this.$props
+
     return (
       <a-modal 
         v-model:visible={ this.visible } 
         { ...this.$attrs }
-        centered={ this.$props.centered }
+        centered={ centered }
         footer={ null }
-        mask={ this.fullscreen ? false : this.$props.mask }
+        mask={ this.fullscreen ? false : mask }
         width={ this.computedWidth }
-        wrapClassName={ `z-dialog ${ this.$props.fullscreen && 'fullscreen' }` }
+        wrapClassName={ `z-dialog ${ fullscreen && 'fullscreen' }` }
       >
         <div class="z-modal-container">
           { this.$slots.default?.() }
@@ -146,14 +148,14 @@ export default defineComponent({
               ghost
               type="primary"
               onClick={ this.handleCancel }
-            >{ this.$props.cancelText }</z-btn>
+            >{ cancelText }</z-btn>
 
             <z-btn
               type="primary"
               btnType={ this.btnType }
               formId={ this.formId }
               onClick={ this.handleConfirm }
-            >{ this.$props.confirmText }</z-btn>
+            >{ confirmText }</z-btn>
           </div>
         }
       </a-modal>

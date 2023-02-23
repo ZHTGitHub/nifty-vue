@@ -1,0 +1,70 @@
+.z-popup {
+  .ant-modal-content {
+    margin-bottom: 61.8%;
+    border-radius: 4px;
+
+    .ant-modal-header,
+    .ant-modal-close {
+      display: none;
+    }
+
+    .ant-modal-body {
+      padding: 0;
+
+      /* 顶部内容 */
+      .z-popup-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+
+        .z-icon {
+          margin-right: 4px;
+          font-size: 22px;
+          font-weight: 500px;
+
+          &.z-icon-info {
+            color: #1890ff;
+          }
+
+          &.z-icon-success {
+            color: #52c41a;
+          } 
+
+          &.z-icon-warning {
+            color: #faad14;
+          } 
+
+          &.z-icon-error {
+            color: #ff4d4f;
+          } 
+        }
+
+        .title {
+          line-height: 22px;
+          font-size: 16px;
+          font-weight: 500;
+          word-wrap: break-word;
+          color: #000000d9;
+        }
+      }
+
+      /* 主要内容 */
+      .z-popup-container {
+        padding: 12px;
+        text-align: center;
+      }
+
+      /* 底部内容 */
+      .z-popup-footer {
+        display: flex;
+        justify-content: center;
+        padding: 12px;
+
+        .cancel {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}

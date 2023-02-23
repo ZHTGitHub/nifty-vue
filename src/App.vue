@@ -128,20 +128,20 @@
   const modalRef = ref(null)
 
   const handleOpen = () => {
-    // Popup({
-    //   title: '删除警告',
-    //   content: '这里是文本内容!',
-    //   type: 'error',
-    //   cancel() {
-    //     console.log('cancel')
-    //   },
+    Popup({
+      title: '删除警告',
+      content: '这里是文本内容!',
+      type: 'error',
+      cancel() {
+        console.log('cancel')
+      },
 
-    //   confirm() {
-    //     console.log('confirm')
-    //   }
-    // })
+      confirm() {
+        console.log('confirm')
+      }
+    })
 
-    modalRef.value.onOpen()
+    // modalRef.value.onOpen()
   }
 
   const handleModalConfirm = ({ error, form }) => {

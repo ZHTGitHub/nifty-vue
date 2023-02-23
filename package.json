@@ -1,6 +1,6 @@
 {
   "name": "nifty-vue",
-  "version": "0.2.0",
+  "version": "0.2.9",
   "title": "Nifty Vue",
   "keywords": [
     "vue",
@@ -17,14 +17,16 @@
   ],
   "files": [
     "dist",
-    "src/types/nifty-vue.d.ts"
+    "README.md",
+    "LICENSE"
   ],
-  "main": "./dist/nifty-vue.umd.cjs",
-  "module": "./dist/nifty-vue.js",
+  "main": "./dist/nifty-vue.umd.js",
+  "module": "./dist/nifty-vue.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/nifty-vue.js",
-      "require": "./dist/nifty-vue.umd.cjs"
+      "import": "./dist/nifty-vue.mjs",
+      "require": "./dist/nifty-vue.umd.js"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",
@@ -61,6 +63,7 @@
     "sass-loader": "^13.2.0",
     "typescript": "~4.7.4",
     "vite": "^4.0.0",
+    "vite-plugin-dts": "^2.0.0-beta.3",
     "vue": "^3.2.45",
     "vue-tsc": "^1.0.12"
   }

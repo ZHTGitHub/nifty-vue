@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import Popup from './popup.vue'
+import Popup from './popup'
 import type { Options } from './types'
 
 export default function popup(options: Options) {
