@@ -3,16 +3,18 @@
   "include": ["env.d.ts", "src/**/*", "src/**/*.tsx", "src/**/*.vue"],
   "compilerOptions": {
     "baseUrl": "./",
+    "declaration": true,
+    "declarationDir": "dist",
     "isolatedModules": false,
     "paths": {
       "nifty-vue": ["src/packages/components/index.ts"],
       "@/*": ["src/*"]
     },
-    "target": "ES5",
+    "target": "ES5",  
+    "module": "esnext",
     "lib": ["DOM", "ESNext"],
     "strictNullChecks": false,
-    "noImplicitAny": false,
-    "allowJs": true
+    "noImplicitAny": false
   },
 
   "references": [
