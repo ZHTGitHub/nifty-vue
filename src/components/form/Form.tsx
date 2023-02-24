@@ -1,7 +1,6 @@
 import { defineComponent, type PropType } from 'vue'
-import { capsule, formId, labelConfig } from '../props'
-import { inputProps } from '../_util/formProps'
-import type { GroupConfig } from '../types'
+import { capsule, formId, inputProps, labelConfig } from '../_util/props'
+import type { GroupConfig } from '../_util/type'
 import type { Row, Col, Field } from './types'
 import './style.scss'
 

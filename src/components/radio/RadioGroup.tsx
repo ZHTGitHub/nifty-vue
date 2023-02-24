@@ -1,9 +1,8 @@
 import { defineComponent, ref } from 'vue'
 import FormInput from '../_util/FormInput'
-import { inputProps, inputItemsProps } from '../_util/formProps'
-import { defaultGroupConfig } from '../default'
-import { groupConfig } from '../props'
-import type { GroupConfig } from '../types'
+import { groupConfig, inputProps, inputItemsProps } from '../_util/props'
+import defaultValues from '../_util/defaultValues'
+import type { GroupConfig } from '../_util/type'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
 
 export default defineComponent({
@@ -19,7 +18,7 @@ export default defineComponent({
     const componentName = useComponentName()
     const valueRef = useFormValue(props.formId, props.formKey)
 
-    const groupConfig = ref<GroupConfig>({ ...defaultGroupConfig, ...props.groupConfig })
+    const groupConfig = ref<GroupConfig>({ ...defaultValues.groupConfig, ...props.groupConfig })
     
     return () => (
       <FormInput

@@ -1,11 +1,11 @@
 import { defineComponent, type Ref } from 'vue'
 import FormInputLabel from './FormInputLabel'
 import FormInputMessages from './FormInputMessages'
-import type { Direction, LabelConfig } from '../types'
+import type { Direction, LabelConfig } from './type'
 import classNames from './classNames'
 import { useFormDefaultValue } from './hooks/useForm'
 import { useFormRequired, useErrorMessage } from './hooks/useFormValidator'
-import type { RuleItem } from './formProps'
+import type { RuleItem } from './type'
 
 interface FormInputProps {
   formId?: string;

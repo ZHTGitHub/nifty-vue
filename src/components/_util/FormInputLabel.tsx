@@ -1,11 +1,12 @@
 import { ref } from 'vue'
 import type { FunctionalComponent } from 'vue'
-import type { Direction, LabelConfig } from '../types'
-import { 
-  defaultHorizontalLabelConfig as defaultHConfig, 
-  defaultVerticalLabelConfig as defaultVConfig 
-} from '../default'
+import type { Direction, LabelConfig } from './type'
+import defaultValues from './defaultValues'
 import classNames from './classNames'
+
+const { horizontal: defaultHConfig, vertical: defaultVConfig } = defaultValues.labelConfig
+
+console.log(defaultHConfig)
 
 interface LabelProps {
   direction?: Direction;

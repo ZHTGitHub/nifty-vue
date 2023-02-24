@@ -1,12 +1,36 @@
 import type { PropType } from 'vue'
-import { direction, formId, labelConfig } from '../props'
+import type { Direction, GroupConfig, LabelConfig, RuleItem } from './type'
 
-export interface RuleItem {
-  name: string,
-  value?: string | number | Array<string | number>,
-  message: string
+// 表单ID
+export const formId = {
+  type: String as PropType<string>
 }
 
+// 使表单组件呈胶囊状
+export const capsule = {
+  type: Boolean as PropType<boolean>,
+  default: false
+}
+
+// label与input的排版(水平方向/水平方向)
+export const direction = {
+  type: String as PropType<Direction>,
+  default: 'horizontal'
+}
+
+// Input label config
+export const labelConfig = {
+  type: Object as PropType<LabelConfig>,
+  default: () => ({})
+}
+
+// Input group config
+export const groupConfig = {
+  type: Object as PropType<GroupConfig>,
+  default: () => ({})
+}
+
+// Input
 export const inputProps = () => ({
   formId, 
   
@@ -31,6 +55,7 @@ export const inputProps = () => ({
   }
 })
 
+// Input items
 export const inputItemsProps = () => ({
   itemLabel: {
     type: String as PropType<string>,

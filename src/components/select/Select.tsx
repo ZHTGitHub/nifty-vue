@@ -1,7 +1,6 @@
 import { defineComponent } from 'vue'
 import FormInput from '../_util/FormInput'
-import { inputProps, inputItemsProps } from '../_util/formProps'
-import { capsule } from '../props'
+import { capsule, inputProps, inputItemsProps } from '../_util/props'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
 
 export default defineComponent({

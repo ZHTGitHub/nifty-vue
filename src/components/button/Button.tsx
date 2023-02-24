@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { useFormStore } from '../_util/store'
-import { formId, capsule } from '../props'
+import { formId, capsule } from '../_util/props'
 import { eventBus } from '../_util/eventBus'
 import classNames from '../_util/classNames'
 import type { BtnType } from './types'

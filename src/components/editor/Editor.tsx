@@ -1,7 +1,7 @@
 import { ref, shallowRef, watch, defineComponent, onBeforeUnmount } from 'vue'
 import FormInput from '../_util/FormInput'
 import type { PropType, Ref } from 'vue'
-import { inputProps } from '../_util/formProps'
+import { inputProps } from '../_util/props'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
 import type { IDomEditor } from '@wangeditor/editor'
 import { Toolbar, Editor } from '@wangeditor/editor-for-vue'

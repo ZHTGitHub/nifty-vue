@@ -2,7 +2,7 @@ import { ref, defineComponent } from 'vue'
 import FormInput from '../_util/FormInput'
 import type { PropType } from 'vue'
 import type { UploadProps } from 'ant-design-vue'
-import { inputProps } from '../_util/formProps'
+import { inputProps } from '../_util/props'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
 
 export default defineComponent({

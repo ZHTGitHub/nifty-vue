@@ -1,5 +1,5 @@
 import { ref, watch, onUnmounted, type Ref } from 'vue'
-import type { RuleItem } from '../formProps'
+import type { RuleItem } from '../type'
 import { useFormStore } from '../store'
 import { eventBus } from '../eventBus'
 import { set } from '../util'
