@@ -1,6 +1,6 @@
 {
   "name": "nifty-vue",
-  "version": "0.2.10",
+  "version": "0.2.14",
   "title": "Nifty Antd VAdmin",
   "keywords": [
     "vue",
@@ -17,13 +17,11 @@
   ],
   "files": [
     "dist",
-    "src/types",
     "README.md",
     "LICENSE"
   ],
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js",

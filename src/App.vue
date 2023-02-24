@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { ref, getCurrentInstance } from 'vue'
-  import { Popup } from './packages'
+  import { Popup } from './components'
   import dayjs from 'dayjs'
-  import { useFormStore } from './packages/store'
+  import { useFormStore } from './components/_util/store'
 
   // const { proxy } = getCurrentInstance()
   const formStore = useFormStore()

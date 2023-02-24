@@ -3,14 +3,13 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-// import dts from 'vite-plugin-dts'
 import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/packages/index.ts'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       fileName: 'index',
       formats: ['cjs', 'umd'],
       name: 'nifty-vue'
@@ -28,13 +27,12 @@ export default defineConfig({
 
   plugins: [
     vue(), 
-    vueJsx(),
-    // dts()
+    vueJsx()
   ],
 
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('src', import.meta.url))
     }
   },
 
