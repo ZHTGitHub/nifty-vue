@@ -8,7 +8,8 @@
     "declarationDir": "dist",
     "emitDeclarationOnly": true,
     "paths": {
-      "nifty-vue": ["src/index.ts"]
+      "nifty-vue": ["src/index.ts"],
+      "@/*": ["src/*"]
     },
     "target": "ES5",  
     "module": "esnext",

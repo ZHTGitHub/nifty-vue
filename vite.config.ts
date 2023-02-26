@@ -25,10 +25,7 @@ export default defineConfig({
     }
   },
 
-  plugins: [
-    vue(), 
-    vueJsx()
-  ],
+  plugins: [vue(), vueJsx()],
 
   resolve: {
     alias: {

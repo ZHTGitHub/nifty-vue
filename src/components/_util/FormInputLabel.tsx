@@ -6,8 +6,6 @@ import classNames from './classNames'
 
 const { horizontal: defaultHConfig, vertical: defaultVConfig } = defaultValues.labelConfig
 
-console.log(defaultHConfig)
-
 interface LabelProps {
   direction?: Direction;
   label?: string | number;
