@@ -2,7 +2,7 @@ import { defineComponent, ref } from 'vue'
 import { Layout } from 'ant-design-vue'
 import LayoutHeader from './header';
 import LayoutSidebar, { type Item } from './sidebar'
-import LayoutContent from './content'
+import LayoutContent from './content/Content.vue'
 
 
 export default defineComponent({
@@ -86,7 +86,7 @@ export default defineComponent({
 
     return () => (
       <Layout hasSider>
-        <LayoutSidebar title="Nifty-vadmin" items={ items.value }/>
+        <LayoutSidebar title="Nifty-Vadmin" items={ items.value }/>
 
         <Layout>
           <LayoutHeader />
