@@ -131,6 +131,7 @@ export default defineComponent({
         v-model:visible={ this.visible } 
         { ...this.$attrs }
         centered={ centered }
+        destroyOnClose
         footer={ null }
         mask={ this.fullscreen ? false : mask }
         width={ this.computedWidth }

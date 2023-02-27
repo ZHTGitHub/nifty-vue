@@ -1,4 +1,4 @@
-import { defineComponent, watch, type Ref } from 'vue'
+import { defineComponent, type Ref } from 'vue'
 import FormInputLabel from './FormInputLabel'
 import FormInputMessages from './FormInputMessages'
 import type { Direction, LabelConfig } from './type'
@@ -28,16 +28,12 @@ export default defineComponent({
       ...attrs 
     }
 
-    // useFormDefaultValue({
-    //   formId, 
-    //   formKey, 
-    //   defaultValue, 
-    //   valueRef
-    // })
-
-    // watch(() => defaultValue, (defaultValue) => {
-    //   console.log(formKey, defaultValue)
-    // }, { immediate: true, deep: true })
+    useFormDefaultValue({
+      formId, 
+      formKey, 
+      defaultValue, 
+      valueRef
+    })
 
     const required = useFormRequired(rules)
 

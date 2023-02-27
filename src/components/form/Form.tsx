@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch, watchEffect, type PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { capsule, formId, inputProps, labelConfig } from '../_util/props'
 import type { GroupConfig } from '../_util/type'
 import type { Row, Col, Field } from './types'
@@ -57,14 +57,6 @@ export default defineComponent({
       labelConfig: commonLabelConfig,
       ...restCommonProps 
     } = props
-
-    // watch(() => defaultValues, (values) => {
-    //   console.log(values)
-    // }, { immediate: true, deep: true })
-
-    watchEffect(() => {
-      console.log(defaultValues)
-    })
 
     return () => (
       <>

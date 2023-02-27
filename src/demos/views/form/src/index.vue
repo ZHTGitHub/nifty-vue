@@ -5,20 +5,16 @@
 
   const dialog = ref<VNodeRef>('')
   const formId = ref<string>('profile')
-  const defaultValues = ref<any>({})
-  // let defaultValues = reactive<any>({})
+  // const defaultValues = ref<any>({})
+  let defaultValues = reactive<any>({})
 
   const openAddDialog = () => {
-    defaultValues.value = { name: 'Leslie', desc: 'Good boy' }
-    // defaultValues.value.name = 'Leslie'
-    // defaultValues.value.desc = 'Good boy'
+    defaultValues = { name: 'Leslie', desc: 'Good boy' }
     dialog.value.onOpen()
   }
 
   const openEditDialog = () => {
-    defaultValues.value = { name: 'ZHT', desc: 'Good man' }
-    // defaultValues.value.name = 'ZHT'
-    // defaultValues.value.desc = 'Good man'
+    defaultValues = { name: 'ZHT', desc: 'Good man' }
     dialog.value.onOpen()
   }
 
