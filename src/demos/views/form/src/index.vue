@@ -5,16 +5,15 @@
 
   const dialog = ref<VNodeRef>('')
   const formId = ref<string>('profile')
-  // const defaultValues = ref<any>({})
   let defaultValues = reactive<any>({})
 
   const openAddDialog = () => {
-    defaultValues = { name: 'Leslie', desc: 'Good boy' }
+    defaultValues = { name: null, role: null }
     dialog.value.onOpen()
   }
 
   const openEditDialog = () => {
-    defaultValues = { name: 'ZHT', desc: 'Good man' }
+    defaultValues = { name: 'ZHT', role: '0' }
     dialog.value.onOpen()
   }
 
@@ -39,14 +38,6 @@
         :fields="fields"
         :defaultValues="defaultValues"
       >
-        <template #tail>
-          <z-input 
-            :formId="formId" 
-            formKey="desc"  
-            label="描述"
-            :defaultValue="defaultValues.desc"
-          />
-        </template>
       </z-form>
     </z-dialog>
   </div>
