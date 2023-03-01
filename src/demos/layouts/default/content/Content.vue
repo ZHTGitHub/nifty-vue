@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div className="pa-4 layout-content">
+  <div className="layout-content">
     <router-view>
       <template #default="{ Component, route }">
         <transition name="slide-fade" mode="out-in" appear>

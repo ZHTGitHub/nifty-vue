@@ -9,7 +9,6 @@ export interface GroupConfig {
 export interface LabelConfig {
   align?: 'left' | 'right';
   label?: string | number;
-  minWidth?: string;
   width?: string;
 }
 

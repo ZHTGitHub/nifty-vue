@@ -36,9 +36,7 @@ export const useFormDefaultValue = ({ formId, formKey, defaultValue, valueRef }:
   const formStore = useFormStore()
 
   watch(() => defaultValue, (defaultVal) => {
-    if(defaultVal && valueRef) {
-      valueRef.value = defaultVal
-      formStore.SET_FORM_DEFAULT_VALUE(formId, formKey, defaultValue)
-    }
+    valueRef.value = defaultVal
+    formStore.SET_FORM_DEFAULT_VALUE(formId, formKey, defaultValue)
   }, { immediate: true, deep: true })
 }

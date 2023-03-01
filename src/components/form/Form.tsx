@@ -68,6 +68,7 @@ export default defineComponent({
               const { 
                 name, 
                 col: fieldCol, 
+                default: fieldDefault,
                 defaultValue: fieldDefaultValue,
                 disabled: fieldDisabled, 
                 groupConfig: fieldGroupConfig,
@@ -93,7 +94,9 @@ export default defineComponent({
                           labelConfig={ labelConfig }
                           { ...restCommonProps }
                           { ...rest }
-                        />
+                        >
+                          { fieldDefault?.() }
+                        </z-checkbox>
                       </a-col>
 
                       { suffixSlot }
@@ -190,6 +193,24 @@ export default defineComponent({
                   }
 
                   {
+                    name === 'inputNumber' && 
+                    <>
+                      <a-col { ...col }>
+                        <z-input-number
+                          capsule={ capsule }
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
+                  }
+
+                  {
                     name === 'radio' && 
                     <>
                       <a-col { ...col }>
@@ -247,6 +268,24 @@ export default defineComponent({
                     <>
                       <a-col { ...col }>
                         <z-switch 
+                          defaultValue={ defaultValue }
+                          disabled={ disabled }
+                          labelConfig={ labelConfig }
+                          { ...restCommonProps }
+                          { ...rest }
+                        />
+                      </a-col>
+
+                      { suffixSlot }
+                    </>
+                  }
+
+                  {
+                    name === 'textarea' && 
+                    <>
+                      <a-col { ...col }>
+                        <z-textarea 
+                          capsule={ capsule }
                           defaultValue={ defaultValue }
                           disabled={ disabled }
                           labelConfig={ labelConfig }

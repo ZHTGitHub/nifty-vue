@@ -1,4 +1,4 @@
-import type { Direction, GroupConfig, LabelConfig } from '../types'
+import type { Direction, GroupConfig, LabelConfig } from '../_util/type'
 
 export type FormId = string | undefined
 
@@ -33,6 +33,7 @@ export interface Field {
   label?: string;
   capsule?: boolean;
   col?: Col;
+  default?: Function;
   defaultValue?: string | number | Array<string | number | object>;
   direction?: Direction;
   disabled?: boolean;

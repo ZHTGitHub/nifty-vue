@@ -19,15 +19,15 @@ const FormInputLabel: FunctionalComponent<LabelProps> = (props, { slots }) => {
   
   const labelClassName = classNames('z-input-label')
 
-  const { align, minWidth, width } = config.value
+  const { align, width } = config.value
 
   return (
-    label && 
+    (label || width) && 
     <label 
       class={ labelClassName }
       style={{
         width,
-        minWidth,
+        minWidth: width,
         textAlign: align
       }}
     >

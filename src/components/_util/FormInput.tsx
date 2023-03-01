@@ -51,8 +51,8 @@ export default defineComponent({
     })
   
     return () => (
-      <div class={[ inputClassName, {'z-input-error': errorMessageRef.value}]}>
-        <FormInputLabel 
+      <div class={[inputClassName, {'z-input-error': errorMessageRef.value}]}>
+        <FormInputLabel
           direction={ direction }
           label={ label }
           labelConfig={ labelConfig }

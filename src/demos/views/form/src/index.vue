@@ -1,44 +1,19 @@
 <script lang="ts" setup>
-  import { ref, reactive } from 'vue'
-  import type { VNodeRef } from 'vue'
-  import { fields } from './cells'
-
-  const dialog = ref<VNodeRef>('')
-  const formId = ref<string>('profile')
-  let defaultValues = reactive<any>({})
-
-  const openAddDialog = () => {
-    defaultValues = { name: null, role: null }
-    dialog.value.onOpen()
-  }
-
-  const openEditDialog = () => {
-    defaultValues = { name: 'ZHT', role: '0' }
-    dialog.value.onOpen()
-  }
-
-  const submitForm = ({ error, form }) => {
-    console.log(error, form)
-  }
+  import Basic from './usage/basic.vue'
+  import Layout from './usage/layout.vue'
+  import Dialog from './usage/dialog.vue'
 </script>
 
 <template>
   <div class="demo">
-    <z-btn @click="openAddDialog">打开</z-btn>
-    <z-btn @click="openEditDialog">打开</z-btn>
+    <div class="pt-3 pb-1 px-4 bg-white">
+      <h4 class="text-h4">Form 表单</h4>
+    </div>
 
-    <z-dialog 
-      ref="dialog"
-      title="个人中心"
-      type="form"
-      @confirm="submitForm"
-    >
-      <z-form 
-        :formId="formId"
-        :fields="fields"
-        :defaultValues="defaultValues"
-      >
-      </z-form>
-    </z-dialog>
+    <div class="pa-4">
+      <Basic />
+      <Layout />
+      <Dialog />
+    </div>
   </div>
 </template>
