@@ -5,7 +5,9 @@
   import { dialogFields } from '../cells'
   const formId = ref<string>('dialogProfile')
   const dialog = ref<VNodeRef>('')
-  let defaultValues = reactive<any>({})
+  let defaultValues = reactive<any>({
+    name: 'Leslie'
+  })
 
   const openDialog = () => {
     dialog.value.onOpen()

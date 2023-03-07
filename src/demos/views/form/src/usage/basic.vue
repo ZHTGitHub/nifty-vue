@@ -23,6 +23,7 @@
           }"
           :defaultValues="{
             username: 'leslie',
+            country: '1',
             switch: true
           }"
           :fields="fields" 

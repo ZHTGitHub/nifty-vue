@@ -12,8 +12,8 @@ export const fields = [
     formKey: 'country',
     label: 'Country',
     items: [
-      { label: 'Singapore', value: 'singapore' },
-      { label: 'Japan', value: 'japan' }
+      { label: 'Singapore', value: '1' },
+      { label: 'Japan', value: '2' }
     ],
     rules: [
       { name: 'required', message: 'Please select your country!' }
