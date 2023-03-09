@@ -55,11 +55,13 @@
       <a-col span="8" v-else-if="mode === 'vertical'">
         <z-form 
           :formId="formId"
-          :col="{
-            span: 24
-          }"
-          direction="vertical"
           :fields="layoutFields" 
+          :config="{
+            col: {
+              direction: 'vertical',
+              span: 24
+            }
+          }"
         >
           <template #tail>
             <a-col span="24">

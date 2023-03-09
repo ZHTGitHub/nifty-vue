@@ -29,21 +29,6 @@
             col: {
               span: 24
             },
-            items: {
-              country: [
-                { label: 'America', value: 'america' }
-              ],
-
-              major: [
-                { label: 'America', value: 'america' },
-                { label: 'Japan', value: 'japan' }
-              ],
-
-              gender: [
-              { label: 'America', value: 'america' },
-                { label: 'Japan', value: 'japan' }
-              ]
-            },
             label: {
               width: '85px'
             }
