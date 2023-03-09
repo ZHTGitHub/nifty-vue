@@ -3,6 +3,11 @@
   import { ComponentDemo } from '@/demos/components'
   import { fields } from '../cells'
   const formId = ref<string>('basicProfile')
+  const defaultValues = ref<object>({
+    username: 'leslie',
+    country: '1',
+    switch: true
+  })
 
   const submitForm = ({ error, form }) => {
     console.log({ error, form })
@@ -18,17 +23,30 @@
       <a-col :xl="12" :md="16" :sm="24">
         <z-form 
           :formId="formId"
-          :col="{
-            span: 24
-          }"
-          :defaultValues="{
-            username: 'leslie',
-            country: '1',
-            switch: true
-          }"
           :fields="fields" 
-          :labelConfig="{
-            width: '85px'
+          :defaultValues="defaultValues"
+          :config="{
+            col: {
+              span: 24
+            },
+            items: {
+              country: [
+                { label: 'America', value: 'america' }
+              ],
+
+              major: [
+                { label: 'America', value: 'america' },
+                { label: 'Japan', value: 'japan' }
+              ],
+
+              gender: [
+              { label: 'America', value: 'america' },
+                { label: 'Japan', value: 'japan' }
+              ]
+            },
+            label: {
+              width: '85px'
+            }
           }"
         >
           <template #tail>

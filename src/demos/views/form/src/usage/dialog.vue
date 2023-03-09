@@ -37,8 +37,13 @@
         :formId="formId"
         :fields="dialogFields"
         :defaultValues="defaultValues"
-        :labelConfig="{
-          width: '80px'
+        :config="{
+          label: {
+            width: '80px'
+          },
+          group: {
+            
+          }
         }"
       >
       </z-form>

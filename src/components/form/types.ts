@@ -39,7 +39,7 @@ export interface Field {
   disabled?: boolean;
   groupConfig?: GroupConfig;
   labelConfig?: LabelConfig;
-  items?: any[];
+  items?: {}[];
   placeholder?: string;
   rules?: { name: string; value?: string | number | Array<string | number>; message: string }[];
   // 日期格式

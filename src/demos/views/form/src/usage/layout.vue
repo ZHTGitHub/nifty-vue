@@ -29,14 +29,16 @@
       <a-col span="8" v-if="mode === 'horizontal'">
         <z-form 
           :formId="formId"
-          :col="{
-            span: 24
-          }"
-          direction="horizontal"
-          :labelConfig="{
-            width: '60px'
-          }"
           :fields="layoutFields" 
+          :config="{
+            direction: 'horizontal',
+            col: {
+              span: 24
+            },
+            label: {
+              width: '60px'
+            }
+          }"
         >
           <template #tail>
             <a-col span="24" style="padding-left: 68px;">
@@ -74,14 +76,16 @@
       <a-col span="12" v-else>
         <z-form 
           :formId="formId"
-          :row="{
-            gutter: [16, 0]
-          }"
-          :col="{
-            span: 10
-          }"
-          direction="vertical"
           :fields="layoutFields" 
+          :config="{
+            direction: 'vertical',
+            row: {
+              gutter: [16, 0]
+            },
+            col: {
+              span: 10
+            }
+          }"
         >
           <template #tail>
             <a-col span="4" class="z-flex align-end">
