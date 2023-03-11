@@ -12,6 +12,10 @@ export default defineComponent({
 
     capsule,
 
+    defaultValue: {
+      type: String as PropType<string>
+    },
+
     placeholder: {
       type: String as PropType<string>,
       default: '选择日期'

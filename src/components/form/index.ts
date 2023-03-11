@@ -6,4 +6,4 @@ Form.install = function(app: App) {
   return app
 }
 
-export default Form as typeof Form
+export default Form

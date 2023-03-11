@@ -17,4 +17,3 @@ const install = function (app: App) {
 }
 
 export default install
-

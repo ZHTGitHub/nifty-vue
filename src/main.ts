@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import Antd from 'ant-design-vue'
-import Nifty, { formStore } from './index'
+import Nifty, { form } from './index'
 
 import router from './demos/router'
 
@@ -11,7 +11,7 @@ import 'nifty-style'
 import './main.css'
 
 const app = createApp(App)
-const pinia = formStore.createPinia()
+const pinia = form.createPinia()
 
 app
   .use(pinia)

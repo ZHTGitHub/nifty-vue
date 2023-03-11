@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import FormInput from '../_util/FormInput'
 import { capsule, inputProps } from '../_util/props'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
@@ -8,7 +8,12 @@ export default defineComponent({
 
   props: {
     ...inputProps(),
-    capsule
+    
+    capsule,
+
+    defaultValue: {
+      type: String as PropType<string>
+    }
   },
 
   setup(props, { attrs }) {

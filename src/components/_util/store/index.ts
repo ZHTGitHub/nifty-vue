@@ -1,4 +1,4 @@
 import { createPinia } from 'pinia'
-import useFormStore, { type FormParams } from './form'
+import useFormStore from './form'
 
-export { createPinia, useFormStore, FormParams }
+export { createPinia, useFormStore }

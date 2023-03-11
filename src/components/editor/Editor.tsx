@@ -23,6 +23,10 @@ export default defineComponent({
       default: false
     },
 
+    defaultValue: {
+      type: String as PropType<string>
+    },
+
     mode: {
       type: String as PropType<'default' | 'simple'>,
       default: 'default'

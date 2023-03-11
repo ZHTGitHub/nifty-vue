@@ -12,6 +12,10 @@ export default defineComponent({
 
     capsule,
 
+    defaultValue: {
+      type: Array as PropType<string[]>
+    },
+
     placeholder: {
       type: [Array, String] as PropType<string[] | string>,
       default: ['开始日期', '结束日期']

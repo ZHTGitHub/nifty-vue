@@ -1,6 +1,7 @@
 import { ref, computed, watch, getCurrentInstance } from 'vue'
 // import type { WritableComputedRef } from 'vue'
-import { useFormStore, type FormParams } from '../store'
+import { useFormStore } from '../store'
+import type { FormParams } from '../store/form'
 
 // component name
 export const useComponentName = () => {

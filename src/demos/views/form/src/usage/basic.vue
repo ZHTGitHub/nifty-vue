@@ -2,9 +2,10 @@
   import { ref } from 'vue'
   import { ComponentDemo } from '@/demos/components'
   import { fields } from '../cells'
+
+
   const formId = ref<string>('basicProfile')
   const defaultValues = ref<object>({
-    username: 'leslie',
     country: '1',
     switch: true
   })
