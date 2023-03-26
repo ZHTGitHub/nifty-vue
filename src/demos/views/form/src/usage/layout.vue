@@ -57,8 +57,8 @@
           :formId="formId"
           :fields="layoutFields" 
           :config="{
-            col: {
               direction: 'vertical',
+            col: {
               span: 24
             }
           }"

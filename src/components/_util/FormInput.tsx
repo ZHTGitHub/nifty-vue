@@ -41,15 +41,15 @@ export default defineComponent({
       formId, 
       formKey, 
       componentName,
-      valueRef, 
-      rules
+      valueRef,
+      rules,
     })
 
     const inputClassName = classNames('z-input', direction, {
       capsule,
       required
     })
-  
+
     return () => (
       <div class={[inputClassName, {'z-input-error': errorMessageRef.value}]}>
         <FormInputLabel

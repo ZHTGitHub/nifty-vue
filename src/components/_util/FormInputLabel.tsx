@@ -28,7 +28,7 @@ const FormInputLabel: FunctionalComponent<LabelProps> = (props, { slots }) => {
       style={{
         width,
         minWidth: width,
-        textAlign: align
+        textAlign: align,
       }}
     >
       { label }

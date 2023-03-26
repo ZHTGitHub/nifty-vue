@@ -72,6 +72,7 @@ export default defineComponent({
                 col: fieldCol, 
                 default: fieldDefault,
                 defaultValue: fieldDefaultValue,
+                direction: fieldDriection,
                 disabled: fieldDisabled, 
                 groupConfig: fieldGroupConfig,
                 items: fieldItems,
@@ -81,6 +82,7 @@ export default defineComponent({
 
               const capsule = fieldCapsule || config.capsule
               const defaultValue = fieldDefaultValue || defaultValues?.[rest.formKey]
+              const direction = fieldDriection || config.direction
               const col = { span: 24, ...config.col, ...fieldCol }
               const disabled = fieldDisabled || config.disabled
               const groupConfig = GROUPS.includes(name) ? { ...config.group, ...fieldGroupConfig } : {}
@@ -105,6 +107,7 @@ export default defineComponent({
                       <a-col { ...col }>
                         <z-checkbox 
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -124,6 +127,7 @@ export default defineComponent({
                       <a-col { ...col }>
                         <z-checkbox-group 
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           items={ items }
                           labelConfig={ labelConfig }
@@ -144,6 +148,7 @@ export default defineComponent({
                         <z-date-picker
                           capsule={ capsule }
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -161,6 +166,7 @@ export default defineComponent({
                       <a-col { ...col }>
                         <z-editor
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -179,6 +185,7 @@ export default defineComponent({
                         <z-range-picker
                           capsule={ capsule }
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -197,6 +204,7 @@ export default defineComponent({
                         <z-input 
                           capsule={ capsule }
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -215,6 +223,7 @@ export default defineComponent({
                         <z-input-number
                           capsule={ capsule }
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -232,6 +241,7 @@ export default defineComponent({
                       <a-col { ...col }>
                         <z-radio 
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -249,6 +259,7 @@ export default defineComponent({
                       <a-col { ...col }>
                         <z-radio-group 
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           items={ items }
                           labelConfig={ labelConfig }
@@ -269,6 +280,7 @@ export default defineComponent({
                         <z-select 
                           capsule={ capsule }
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           items={ items }
                           labelConfig={ labelConfig }
@@ -287,6 +299,7 @@ export default defineComponent({
                       <a-col { ...col }>
                         <z-switch 
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
@@ -305,6 +318,7 @@ export default defineComponent({
                         <z-textarea 
                           capsule={ capsule }
                           defaultValue={ defaultValue }
+                          direction={ direction }
                           disabled={ disabled }
                           labelConfig={ labelConfig }
                           { ...restProps }
