@@ -26,7 +26,7 @@ export default defineComponent({
 
     centered: {
       type: Boolean as PropType<boolean>,
-        default: true
+      default: true
     },
 
     confirmText: {
@@ -40,6 +40,16 @@ export default defineComponent({
     },
 
     mask: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+
+    showCancelButton: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+
+    showConfirmButton: {
       type: Boolean as PropType<boolean>,
       default: true
     },
@@ -124,7 +134,7 @@ export default defineComponent({
   },
 
   render() {
-    const { cancelText, centered, confirmText, mask, fullscreen } = this.$props
+    const { cancelText, centered, confirmText, mask, fullscreen, showCancelButton, showConfirmButton } = this.$props
 
     return (
       <a-modal 
@@ -144,19 +154,25 @@ export default defineComponent({
         {
           this.$slots.footer?.() ||
           <div class="z-modal-footer">
-            <z-btn
-              class="cancel"
-              ghost
-              type="primary"
-              onClick={ this.handleCancel }
-            >{ cancelText }</z-btn>
+            {
+              showCancelButton &&
+              <z-btn
+                class="cancel"
+                ghost
+                type="primary"
+                onClick={ this.handleCancel }
+              >{ cancelText }</z-btn>
+            }
 
-            <z-btn
-              type="primary"
-              btnType={ this.btnType }
-              formId={ this.formId }
-              onClick={ this.handleConfirm }
-            >{ confirmText }</z-btn>
+            {
+              showConfirmButton &&
+              <z-btn
+                type="primary"
+                btnType={ this.btnType }
+                formId={ this.formId }
+                onClick={ this.handleConfirm }
+              >{ confirmText }</z-btn>
+            }
           </div>
         }
       </a-modal>
