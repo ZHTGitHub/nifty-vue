@@ -1,9 +1,16 @@
-import { ref, shallowRef, watch, defineComponent, onBeforeUnmount } from 'vue'
+import { 
+  ref, 
+  shallowRef, 
+  watch, 
+  defineComponent, 
+  onBeforeUnmount,
+} from 'vue'
 import FormInput from '../_util/FormInput'
 import type { PropType, Ref } from 'vue'
 import { inputProps } from '../_util/props'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
-import type { IDomEditor } from '@wangeditor/editor'
+import { DomEditor } from '@wangeditor/editor'
+import type { IDomEditor, IToolbarConfig } from '@wangeditor/editor'
 import { Toolbar, Editor } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css'
 
@@ -39,10 +46,17 @@ export default defineComponent({
     readonly: {
       type: Boolean as PropType<boolean>,
       default: false
-    }
+    },
+
+    toolbarConfig: {
+      type: Object as PropType<any>,
+      default: () => ({})
+    },
   },
 
-  setup(props) {
+  emits: ['created', 'change', 'blur'],
+
+  setup(props, { emit }) {
     const editorRef = shallowRef()
 
     onBeforeUnmount(() => {
@@ -60,18 +74,20 @@ export default defineComponent({
       readOnly: props.readonly
     }
 
-    const handleCreated = (editor: IDomEditor) => {
+    const editorCreated = (editor: IDomEditor) => {
       editorRef.value = editor 
+      emit('created', editorRef.value)
     }
 
-    const handleChange = () => {
+    const editorChange = () => {
       const text = editorRef.value.getText()
       const html = editorRef.value.getHtml()
       valueRef.value = text ? html : text
+      emit('change', valueRef.value)
     }
 
-    const handleBlur = () => {
-      console.log('blur')
+    const editorBlur = () => {
+      emit('blur', valueRef.value)
     }
 
     watch(() => valueRef.value, (val) => {
@@ -82,39 +98,55 @@ export default defineComponent({
       }
     })
 
-    return () => (
-      <FormInput
-        formId={ props.formId }
-        formKey={ props.formKey }
-        class="z-input-editor"
-        componentName={ componentName }
-        defaultValue={ props.defaultValue }
-        direction={ props.direction }
-        label={ props.label }
-        labelConfig={ props.labelConfig }
-        rules={ props.rules }
-        valueRef={ valueRef }
-      >
-        <div class="editor">
-          <Toolbar
-            class="editor-toolbar"
-            editor={ editorRef.value }
-            defaultConfig={{}}
-            mode={ props.mode }
-          />
+    return () => {
+      const { 
+        formId, 
+        formKey, 
+        defaultValue, 
+        direction, 
+        label, 
+        labelConfig, 
+        mode, 
+        rules, 
+        toolbarConfig,
+        ...rest 
+      } = props
 
-          <Editor
-            class="editor-container"
-            defaultConfig={ editorConfig }
-            mode={ props.mode }
-            v-model={ valueHtml.value }
-            onOnCreated={ handleCreated }
-            onOnChange={ handleChange }
-            onOnBlur={ handleBlur }
-          />
-        </div>
-      </FormInput>
-    )
+      return (
+        <FormInput
+          formId={ formId }
+          formKey={ formKey }
+          class="z-input-editor"
+          componentName={ componentName }
+          defaultValue={ defaultValue }
+          direction={ direction }
+          label={ label }
+          labelConfig={ labelConfig }
+          rules={ rules }
+          valueRef={ valueRef }
+        >
+          <div class="editor">
+            <Toolbar
+              class="editor-toolbar"
+              editor={ editorRef.value }
+              defaultConfig={ toolbarConfig }
+              mode={ mode }
+            />
+  
+            <Editor
+              class="editor-container"
+              defaultConfig={ editorConfig }
+              mode={ mode }
+              v-model={ valueHtml.value }
+              onOnCreated={ editorCreated }
+              onOnChange={ editorChange }
+              onOnBlur={ editorBlur }
+              { ...rest }
+            />
+          </div>
+        </FormInput>
+      )
+    }
   }
 })
 
