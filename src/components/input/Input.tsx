@@ -1,4 +1,4 @@
-import { defineComponent, type PropType } from 'vue'
+import { defineComponent } from 'vue'
 import FormInput from '../_util/FormInput'
 import { capsule, inputProps } from '../_util/props'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
@@ -10,10 +10,6 @@ export default defineComponent({
     ...inputProps(),
     
     capsule,
-
-    defaultValue: {
-      type: String as PropType<string>
-    }
   },
 
   setup(props, { attrs }) {
@@ -26,7 +22,7 @@ export default defineComponent({
         formKey={ props.formKey }
         componentName={ componentName }
         capsule={ props.capsule }
-        defaultValue={ props.defaultValue }
+        defaultValue={ String(props.defaultValue) }
         direction={ props.direction }
         label={ props.label }
         labelConfig={ props.labelConfig }
