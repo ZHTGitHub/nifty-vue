@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import FormInput from '../_util/FormInput'
 import { capsule, inputProps } from '../_util/props'
 import { useComponentName, useFormValue } from '../_util/hooks/useForm'
@@ -8,7 +8,6 @@ export default defineComponent({
 
   props: {
     ...inputProps(),
-    
     capsule,
   },
 
@@ -22,7 +21,7 @@ export default defineComponent({
         formKey={ props.formKey }
         componentName={ componentName }
         capsule={ props.capsule }
-        defaultValue={ String(props.defaultValue) }
+        defaultValue={ props.defaultValue == undefined ? '' : String(props.defaultValue) }
         direction={ props.direction }
         label={ props.label }
         labelConfig={ props.labelConfig }
