@@ -34,6 +34,11 @@ export default defineComponent({
       default: '确认'
     },
 
+    detail: {
+      type: Object as PropType<object>,
+      default: null,
+    },
+
     fullscreen: {
       type: Boolean as PropType<boolean>,
       default: false
@@ -61,7 +66,7 @@ export default defineComponent({
 
     type: {
       type: String as PropType<'normal' | 'form'>
-    }
+    },
   },
 
   emits: ['cancel', 'confirm'],
@@ -118,7 +123,7 @@ export default defineComponent({
         validateInfo = { error, form: formStore.getForm(formId.value) }
       }
 
-      emit('confirm', validateInfo)
+      emit('confirm', validateInfo, { detail: props.detail })
     }
 
     return {
